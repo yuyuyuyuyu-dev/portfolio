@@ -7,7 +7,7 @@ kotlin = "2.1.21"
 kotlinx-coroutines = "1.10.2"
 circuit = "0.28.0"
 koin = "4.0.3"
-simpleTopAppBar = "0.2.0"
+simpleTopAppBar = "0.3.1"
 createTypography = "0.1.0"
 aboutLibraries = "12.1.2"
 

@@ -18,7 +18,7 @@ import dev.yuyuyuyuyu.portfolio.ui.openSourceLicenseList.OpenSourceLicenseListSc
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.PortfolioScreen
 import dev.yuyuyuyuyu.portfolio.ui.theme.darkScheme
 import dev.yuyuyuyuyu.portfolio.ui.theme.lightScheme
-import dev.yuyuyuyuyu.simpletopappbar.SimpleTopAppBar
+import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
 import org.jetbrains.compose.resources.Font
 import org.koin.compose.KoinApplication
 import org.koin.compose.koinInject
