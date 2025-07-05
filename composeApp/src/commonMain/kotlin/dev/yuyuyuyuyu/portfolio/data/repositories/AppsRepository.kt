@@ -142,6 +142,7 @@ class AppsRepository {
         App(
             name = "気圧計",
             description = "気圧センサーの値を表示するアプリ",
+            icon = Res.drawable.barometer_icon,
             techStack = setOf(TechStack.Android, TechStack.Kotlin, TechStack.JetpackCompose),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/barometer",
             screenshots = listOf(Res.drawable.barometer_en_screenshot, Res.drawable.barometer_ja_screenshot),
