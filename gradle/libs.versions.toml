@@ -5,11 +5,12 @@ composeMultiplatform = "1.8.0"
 junit = "4.13.2"
 kotlin = "2.1.21"
 kotlinx-coroutines = "1.10.2"
+
 circuit = "0.28.0"
 koin = "4.0.3"
 simpleTopAppBar = "0.3.1"
-createTypography = "0.1.0"
 aboutLibraries = "12.1.2"
+myMaterialTheme = "0.3.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -18,11 +19,12 @@ junit = { module = "junit:junit", version.ref = "junit" }
 androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+
 circuit = { group = "com.slack.circuit", name = "circuit-foundation", version.ref = "circuit" }
 koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
 yuyuyuyuyu-simpleTopAppBar = { group = "dev.yuyuyuyuyu", name = "simpletopappbar", version.ref = "simpleTopAppBar" }
-yuyuyuyuyu-createTypography = { group = "dev.yuyuyuyuyu", name = "createtypography", version.ref = "createTypography" }
 aboutlibraries-compose-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }      # Material 3 UI
+myMaterialTheme = { group = "dev.yuyuyuyuyu", name = "mymaterialtheme", version.ref = "myMaterialTheme" }
 
 [plugins]
 composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }

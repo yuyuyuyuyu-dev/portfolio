@@ -54,7 +54,7 @@ kotlin {
             implementation(libs.koin.compose)
 
             implementation(libs.yuyuyuyuyu.simpleTopAppBar)
-            implementation(libs.yuyuyuyuyu.createTypography)
+            implementation(libs.myMaterialTheme)
 
             implementation(libs.aboutlibraries.compose.m3)
         }
