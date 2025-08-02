@@ -114,14 +114,8 @@ class AppsRepository {
         App(
             name = "引けない確率の計算",
             description = "1度も引けない確率を計算するアプリ",
-            techStack = setOf(
-                TechStack.Web,
-                TechStack.Angular,
-                TechStack.TypeScript,
-                TechStack.AngularMaterial,
-                TechStack.Pwa,
-            ),
-            url = "https://non-drawing-probability-calculator.vercel.app",
+            techStack = setOf(TechStack.Web, TechStack.Kotlin, TechStack.ComposeMultiplatform, TechStack.Pwa),
+            url = "https://not-pulling-probability-calculator.yuyuyuyuyu.dev",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/not-pulling-probability-calculator",
             screenshots = listOf(Res.drawable.not_pulling_probability_calculator_screenshot),
         ),
