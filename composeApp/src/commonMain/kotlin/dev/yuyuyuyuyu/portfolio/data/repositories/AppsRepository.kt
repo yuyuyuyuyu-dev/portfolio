@@ -45,12 +45,11 @@ class AppsRepository {
             icon = Res.drawable.whatisthedatetoday_icon,
             techStack = setOf(
                 TechStack.Web,
-                TechStack.Html,
-                TechStack.Css,
-                TechStack.Go,
-                TechStack.Pwa
+                TechStack.Kotlin,
+                TechStack.ComposeMultiplatform,
+                TechStack.Pwa,
             ),
-            url = "https://yuyuyuyuyu-dev.github.io/what-is-the-date-today/",
+            url = "https://what-is-the-date-today.yuyuyuyuyu.dev",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/what-is-the-date-today",
             screenshots = listOf(Res.drawable.what_is_the_date_today_screenshot),
         ),
