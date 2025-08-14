@@ -1,4 +1,4 @@
-name: Dependabot
+name: Tests
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  dependabot:
-    name: Dependabot
+  tests:
+    name: Run Tests
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -22,5 +22,8 @@ jobs:
           java-version: '21'
           distribution: 'jetbrains'
 
-      - name: Send dependencies to Dependabot
-        uses: gradle/actions/dependency-submission@v4
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Run tests
+        run: ./gradlew jvmTest
