@@ -9,7 +9,6 @@ import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.barometer_en_screenshot
 import portfolio.composeapp.generated.resources.barometer_icon
 import portfolio.composeapp.generated.resources.barometer_ja_screenshot
-import portfolio.composeapp.generated.resources.copy_to_clipboard_screenshot
 import portfolio.composeapp.generated.resources.delicioushareapp_icon
 import portfolio.composeapp.generated.resources.genkaikor_screenshot
 import portfolio.composeapp.generated.resources.get_random_int_screenshot
@@ -81,19 +80,6 @@ class AppsRepository {
             url = "https://yuyuyuyuyu-dev.github.io/location-remover/",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/location-remover",
             screenshots = listOf(Res.drawable.LocationRemover_screenshot),
-        ),
-        App(
-            name = "クリップボードへコピー",
-            description = "入力された文字をクリップボードへコピーするアプリ",
-            techStack = setOf(
-                TechStack.Web,
-                TechStack.TypeScript,
-                TechStack.React,
-                TechStack.MaterialUi
-            ),
-            url = "https://yuyuyuyuyu-dev.github.io/copy-to-clipboard/",
-            repositoryUrl = "https://github.com/yuyuyuyuyu-dev/copy-to-clipboard",
-            screenshots = listOf(Res.drawable.copy_to_clipboard_screenshot),
         ),
         App(
             name = "乱数の生成",
@@ -195,12 +181,11 @@ class AppsRepository {
             description = "L33t表記へ変換するアプリ",
             techStack = setOf(
                 TechStack.Web,
-                TechStack.Angular,
-                TechStack.TypeScript,
-                TechStack.AngularMaterial,
+                TechStack.Kotlin,
+                TechStack.ComposeMultiplatform,
                 TechStack.Pwa,
             ),
-            url = "https://to-leet.vercel.app",
+            url = "http://to-leet.yuyuyuyuyu.dev/",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/to-leet",
             screenshots = listOf(Res.drawable.to_leet_screenshot),
         ),
