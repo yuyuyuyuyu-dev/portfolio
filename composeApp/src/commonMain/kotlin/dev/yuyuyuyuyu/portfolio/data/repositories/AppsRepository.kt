@@ -159,7 +159,7 @@ class AppsRepository {
                 TechStack.TypeScript,
                 TechStack.MaterialUi,
             ),
-            url = "https://password-generator-yuyuyuyuyu-dev.vercel.app",
+            url = "https://password-generator-yu-ko-ba.vercel.app",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/password-generator",
             screenshots = listOf(Res.drawable.PasswordGenerator_screenshot),
         ),
