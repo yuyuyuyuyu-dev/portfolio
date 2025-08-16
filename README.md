@@ -1,7 +1,6 @@
 # portfolio
 
-<a href="https://yuyuyuyuyu.dev" target="_blank" rel="noopener noreferrer">![Deploy to GitHub Pages](https://github.com/yu-ko-ba/portfolio/actions/workflows/deploy.yml/badge.svg)</a><br />
-<br />
+[![Deploy](https://github.com/yuyuyuyuyu-dev/portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/yuyuyuyuyu-dev/portfolio/actions/workflows/deploy.yml)
 
 ポートフォリオサイト
 
