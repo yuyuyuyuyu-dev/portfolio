@@ -16,7 +16,7 @@ import dev.yuyuyuyuyu.portfolio.ui.portfolio.PortfolioScreen
 fun MainNavigation(modifier: Modifier = Modifier) {
     val backStack: MutableList<MainNavigationRoute> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
-            mutableStateListOf(MainNavigationRoute.Portfolio)
+            mutableStateListOf(MainNavigationRoute.Licenses)
         }
 
     NavDisplay(
@@ -26,11 +26,17 @@ fun MainNavigation(modifier: Modifier = Modifier) {
         entryProvider = { key ->
             when (key) {
                 MainNavigationRoute.Portfolio -> NavEntry(key) {
-                    PortfolioScreen()
+                    PortfolioScreen {
+                        backStack.add(MainNavigationRoute.Licenses)
+                    }
                 }
 
                 MainNavigationRoute.Licenses -> NavEntry(key) {
-                    LicensesScreen()
+                    LicensesScreen(
+                        onNavigateToPortfolio = {
+                            backStack.add(MainNavigationRoute.Portfolio)
+                        }
+                    )
                 }
             }
         }
