@@ -8,12 +8,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
+import dev.yuyuyuyuyu.portfolio.di.AppComponent
+import dev.yuyuyuyuyu.portfolio.di.create
 import dev.yuyuyuyuyu.portfolio.ui.licenses.LicensesScreen
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.PortfolioScreen
 
-@Preview
 @Composable
-fun MainNavigation(modifier: Modifier = Modifier) {
+fun MainNavigation(appComponent: AppComponent, modifier: Modifier = Modifier) {
     val backStack: MutableList<MainNavigationRoute> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
             mutableStateListOf(MainNavigationRoute.Portfolio)
@@ -26,7 +26,7 @@ fun MainNavigation(modifier: Modifier = Modifier) {
         entryProvider = { key ->
             when (key) {
                 MainNavigationRoute.Portfolio -> NavEntry(key) {
-                    PortfolioScreen {
+                    appComponent.portfolioScreen {
                         backStack.add(MainNavigationRoute.Licenses)
                     }
                 }
@@ -41,4 +41,10 @@ fun MainNavigation(modifier: Modifier = Modifier) {
             }
         }
     )
+}
+
+@Preview
+@Composable
+private fun MainNavigationPreview() {
+    MainNavigation(appComponent = AppComponent::class.create())
 }

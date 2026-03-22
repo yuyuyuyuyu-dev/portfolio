@@ -1,3 +1,4 @@
+/*
 package dev.yuyuyuyuyu.portfolio.di
 
 import com.slack.circuit.foundation.Circuit
@@ -56,3 +57,4 @@ val portfolioAppModule = module {
     single { PluginsRepository() }
     single { CliToolsRepository() }
 }
+ */
