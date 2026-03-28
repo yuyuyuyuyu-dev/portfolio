@@ -1,7 +1,5 @@
 package dev.yuyuyuyuyu.portfolio.ui.licenses
 
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,10 +13,7 @@ import portfolio.composeapp.generated.resources.Res
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun LicensesScreen(
-    onNavigateToPortfolio: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun LicensesScreen(modifier: Modifier = Modifier) {
     var aboutLibsJson by remember { mutableStateOf("") }
     LaunchedEffect(Unit) {
         aboutLibsJson = Res.readBytes("files/aboutlibraries.json").decodeToString()
@@ -27,5 +22,4 @@ fun LicensesScreen(
     if (aboutLibsJson.isNotEmpty()) {
         LibrariesContainer(aboutLibsJson = aboutLibsJson, modifier = modifier)
     }
-    Button(onClick = onNavigateToPortfolio, content = { Text("navigate to PortfolioScreen") })
 }

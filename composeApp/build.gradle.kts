@@ -54,6 +54,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.aboutlibraries.compose)
             implementation(libs.kotlinInject.runtime)
+            implementation(libs.yuyuyuyuyu.simpleTopAppBar)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
