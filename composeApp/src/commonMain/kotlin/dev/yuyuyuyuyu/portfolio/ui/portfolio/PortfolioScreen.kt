@@ -1,30 +1,79 @@
 package dev.yuyuyuyuyu.portfolio.ui.portfolio
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Apps
+import androidx.compose.material.icons.filled.Bolt
+import androidx.compose.material.icons.filled.Book
+import androidx.compose.material.icons.filled.Terminal
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.saveable.rememberSerializable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import me.tatarka.inject.annotations.Inject
 
 typealias PortfolioScreen = @Composable (onNavigateToLicenses: () -> Unit) -> Unit
 
 @Inject
 @Composable
-fun PortfolioScreen(portfolioViewModel: () -> PortfolioViewModel) {
+fun PortfolioScreen(portfolioViewModel: () -> PortfolioViewModelImpl) {
     val viewModel = viewModel { portfolioViewModel() }
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Column {
-        Text("Portfolio")
-        Text(uiState.message)
+    val backStack: MutableList<PortfolioRoute> =
+        rememberSerializable(serializer = SnapshotStateListSerializer()) {
+            mutableStateListOf(PortfolioRoute.Apps)
+        }
+
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                NavigationBarItem(
+                    selected = backStack.last() == PortfolioRoute.Apps,
+                    onClick = { backStack.add(PortfolioRoute.Apps) },
+                    icon = { Icon(Icons.Default.Apps, null) },
+                    label = { Text("アプリ") },
+                )
+                NavigationBarItem(
+                    selected = backStack.last() == PortfolioRoute.Libraries,
+                    onClick = { backStack.add(PortfolioRoute.Libraries) },
+                    icon = { Icon(Icons.Default.Book, null) },
+                    label = { Text("ライブラリ") },
+                )
+                NavigationBarItem(
+                    selected = backStack.last() == PortfolioRoute.Plugins,
+                    onClick = { backStack.add(PortfolioRoute.Plugins) },
+                    icon = { Icon(Icons.Default.Bolt, null) },
+                    label = { Text("プラグイン") },
+                )
+                NavigationBarItem(
+                    selected = backStack.last() == PortfolioRoute.CliTools,
+                    onClick = { backStack.add(PortfolioRoute.CliTools) },
+                    icon = { Icon(Icons.Default.Terminal, null) },
+                    label = { Text("CLIツール") },
+                )
+            }
+        },
+    ) { innerPadding ->
+        PortfolioNavigation(
+            backStack = backStack,
+            modifier = Modifier.padding(innerPadding),
+        )
     }
 }
 
 @Preview
 @Composable
 private fun PortfolioScreenPreview() {
-    PortfolioScreen(portfolioViewModel = { PortfolioViewModel() })
+    PortfolioScreen(portfolioViewModel = { PortfolioViewModelImpl() })
 }
