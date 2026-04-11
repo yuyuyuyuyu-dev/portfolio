@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -66,5 +67,16 @@ fun ItemBody(
                 )
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun ItemBodyPreview() {
+    ItemBody(
+        repositoryUrl = "https://github.com/example/repo",
+        onSourceCodeLinkClick = {},
+    ) {
+        Text("Additional Content")
     }
 }

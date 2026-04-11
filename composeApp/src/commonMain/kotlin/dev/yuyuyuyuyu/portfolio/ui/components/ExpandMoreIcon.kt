@@ -9,6 +9,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 
 @Composable
 fun ExpandMoreIcon(
@@ -26,4 +29,16 @@ fun ExpandMoreIcon(
             contentDescription = "open",
         )
     }
+}
+
+private class ExpandMoreIconPreviewParameterProvider : PreviewParameterProvider<Boolean> {
+    override val values = sequenceOf(true, false)
+}
+
+@Preview
+@Composable
+private fun ExpandMoreIconPreview(
+    @PreviewParameter(ExpandMoreIconPreviewParameterProvider::class) expanded: Boolean,
+) {
+    ExpandMoreIcon(expanded = expanded)
 }

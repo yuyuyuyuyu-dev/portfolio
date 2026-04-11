@@ -12,11 +12,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.App
+import dev.yuyuyuyuyu.portfolio.data.models.TechStack
 import dev.yuyuyuyuyu.portfolio.ui.components.listItems.shared.BaseListItem
 import dev.yuyuyuyuyu.portfolio.ui.components.listItems.shared.ItemBody
 import org.jetbrains.compose.resources.painterResource
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.default_icon
 
 @Composable
 fun AppListItem(
@@ -77,4 +81,18 @@ fun AppListItem(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun AppListItemPreview() {
+    AppListItem(
+        app = App(
+            name = "Sample App",
+            description = "This is a sample app description.",
+            techStack = setOf(TechStack.Kotlin, TechStack.JetpackCompose),
+            repositoryUrl = "https://github.com/example/repo",
+            icon = Res.drawable.default_icon,
+        )
+    )
 }

@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
 import dev.yuyuyuyuyu.portfolio.ui.components.ExpandMoreIcon
@@ -85,4 +86,20 @@ fun BaseListItem(
 
         Spacer(Modifier.height(40.dp))
     }
+}
+
+@Preview
+@Composable
+private fun BaseListItemPreview() {
+    BaseListItem(
+        name = "Sample Name",
+        description = "This is a sample description.",
+        techStackSet = setOf(TechStack.Kotlin, TechStack.JetpackCompose),
+        icon = { modifier ->
+            Spacer(modifier = modifier.background(MaterialTheme.colorScheme.primary))
+        },
+        expandedItem = {
+            Text("Expanded Item Content")
+        },
+    )
 }

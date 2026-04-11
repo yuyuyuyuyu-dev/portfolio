@@ -2,6 +2,7 @@ package dev.yuyuyuyuyu.portfolio.data.repositories
 
 import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
+import me.tatarka.inject.annotations.Inject
 import portfolio.composeapp.generated.resources.CodeScanner_screenshot
 import portfolio.composeapp.generated.resources.LocationRemover_screenshot
 import portfolio.composeapp.generated.resources.PasswordGenerator_screenshot
@@ -23,6 +24,7 @@ import portfolio.composeapp.generated.resources.what_is_the_date_today_screensho
 import portfolio.composeapp.generated.resources.whatisthedatetoday_icon
 import portfolio.composeapp.generated.resources.ym_previewer_screenshot
 
+@Inject
 class AppsRepository {
     private val apps = listOf(
         App(
