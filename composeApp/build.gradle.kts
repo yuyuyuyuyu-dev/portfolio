@@ -56,6 +56,7 @@ kotlin {
             implementation(libs.kotlinInject.runtime)
             implementation(libs.yuyuyuyuyu.simpleTopAppBar)
             implementation(compose.materialIconsExtended)
+            implementation(libs.yuyuyuyuyu.myMaterialTheme)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

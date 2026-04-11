@@ -21,6 +21,7 @@ ksp = "2.3.6"
 material3 = "1.10.0-alpha05"
 multiplatform-nav3-ui = "1.0.0-alpha06"
 simpleTopAppBar = "0.4.0"
+myMaterialTheme = "0.4.0"
 
 [libraries]
 aboutlibraries-compose = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutlibraries" }
@@ -48,6 +49,7 @@ kotlinInject-compiler = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp
 kotlinInject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlin-inject" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 yuyuyuyuyu-simpleTopAppBar = { group = "dev.yuyuyuyuyu", name = "simpletopappbar", version.ref = "simpleTopAppBar" }
+yuyuyuyuyu-myMaterialTheme = { group = "dev.yuyuyuyuyu", name = "mymaterialtheme", version.ref = "myMaterialTheme" }
 
 [plugins]
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutlibraries" }

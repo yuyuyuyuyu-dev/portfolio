@@ -28,7 +28,11 @@ fun MainScreen(appComponent: AppComponent) {
                 title = "portfolio",
                 navigateBackIsPossible = backStack.size > 1,
                 onNavigateBackButtonClick = { backStack.removeLastOrNull() },
-                onOpenSourceLicensesButtonClick = { backStack.add(MainNavigationRoute.Licenses) },
+                onOpenSourceLicensesButtonClick = {
+                    if (backStack.lastOrNull() != MainNavigationRoute.Licenses) {
+                        backStack.add(MainNavigationRoute.Licenses)
+                    }
+                },
                 onSourceCodeButtonClick = {
                     uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/portfolio")
                 },
