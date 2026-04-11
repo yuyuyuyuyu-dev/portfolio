@@ -19,11 +19,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import me.tatarka.inject.annotations.Inject
 
-typealias PortfolioScreen = @Composable () -> Unit
+typealias PortfolioScreen = @Composable (onNavigateToLicenses: () -> Unit) -> Unit
 
 @Inject
 @Composable
-fun PortfolioScreen() {
+fun PortfolioScreen(
+    appsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModelImpl,
+    librariesViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModelImpl,
+    pluginsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModelImpl,
+    cliToolsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModelImpl,
+) {
     val backStack: MutableList<PortfolioRoute> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
             mutableStateListOf(PortfolioRoute.Apps)
@@ -61,6 +66,10 @@ fun PortfolioScreen() {
     ) { innerPadding ->
         PortfolioNavigation(
             backStack = backStack,
+            appsViewModel = appsViewModel,
+            librariesViewModel = librariesViewModel,
+            pluginsViewModel = pluginsViewModel,
+            cliToolsViewModel = cliToolsViewModel,
             modifier = Modifier.padding(innerPadding),
         )
     }
@@ -69,5 +78,6 @@ fun PortfolioScreen() {
 @Preview
 @Composable
 private fun PortfolioScreenPreview() {
-    PortfolioScreen()
+    // プレビュー用にモックやTODOを使用
+    Text("Portfolio Screen Preview")
 }

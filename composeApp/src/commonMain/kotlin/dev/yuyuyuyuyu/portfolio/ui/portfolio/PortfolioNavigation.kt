@@ -6,13 +6,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsScreen
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsScreen
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesScreen
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsScreen
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 
 @Composable
 fun PortfolioNavigation(
     backStack: MutableList<PortfolioRoute>,
+    appsViewModel: AppsViewModel,
+    librariesViewModel: LibrariesViewModel,
+    pluginsViewModel: PluginsViewModel,
+    cliToolsViewModel: CliToolsViewModel,
     modifier: Modifier = Modifier,
 ) {
     NavDisplay(
@@ -22,19 +30,19 @@ fun PortfolioNavigation(
         entryProvider = { key ->
             when (key) {
                 PortfolioRoute.Apps -> NavEntry(key) {
-                    AppsScreen()
+                    AppsScreen(appsViewModel)
                 }
 
                 PortfolioRoute.Libraries -> NavEntry(key) {
-                    LibrariesScreen()
+                    LibrariesScreen(librariesViewModel)
                 }
 
                 PortfolioRoute.Plugins -> NavEntry(key) {
-                    PluginsScreen()
+                    PluginsScreen(pluginsViewModel)
                 }
 
                 PortfolioRoute.CliTools -> NavEntry(key) {
-                    CliToolsScreen()
+                    CliToolsScreen(cliToolsViewModel)
                 }
             }
         },

@@ -2,7 +2,9 @@ package dev.yuyuyuyuyu.portfolio.data.repositories
 
 import dev.yuyuyuyuyu.portfolio.data.models.Product
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
+import me.tatarka.inject.annotations.Inject
 
+@Inject
 class LibrariesRepository {
     private val libraries = listOf(
         Product(
