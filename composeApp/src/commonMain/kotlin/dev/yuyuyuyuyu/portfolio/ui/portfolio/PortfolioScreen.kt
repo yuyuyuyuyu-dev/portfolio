@@ -12,24 +12,18 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import me.tatarka.inject.annotations.Inject
 
-typealias PortfolioScreen = @Composable (onNavigateToLicenses: () -> Unit) -> Unit
+typealias PortfolioScreen = @Composable () -> Unit
 
 @Inject
 @Composable
-fun PortfolioScreen(portfolioViewModel: () -> PortfolioViewModelImpl) {
-    val viewModel = viewModel { portfolioViewModel() }
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
+fun PortfolioScreen() {
     val backStack: MutableList<PortfolioRoute> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
             mutableStateListOf(PortfolioRoute.Apps)
@@ -75,5 +69,5 @@ fun PortfolioScreen(portfolioViewModel: () -> PortfolioViewModelImpl) {
 @Preview
 @Composable
 private fun PortfolioScreenPreview() {
-    PortfolioScreen(portfolioViewModel = { PortfolioViewModelImpl() })
+    PortfolioScreen()
 }
