@@ -42,7 +42,11 @@ fun PortfolioNavigation(
         entryProvider = { key ->
             when (key) {
                 PortfolioRoute.Today -> NavEntry(key) {
-                    TodayScreen()
+                    TodayScreen(
+                        appsViewModel = appsViewModel,
+                        pluginsViewModel = pluginsViewModel,
+                        onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) }
+                    )
                 }
 
                 PortfolioRoute.Catalog -> NavEntry(key) {
