@@ -45,6 +45,8 @@ fun PortfolioNavigation(
                     TodayScreen(
                         appsViewModel = appsViewModel,
                         pluginsViewModel = pluginsViewModel,
+                        cliToolsViewModel = cliToolsViewModel,
+                        templatesViewModel = templatesViewModel,
                         onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) }
                     )
                 }

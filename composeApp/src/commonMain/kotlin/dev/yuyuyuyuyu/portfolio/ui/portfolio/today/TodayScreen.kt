@@ -41,21 +41,30 @@ import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.Product
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun TodayScreen(
     appsViewModel: AppsViewModel,
     pluginsViewModel: PluginsViewModel,
+    cliToolsViewModel: CliToolsViewModel,
+    templatesViewModel: TemplatesViewModel,
     onProductClick: (String) -> Unit,
 ) {
     val appsState by appsViewModel.uiState.collectAsState()
     val pluginsState by pluginsViewModel.uiState.collectAsState()
+    val cliToolsState by cliToolsViewModel.uiState.collectAsState()
+    val templatesState by templatesViewModel.uiState.collectAsState()
     val uriHandler = LocalUriHandler.current
 
     val howOldAmI = appsState.apps.find { it.name == "年齢の計算" }
+    val html2pdf = cliToolsState.cliTools.find { it.name == "@yuyuyuyuyu-dev/html2pdf" }
+    val notPullingCalc = appsState.apps.find { it.name == "引けない確率の計算" }
     val inputSourceHandler = appsState.apps.find { it.name == "Input Source Handler" }
     val composePwa = pluginsState.plugins.find { it.name == "ComposePWA" }
+    val businessCard = templatesState.templates.find { it.name == "business-card-template" }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -83,13 +92,21 @@ fun TodayScreen(
                     onClick = { onProductClick(howOldAmI.repositoryUrl) })
             }
         }
-
-        if (inputSourceHandler != null) {
+        
+        if (html2pdf != null) {
             item {
                 ToolOfTheDayCard(
-                    product = inputSourceHandler,
-                    title = "Macの便利ツール",
-                    onClick = { onProductClick(inputSourceHandler.repositoryUrl) })
+                    product = html2pdf,
+                    title = "究極の横着",
+                    onClick = { onProductClick(html2pdf.repositoryUrl) })
+            }
+        }
+        
+        if (notPullingCalc != null) {
+            item {
+                AppOfTheDayCard(
+                    app = notPullingCalc,
+                    onClick = { onProductClick(notPullingCalc.repositoryUrl) })
             }
         }
 
@@ -99,6 +116,24 @@ fun TodayScreen(
                     product = composePwa,
                     title = "開発のおとも",
                     onClick = { onProductClick(composePwa.repositoryUrl) })
+            }
+        }
+
+        if (businessCard != null) {
+            item {
+                ToolOfTheDayCard(
+                    product = businessCard,
+                    title = "使い慣れた道具で",
+                    onClick = { onProductClick(businessCard.repositoryUrl) })
+            }
+        }
+
+        if (inputSourceHandler != null) {
+            item {
+                ToolOfTheDayCard(
+                    product = inputSourceHandler,
+                    title = "Macの便利ツール",
+                    onClick = { onProductClick(inputSourceHandler.repositoryUrl) })
             }
         }
 
