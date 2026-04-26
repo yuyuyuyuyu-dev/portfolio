@@ -3,7 +3,15 @@ package dev.yuyuyuyuyu.portfolio.ui.portfolio.today
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -14,7 +22,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -60,19 +67,27 @@ fun TodayScreen(
 
         if (howOldAmI != null) {
             item {
-                AppOfTheDayCard(app = howOldAmI, onClick = { onProductClick(howOldAmI.repositoryUrl) })
+                AppOfTheDayCard(
+                    app = howOldAmI,
+                    onClick = { onProductClick(howOldAmI.repositoryUrl) })
             }
         }
-        
+
         if (inputSourceHandler != null) {
             item {
-                ToolOfTheDayCard(product = inputSourceHandler, title = "MAC UTILITY", onClick = { onProductClick(inputSourceHandler.repositoryUrl) })
+                ToolOfTheDayCard(
+                    product = inputSourceHandler,
+                    title = "Macの便利ツール",
+                    onClick = { onProductClick(inputSourceHandler.repositoryUrl) })
             }
         }
 
         if (composePwa != null) {
             item {
-                ToolOfTheDayCard(product = composePwa, title = "DEVELOPER TOOL", onClick = { onProductClick(composePwa.repositoryUrl) })
+                ToolOfTheDayCard(
+                    product = composePwa,
+                    title = "開発のおとも",
+                    onClick = { onProductClick(composePwa.repositoryUrl) })
             }
         }
     }
@@ -91,20 +106,20 @@ fun DeveloperPhilosophyCard(modifier: Modifier = Modifier) {
         ) {
             Column {
                 Text(
-                    text = "MEET THE DEVELOPER",
+                    text = "私について",
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = "徹底的に、繰り返しを駆逐する。",
-                    style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
+                    text = "めんどくさいことはやりたくない。",
+                    style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
-            
+
             Text(
-                text = "「二度と同じことをしないために、コードを書く。」\n\n日常の面倒から開発プロセスの非効率まで、すべての定型作業を終わらせるためにアプリやツールを作り続けるエンジニアのポートフォリオ。",
+                text = "日常で出会ったちょっとした不便から開発時の繰り返しの作業まで、「めんどくさい」と思ったことをアプリやツールを作って解決しています。",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * 1.5
@@ -147,7 +162,7 @@ fun AppOfTheDayCard(app: App, onClick: () -> Unit, modifier: Modifier = Modifier
                     .align(Alignment.BottomStart)
             ) {
                 Text(
-                    text = "APP OF THE DAY",
+                    text = "今日のピックアップ",
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
                     color = Color.White.copy(alpha = 0.8f)
                 )
@@ -170,9 +185,15 @@ fun AppOfTheDayCard(app: App, onClick: () -> Unit, modifier: Modifier = Modifier
 }
 
 @Composable
-fun ToolOfTheDayCard(product: Any, title: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun ToolOfTheDayCard(
+    product: Any,
+    title: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val name = if (product is App) product.name else if (product is Product) product.name else ""
-    val description = if (product is App) product.description else if (product is Product) product.description else ""
+    val description =
+        if (product is App) product.description else if (product is Product) product.description else ""
 
     Surface(
         shape = RoundedCornerShape(24.dp),
