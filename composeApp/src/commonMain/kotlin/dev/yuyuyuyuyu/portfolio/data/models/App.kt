@@ -12,4 +12,7 @@ data class App(
     val screenshots: List<DrawableResource> = listOf(),
     val url: String? = null,
     val icon: DrawableResource = Res.drawable.default_icon,
+    val platforms: Set<Platform> = emptySet(),
+    val motivation: String? = null,
+    val installCommand: String? = null,
 )

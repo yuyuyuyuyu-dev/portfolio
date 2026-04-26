@@ -53,6 +53,8 @@ class AppsRepository {
             url = "https://what-is-the-date-today.yuyuyuyuyu.dev",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/what-is-the-date-today",
             screenshots = listOf(Res.drawable.what_is_the_date_today_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
+            motivation = "病院で問診票を書く時に、西暦と和暦と月と日付と曜日をまとめて確認する方法がないのがめんどくさすぎたため。",
         ),
         App(
             name = "年齢の計算",
@@ -67,6 +69,8 @@ class AppsRepository {
             url = "https://how-old-am-i.yuyuyuyuyu.dev",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/how-old-am-i",
             screenshots = listOf(Res.drawable.how_old_am_i_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
+            motivation = "病院で問診票を書くとき、毎回自分の年齢を覚えていなくて生年月日から数えるのが面倒だったため。",
         ),
         App(
             name = "Location Remover",
@@ -208,6 +212,15 @@ class AppsRepository {
             techStack = setOf(TechStack.Android, TechStack.Kotlin, TechStack.JetpackCompose),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/CodeScanner",
             screenshots = listOf(Res.drawable.CodeScanner_screenshot),
+        ),
+        App(
+            name = "Input Source Handler",
+            description = "A simple macOS utility to switch input sources using custom keyboard shortcuts.",
+            techStack = setOf(TechStack.Swift, TechStack.SwiftUi),
+            repositoryUrl = "https://github.com/yuyuyuyuyu-dev/input-source-handler",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.MacOS),
+            motivation = "US配列キーボードで、Android Studioのターミナル操作中に入力切り替えショートカットが干渉してしまうのが面倒だったため。Android Studioがキーボード入力をフックできるなら自分でも作れるのではないかと考えた。",
+            installCommand = "brew tap yuyuyuyuyu-dev/tap\nbrew install --cask input-source-handler",
         ),
     ).sortedBy { it.repositoryUrl }
 

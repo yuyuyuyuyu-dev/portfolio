@@ -5,4 +5,7 @@ data class Product(
     val description: String,
     val techStack: Set<TechStack>,
     val repositoryUrl: String,
+    val platforms: Set<Platform> = emptySet(),
+    val motivation: String? = null,
+    val installCommand: String? = null,
 )

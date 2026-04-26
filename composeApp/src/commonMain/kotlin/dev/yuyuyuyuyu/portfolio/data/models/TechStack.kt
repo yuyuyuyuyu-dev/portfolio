@@ -8,6 +8,7 @@ enum class TechStack(val label: String) {
     Gradle("Gradle"),
     NodeJs("Node.js"),
     Swift("Swift"),
+    SwiftUi("SwiftUI"),
     Kotlin("Kotlin"),
     React("React"),
     NextJs("Next.js"),
