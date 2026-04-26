@@ -55,6 +55,15 @@ class CliToolsRepository {
             techStack = setOf(TechStack.TypeScript, TechStack.NodeJs),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/generate-third-party-licenses-json",
         ),
+        Product(
+            name = "@yuyuyuyuyu-dev/html2pdf",
+            description = "Converts HTML to PDF using Chromium.",
+            techStack = setOf(TechStack.TypeScript, TechStack.NodeJs),
+            repositoryUrl = "https://github.com/yuyuyuyuyu-dev/html2pdf",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Cli),
+            motivation = "AndroidスマホでGeminiを使ってHTMLとCSSの名刺を作っていた時、HTMLをPDFに変換するためだけにわざわざPCを取り出すのが面倒だったため。スマホのTermux環境だけで完結させるために作った。",
+            installCommand = "npx @yuyuyuyuyu-dev/html2pdf --chromium-path \"\$(type -p chromium-browser)\" --src {Source HTML file path} --dest {Destination PDF path}",
+        ),
     ).sortedBy { it.repositoryUrl }
 
     fun getCliTools() = cliTools
