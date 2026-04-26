@@ -42,7 +42,6 @@ class AppsRepository {
             techStack = setOf(TechStack.Android, TechStack.Kotlin),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/DigitalClock",
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android),
-            motivation = "Androidアプリ開発の参考書を読み終えた後、学んだ知識を定着させるために最初のステップとして作成したもの。",
         ),
         App(
             name = "今日の日付",
@@ -233,11 +232,4 @@ class AppsRepository {
     ).sortedBy { it.repositoryUrl }
 
     fun getApps() = apps
-}
-        ),
-    ).sortedBy { it.repositoryUrl }
-
-    fun getApps() = apps
-}
-n getApps() = apps
 }

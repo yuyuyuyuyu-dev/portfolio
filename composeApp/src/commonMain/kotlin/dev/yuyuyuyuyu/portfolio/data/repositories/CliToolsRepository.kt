@@ -24,6 +24,8 @@ class CliToolsRepository {
             description = "myDEを簡単に起動するためのシェルスクリプト",
             techStack = setOf(TechStack.Bash),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/myde_command",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Cli),
+            motivation = "上記のDockerコンテナ「myDE」を起動するコマンドすら毎回打つのが面倒だったため、簡単に起動するためのスクリプトを作った。",
         ),
         Product(
             name = "newProject",
