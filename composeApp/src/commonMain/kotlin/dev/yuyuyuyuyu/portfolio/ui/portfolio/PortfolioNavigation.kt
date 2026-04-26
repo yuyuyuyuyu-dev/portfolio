@@ -5,14 +5,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsScreen
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsScreen
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesScreen
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsScreen
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.today.TodayScreen
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.catalog.CatalogScreen
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.search.SearchScreen
+
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 
 @Composable
 fun PortfolioNavigation(
@@ -21,6 +22,7 @@ fun PortfolioNavigation(
     librariesViewModel: LibrariesViewModel,
     pluginsViewModel: PluginsViewModel,
     cliToolsViewModel: CliToolsViewModel,
+    templatesViewModel: TemplatesViewModel,
     modifier: Modifier = Modifier,
 ) {
     NavDisplay(
@@ -29,20 +31,22 @@ fun PortfolioNavigation(
         onBack = { backStack.removeLastOrNull() },
         entryProvider = { key ->
             when (key) {
-                PortfolioRoute.Apps -> NavEntry(key) {
-                    AppsScreen(appsViewModel)
+                PortfolioRoute.Today -> NavEntry(key) {
+                    TodayScreen()
                 }
 
-                PortfolioRoute.Libraries -> NavEntry(key) {
-                    LibrariesScreen(librariesViewModel)
+                PortfolioRoute.Catalog -> NavEntry(key) {
+                    CatalogScreen(
+                        appsViewModel = appsViewModel,
+                        librariesViewModel = librariesViewModel,
+                        pluginsViewModel = pluginsViewModel,
+                        cliToolsViewModel = cliToolsViewModel,
+                        templatesViewModel = templatesViewModel,
+                    )
                 }
 
-                PortfolioRoute.Plugins -> NavEntry(key) {
-                    PluginsScreen(pluginsViewModel)
-                }
-
-                PortfolioRoute.CliTools -> NavEntry(key) {
-                    CliToolsScreen(cliToolsViewModel)
+                PortfolioRoute.Search -> NavEntry(key) {
+                    SearchScreen()
                 }
             }
         },

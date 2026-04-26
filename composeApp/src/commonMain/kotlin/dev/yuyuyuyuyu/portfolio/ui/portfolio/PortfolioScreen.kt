@@ -3,9 +3,8 @@ package dev.yuyuyuyuyu.portfolio.ui.portfolio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Apps
-import androidx.compose.material.icons.filled.Bolt
-import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.Terminal
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Today
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -28,38 +27,33 @@ fun PortfolioScreen(
     librariesViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModelImpl,
     pluginsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModelImpl,
     cliToolsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModelImpl,
+    templatesViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModelImpl,
 ) {
     val backStack: MutableList<PortfolioRoute> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
-            mutableStateListOf(PortfolioRoute.Apps)
+            mutableStateListOf(PortfolioRoute.Today)
         }
 
     Scaffold(
         bottomBar = {
             NavigationBar {
                 NavigationBarItem(
-                    selected = backStack.last() == PortfolioRoute.Apps,
-                    onClick = { backStack.add(PortfolioRoute.Apps) },
+                    selected = backStack.last() == PortfolioRoute.Today,
+                    onClick = { backStack.add(PortfolioRoute.Today) },
+                    icon = { Icon(Icons.Default.Today, null) },
+                    label = { Text("Today") },
+                )
+                NavigationBarItem(
+                    selected = backStack.last() == PortfolioRoute.Catalog,
+                    onClick = { backStack.add(PortfolioRoute.Catalog) },
                     icon = { Icon(Icons.Default.Apps, null) },
-                    label = { Text("アプリ") },
+                    label = { Text("Apps / Tools") },
                 )
                 NavigationBarItem(
-                    selected = backStack.last() == PortfolioRoute.Libraries,
-                    onClick = { backStack.add(PortfolioRoute.Libraries) },
-                    icon = { Icon(Icons.Default.Book, null) },
-                    label = { Text("ライブラリ") },
-                )
-                NavigationBarItem(
-                    selected = backStack.last() == PortfolioRoute.Plugins,
-                    onClick = { backStack.add(PortfolioRoute.Plugins) },
-                    icon = { Icon(Icons.Default.Bolt, null) },
-                    label = { Text("プラグイン") },
-                )
-                NavigationBarItem(
-                    selected = backStack.last() == PortfolioRoute.CliTools,
-                    onClick = { backStack.add(PortfolioRoute.CliTools) },
-                    icon = { Icon(Icons.Default.Terminal, null) },
-                    label = { Text("CLIツール") },
+                    selected = backStack.last() == PortfolioRoute.Search,
+                    onClick = { backStack.add(PortfolioRoute.Search) },
+                    icon = { Icon(Icons.Default.Search, null) },
+                    label = { Text("検索") },
                 )
             }
         },
@@ -70,6 +64,7 @@ fun PortfolioScreen(
             librariesViewModel = librariesViewModel,
             pluginsViewModel = pluginsViewModel,
             cliToolsViewModel = cliToolsViewModel,
+            templatesViewModel = templatesViewModel,
             modifier = Modifier.padding(innerPadding),
         )
     }

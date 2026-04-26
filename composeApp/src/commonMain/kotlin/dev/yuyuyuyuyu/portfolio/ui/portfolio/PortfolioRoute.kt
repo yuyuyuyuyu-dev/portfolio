@@ -5,14 +5,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface PortfolioRoute {
     @Serializable
-    data object Apps : PortfolioRoute
+    data object Today : PortfolioRoute
 
     @Serializable
-    data object Libraries : PortfolioRoute
+    data object Catalog : PortfolioRoute
 
     @Serializable
-    data object Plugins : PortfolioRoute
-
-    @Serializable
-    data object CliTools : PortfolioRoute
+    data object Search : PortfolioRoute
 }
