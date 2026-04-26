@@ -61,7 +61,14 @@ fun PortfolioNavigation(
                 }
 
                 PortfolioRoute.Search -> NavEntry(key) {
-                    SearchScreen()
+                    SearchScreen(
+                        appsViewModel = appsViewModel,
+                        librariesViewModel = librariesViewModel,
+                        pluginsViewModel = pluginsViewModel,
+                        cliToolsViewModel = cliToolsViewModel,
+                        templatesViewModel = templatesViewModel,
+                        onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) }
+                    )
                 }
 
                 is PortfolioRoute.Detail -> NavEntry(key) {
