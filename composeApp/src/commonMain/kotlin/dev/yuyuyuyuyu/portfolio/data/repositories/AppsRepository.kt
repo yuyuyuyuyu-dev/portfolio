@@ -90,6 +90,8 @@ class AppsRepository {
             url = "https://yuyuyuyuyu-dev.github.io/location-remover/",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/location-remover",
             screenshots = listOf(Res.drawable.LocationRemover_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
+            motivation = "SNS等に写真を投稿する際、自前で位置情報を削除しておけると安心だと考え発案した。専門学校のグループ演習にてチームで開発したもので、自身は主にアプリのアイデア出しとPWA化の対応を担当。",
         ),
         App(
             name = "乱数の生成",
