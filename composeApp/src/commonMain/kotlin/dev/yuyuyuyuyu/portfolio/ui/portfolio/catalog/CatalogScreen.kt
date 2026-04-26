@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.Platform
 import dev.yuyuyuyuyu.portfolio.data.models.Product
-import dev.yuyuyuyuyu.portfolio.ui.components.listItems.AppListItem
-import dev.yuyuyuyuyu.portfolio.ui.components.listItems.ProductListItem
+import dev.yuyuyuyuyu.portfolio.ui.components.listItems.AppTile
+import dev.yuyuyuyuyu.portfolio.ui.components.listItems.ProductTile
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
@@ -35,6 +35,7 @@ fun CatalogScreen(
     pluginsViewModel: PluginsViewModel,
     cliToolsViewModel: CliToolsViewModel,
     templatesViewModel: TemplatesViewModel,
+    onProductClick: (String) -> Unit,
 ) {
     val appsState by appsViewModel.uiState.collectAsState()
     val librariesState by librariesViewModel.uiState.collectAsState()
@@ -59,7 +60,8 @@ fun CatalogScreen(
             item {
                 CatalogSection(
                     title = "Mac用ツール (homebrew-tap)",
-                    apps = macApps
+                    apps = macApps,
+                    onProductClick = onProductClick
                 )
             }
         }
@@ -68,7 +70,8 @@ fun CatalogScreen(
             item {
                 CatalogSection(
                     title = "Webアプリ・PWA",
-                    apps = webApps
+                    apps = webApps,
+                    onProductClick = onProductClick
                 )
             }
         }
@@ -77,7 +80,8 @@ fun CatalogScreen(
             item {
                 CatalogSection(
                     title = "モバイル＆その他アプリ",
-                    apps = androidIosApps + otherApps
+                    apps = androidIosApps + otherApps,
+                    onProductClick = onProductClick
                 )
             }
         }
@@ -88,7 +92,8 @@ fun CatalogScreen(
                     title = "CLIツール",
                     products = cliToolsState.cliTools,
                     icon = Icons.Default.Terminal,
-                    iconDescription = "CLI"
+                    iconDescription = "CLI",
+                    onProductClick = onProductClick
                 )
             }
         }
@@ -99,7 +104,8 @@ fun CatalogScreen(
                     title = "プラグイン",
                     products = pluginsState.plugins,
                     icon = Icons.Default.Bolt,
-                    iconDescription = "Plugin"
+                    iconDescription = "Plugin",
+                    onProductClick = onProductClick
                 )
             }
         }
@@ -110,7 +116,8 @@ fun CatalogScreen(
                     title = "ライブラリ",
                     products = librariesState.libraries,
                     icon = Icons.Default.Book,
-                    iconDescription = "Library"
+                    iconDescription = "Library",
+                    onProductClick = onProductClick
                 )
             }
         }
@@ -121,7 +128,8 @@ fun CatalogScreen(
                     title = "テンプレート",
                     products = templatesState.templates,
                     icon = Icons.Default.Brush,
-                    iconDescription = "Template"
+                    iconDescription = "Template",
+                    onProductClick = onProductClick
                 )
             }
         }
@@ -132,6 +140,7 @@ fun CatalogScreen(
 fun CatalogSection(
     title: String,
     apps: List<App>,
+    onProductClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
@@ -145,9 +154,10 @@ fun CatalogSection(
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
             items(apps) { app ->
-                Box(modifier = Modifier.width(300.dp)) {
-                    AppListItem(app = app)
-                }
+                AppTile(
+                    app = app,
+                    onClick = { onProductClick(app.repositoryUrl) }
+                )
             }
         }
     }
@@ -159,6 +169,7 @@ fun CatalogProductSection(
     products: List<Product>,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     iconDescription: String,
+    onProductClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
@@ -172,13 +183,12 @@ fun CatalogProductSection(
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
             items(products) { product ->
-                Box(modifier = Modifier.width(300.dp)) {
-                    ProductListItem(
-                        product = product,
-                        icon = icon,
-                        iconDescription = iconDescription
-                    )
-                }
+                ProductTile(
+                    product = product,
+                    icon = icon,
+                    iconDescription = iconDescription,
+                    onClick = { onProductClick(product.repositoryUrl) }
+                )
             }
         }
     }

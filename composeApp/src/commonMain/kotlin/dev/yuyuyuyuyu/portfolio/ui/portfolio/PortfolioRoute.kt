@@ -12,4 +12,7 @@ sealed interface PortfolioRoute {
 
     @Serializable
     data object Search : PortfolioRoute
+
+    @Serializable
+    data class Detail(val repositoryUrl: String) : PortfolioRoute
 }

@@ -15,6 +15,10 @@ import dev.yuyuyuyuyu.portfolio.ui.portfolio.search.SearchScreen
 
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.detail.DetailScreen
+
 @Composable
 fun PortfolioNavigation(
     backStack: MutableList<PortfolioRoute>,
@@ -25,6 +29,12 @@ fun PortfolioNavigation(
     templatesViewModel: TemplatesViewModel,
     modifier: Modifier = Modifier,
 ) {
+    val appsState by appsViewModel.uiState.collectAsState()
+    val librariesState by librariesViewModel.uiState.collectAsState()
+    val pluginsState by pluginsViewModel.uiState.collectAsState()
+    val cliToolsState by cliToolsViewModel.uiState.collectAsState()
+    val templatesState by templatesViewModel.uiState.collectAsState()
+
     NavDisplay(
         backStack = backStack,
         modifier = modifier,
@@ -42,11 +52,25 @@ fun PortfolioNavigation(
                         pluginsViewModel = pluginsViewModel,
                         cliToolsViewModel = cliToolsViewModel,
                         templatesViewModel = templatesViewModel,
+                        onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) }
                     )
                 }
 
                 PortfolioRoute.Search -> NavEntry(key) {
                     SearchScreen()
+                }
+
+                is PortfolioRoute.Detail -> NavEntry(key) {
+                    val url = key.repositoryUrl
+                    val app = appsState.apps.find { it.repositoryUrl == url }
+                    val product = sequenceOf(
+                        librariesState.libraries,
+                        pluginsState.plugins,
+                        cliToolsState.cliTools,
+                        templatesState.templates
+                    ).flatten().find { it.repositoryUrl == url }
+
+                    DetailScreen(app = app, product = product)
                 }
             }
         },
