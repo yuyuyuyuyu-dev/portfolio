@@ -14,8 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
+import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
 import me.tatarka.inject.annotations.Inject
 
 typealias PortfolioScreen = @Composable (onNavigateToLicenses: () -> Unit) -> Unit
@@ -28,13 +30,27 @@ fun PortfolioScreen(
     pluginsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModelImpl,
     cliToolsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModelImpl,
     templatesViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModelImpl,
+    @me.tatarka.inject.annotations.Assisted onNavigateToLicenses: () -> Unit
 ) {
     val backStack: MutableList<PortfolioRoute> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
             mutableStateListOf(PortfolioRoute.Today)
         }
 
+    val uriHandler = LocalUriHandler.current
+
     Scaffold(
+        topBar = {
+            SimpleTopAppBar(
+                title = "portfolio",
+                navigateBackIsPossible = backStack.size > 1,
+                onNavigateBackButtonClick = { backStack.removeLastOrNull() },
+                onOpenSourceLicensesButtonClick = onNavigateToLicenses,
+                onSourceCodeButtonClick = {
+                    uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/portfolio")
+                },
+            )
+        },
         bottomBar = {
             NavigationBar {
                 NavigationBarItem(
