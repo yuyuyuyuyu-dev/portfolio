@@ -33,12 +33,16 @@ class AppsRepository {
             icon = Res.drawable.puremusicplayer_icon,
             techStack = setOf(TechStack.Ios, TechStack.Swift),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/PureMusicPlayer",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Ios),
+            motivation = "Macの `afplay` コマンドで再生した時の音が好きで、この音質をそのまま持ち運びたいと思ったため。CoreAudioのAPIを直接叩いて音声ファイルの再生部分を実装している。",
         ),
         App(
             name = "DigitalClock",
             description = "デジタル時計アプリ",
             techStack = setOf(TechStack.Android, TechStack.Kotlin),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/DigitalClock",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android),
+            motivation = "Androidアプリ開発の参考書を読み終えた後、学んだ知識を定着させるために最初のステップとして作成したもの。",
         ),
         App(
             name = "今日の日付",
