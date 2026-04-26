@@ -218,6 +218,8 @@ class AppsRepository {
             techStack = setOf(TechStack.Android, TechStack.Kotlin, TechStack.JetpackCompose),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/CodeScanner",
             screenshots = listOf(Res.drawable.CodeScanner_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android),
+            motivation = "街中にあるQRコードをスキャンして、純粋にどんなデータが埋め込まれているのか（中身の文字列）を見てみたら面白いのではないかという好奇心から作成。",
         ),
         App(
             name = "Input Source Handler",
@@ -231,4 +233,11 @@ class AppsRepository {
     ).sortedBy { it.repositoryUrl }
 
     fun getApps() = apps
+}
+        ),
+    ).sortedBy { it.repositoryUrl }
+
+    fun getApps() = apps
+}
+n getApps() = apps
 }
