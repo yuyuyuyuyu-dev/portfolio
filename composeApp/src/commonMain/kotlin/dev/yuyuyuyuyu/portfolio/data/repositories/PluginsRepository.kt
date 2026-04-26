@@ -12,6 +12,8 @@ class PluginsRepository {
             description = "行末に\";\"を挿入するNeovimプラグイン",
             techStack = setOf(TechStack.Neovim, TechStack.Lua),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/insert-end-semicolon.nvim",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Neovim),
+            motivation = "Rustなど行末にセミコロンが必要な言語で、わざわざ行末にカーソルを移動させてからセミコロンを入力するのが面倒だったため。現在位置を維持したまま行末にセミコロンを挿入する関数を提供するプラグインを作成した。",
         ),
         Product(
             name = "ComposePWA",
