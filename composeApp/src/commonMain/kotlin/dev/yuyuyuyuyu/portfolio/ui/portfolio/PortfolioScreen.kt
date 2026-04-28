@@ -37,13 +37,33 @@ fun PortfolioScreen(
             mutableStateListOf(PortfolioRoute.Today)
         }
 
+    val currentRoute = backStack.lastOrNull()
+    val isTopLevel = currentRoute == PortfolioRoute.Today || currentRoute == PortfolioRoute.Catalog || currentRoute == PortfolioRoute.Search
+    val currentTab = if (isTopLevel) currentRoute else backStack.getOrNull(1) ?: PortfolioRoute.Today
+
+    fun navigateToTab(route: PortfolioRoute) {
+        if (currentTab == route) {
+            // Pop to root of the current tab if already selected
+            while (backStack.size > (if (route == PortfolioRoute.Today) 1 else 2)) {
+                backStack.removeLastOrNull()
+            }
+            return
+        }
+        
+        backStack.clear()
+        backStack.add(PortfolioRoute.Today)
+        if (route != PortfolioRoute.Today) {
+            backStack.add(route)
+        }
+    }
+
     val uriHandler = LocalUriHandler.current
 
     Scaffold(
         topBar = {
             SimpleTopAppBar(
                 title = "portfolio",
-                navigateBackIsPossible = backStack.size > 1,
+                navigateBackIsPossible = !isTopLevel,
                 onNavigateBackButtonClick = { backStack.removeLastOrNull() },
                 onOpenSourceLicensesButtonClick = onNavigateToLicenses,
                 onSourceCodeButtonClick = {
@@ -54,20 +74,20 @@ fun PortfolioScreen(
         bottomBar = {
             NavigationBar {
                 NavigationBarItem(
-                    selected = backStack.last() == PortfolioRoute.Today,
-                    onClick = { backStack.add(PortfolioRoute.Today) },
+                    selected = currentTab == PortfolioRoute.Today,
+                    onClick = { navigateToTab(PortfolioRoute.Today) },
                     icon = { Icon(Icons.Default.Today, null) },
                     label = { Text("Today") },
                 )
                 NavigationBarItem(
-                    selected = backStack.last() == PortfolioRoute.Catalog,
-                    onClick = { backStack.add(PortfolioRoute.Catalog) },
+                    selected = currentTab == PortfolioRoute.Catalog,
+                    onClick = { navigateToTab(PortfolioRoute.Catalog) },
                     icon = { Icon(Icons.Default.Apps, null) },
                     label = { Text("Apps / Tools") },
                 )
                 NavigationBarItem(
-                    selected = backStack.last() == PortfolioRoute.Search,
-                    onClick = { backStack.add(PortfolioRoute.Search) },
+                    selected = currentTab == PortfolioRoute.Search,
+                    onClick = { navigateToTab(PortfolioRoute.Search) },
                     icon = { Icon(Icons.Default.Search, null) },
                     label = { Text("検索") },
                 )
