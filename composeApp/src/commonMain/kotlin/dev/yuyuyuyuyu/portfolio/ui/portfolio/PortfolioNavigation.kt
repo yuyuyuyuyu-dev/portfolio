@@ -1,6 +1,7 @@
 package dev.yuyuyuyuyu.portfolio.ui.portfolio
 
 import androidx.compose.runtime.Composable
+import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.NavEntry
@@ -75,15 +76,15 @@ fun PortfolioNavigation(
 
                 is PortfolioRoute.Detail -> NavEntry(key) {
                     val url = key.repositoryUrl
-                    val app = appsState.apps.find { it.repositoryUrl == url }
-                    val product = sequenceOf(
-                        librariesState.libraries,
-                        pluginsState.plugins,
-                        cliToolsState.cliTools,
-                        templatesState.templates
-                    ).flatten().find { it.repositoryUrl == url }
+                    val allItems = appsState.apps + librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
+                    val item = allItems.find { it.repositoryUrl == url }
 
-                    DetailScreen(app = app, product = product)
+                    if (item != null) {
+                        DetailScreen(item = item)
+                    } else {
+                        // Fallback or error state
+                        Text("Item not found")
+                    }
                 }
             }
         },

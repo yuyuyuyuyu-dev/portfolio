@@ -69,7 +69,7 @@ fun CatalogScreen(
             item {
                 CatalogSection(
                     title = "Webアプリ・PWA",
-                    apps = webApps,
+                    items = webApps,
                     onProductClick = onProductClick
                 )
             }
@@ -77,11 +77,9 @@ fun CatalogScreen(
 
         if (plugins.isNotEmpty()) {
             item {
-                CatalogProductSection(
+                CatalogSection(
                     title = "プラグイン",
-                    products = plugins,
-                    icon = Icons.Default.Bolt,
-                    iconDescription = "Plugin",
+                    items = plugins,
                     onProductClick = onProductClick
                 )
             }
@@ -89,11 +87,9 @@ fun CatalogScreen(
 
         if (libraries.isNotEmpty()) {
             item {
-                CatalogProductSection(
+                CatalogSection(
                     title = "ライブラリ",
-                    products = libraries,
-                    icon = Icons.Default.Book,
-                    iconDescription = "Library",
+                    items = libraries,
                     onProductClick = onProductClick
                 )
             }
@@ -101,11 +97,9 @@ fun CatalogScreen(
 
         if (cliTools.isNotEmpty()) {
             item {
-                CatalogProductSection(
+                CatalogSection(
                     title = "CLIツール",
-                    products = cliTools,
-                    icon = Icons.Default.Terminal,
-                    iconDescription = "CLI",
+                    items = cliTools,
                     onProductClick = onProductClick
                 )
             }
@@ -113,11 +107,9 @@ fun CatalogScreen(
 
         if (templates.isNotEmpty()) {
             item {
-                CatalogProductSection(
+                CatalogSection(
                     title = "テンプレート",
-                    products = templates,
-                    icon = Icons.Default.Brush,
-                    iconDescription = "Template",
+                    items = templates,
                     onProductClick = onProductClick
                 )
             }
@@ -127,7 +119,7 @@ fun CatalogScreen(
             item {
                 CatalogSection(
                     title = "Macアプリ",
-                    apps = macApps,
+                    items = macApps,
                     onProductClick = onProductClick
                 )
             }
@@ -137,7 +129,7 @@ fun CatalogScreen(
             item {
                 CatalogSection(
                     title = "モバイル＆その他アプリ",
-                    apps = androidIosApps + otherApps,
+                    items = androidIosApps + otherApps,
                     onProductClick = onProductClick
                 )
             }
@@ -148,7 +140,7 @@ fun CatalogScreen(
 @Composable
 fun CatalogSection(
     title: String,
-    apps: List<App>,
+    items: List<dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem>,
     onProductClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -162,41 +154,10 @@ fun CatalogSection(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
-            items(apps) { app ->
-                AppTile(
-                    app = app,
-                    onClick = { onProductClick(app.repositoryUrl) }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun CatalogProductSection(
-    title: String,
-    products: List<Product>,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
-    iconDescription: String,
-    onProductClick: (String) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Column(modifier = modifier) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-        )
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp)
-        ) {
-            items(products) { product ->
-                ProductTile(
-                    product = product,
-                    icon = icon,
-                    iconDescription = iconDescription,
-                    onClick = { onProductClick(product.repositoryUrl) }
+            items(items) { item ->
+                dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemTile(
+                    item = item,
+                    onClick = { onProductClick(item.repositoryUrl) }
                 )
             }
         }

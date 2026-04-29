@@ -23,7 +23,8 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.App
-import dev.yuyuyuyuyu.portfolio.data.models.Product
+import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
+import dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemIcon
 import org.jetbrains.compose.resources.painterResource
 
 import androidx.compose.foundation.shape.CircleShape
@@ -31,27 +32,24 @@ import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 
 @Composable
 fun DetailScreen(
-    app: App? = null,
-    product: Product? = null,
+    item: PortfolioItem,
 ) {
     val uriHandler = LocalUriHandler.current
     val clipboardManager = LocalClipboardManager.current
     val scrollState = rememberScrollState()
 
-    // Normalize data between App and Product for unified rendering
-    val name = app?.name ?: product?.name ?: ""
-    val description = app?.description ?: product?.description ?: ""
-    val motivation = app?.motivation ?: product?.motivation
-    val repositoryUrl = app?.repositoryUrl ?: product?.repositoryUrl ?: ""
-    val installCommand = app?.installCommand ?: product?.installCommand
-    val appUrl = app?.url
+    val name = item.name
+    val description = item.description
+    val motivation = item.motivation
+    val repositoryUrl = item.repositoryUrl
+    val installCommand = item.installCommand
+    val appUrl = (item as? App)?.url
 
     Column(
         modifier = Modifier
@@ -65,45 +63,7 @@ fun DetailScreen(
             horizontalArrangement = Arrangement.spacedBy(24.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (app != null) {
-                Image(
-                    painter = painterResource(app.icon),
-                    contentDescription = "$name icon",
-                    modifier = Modifier
-                        .size(120.dp)
-                        .clip(RoundedCornerShape(28.dp)),
-                    contentScale = ContentScale.Crop,
-                )
-            } else {
-                // Terminal Window Style Box
-                Column(
-                    modifier = Modifier
-                        .size(120.dp)
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(Color(0xFFFBF1C7)) // Gruvbox Light background
-                        .padding(12.dp)
-                ) {
-                    // macOS Window Buttons
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
-                        modifier = Modifier.padding(bottom = 12.dp)
-                    ) {
-                        Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(Color(0xFFCC241D)))
-                        Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(Color(0xFFD79921)))
-                        Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(Color(0xFF98971A)))
-                    }
-                    
-                    // Terminal Prompt
-                    Text(
-                        text = "> $name",
-                        color = Color(0xFF3C3836), // Gruvbox Light text color
-                        fontSize = 14.sp,
-                        maxLines = 3,
-                        overflow = TextOverflow.Ellipsis,
-                        lineHeight = 20.sp
-                    )
-                }
-            }
+            PortfolioItemIcon(item = item, size = 120.dp)
 
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
@@ -136,7 +96,7 @@ fun DetailScreen(
         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
         // --- Screenshots Section (Only for Apps) ---
-        if (app != null && app.screenshots.isNotEmpty()) {
+        if (item is App && item.screenshots.isNotEmpty()) {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
                     text = "スクリーンショット",
@@ -144,7 +104,7 @@ fun DetailScreen(
                     fontWeight = FontWeight.Bold
                 )
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    items(app.screenshots) { screenshot ->
+                    items(item.screenshots) { screenshot ->
                         Image(
                             painter = painterResource(screenshot),
                             contentDescription = "Screenshot of $name",
