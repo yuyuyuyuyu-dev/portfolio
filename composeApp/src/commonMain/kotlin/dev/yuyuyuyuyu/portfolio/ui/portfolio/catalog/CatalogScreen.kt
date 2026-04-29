@@ -17,11 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.Platform
-import dev.yuyuyuyuyu.portfolio.data.models.Product
-import dev.yuyuyuyuyu.portfolio.ui.components.listItems.AppTile
-import dev.yuyuyuyuyu.portfolio.ui.components.listItems.ProductTile
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
