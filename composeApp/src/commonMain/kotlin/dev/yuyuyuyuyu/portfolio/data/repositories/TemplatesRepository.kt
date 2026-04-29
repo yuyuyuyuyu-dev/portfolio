@@ -16,7 +16,7 @@ class TemplatesRepository {
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
             motivation = "名刺を作るためだけに、普段使わないデザインツールの使い方を覚えるのがコスパが悪く面倒だったため。使い慣れたHTMLとCSS（CSSならミリ単位のサイズ指定も可能）で作ってみたら良好だったため、次に作る時のためにテンプレート化した。",
         )
-    ).sortedBy { it.repositoryUrl }
+    ).sortedBy { it.name }
 
     fun getTemplates() = templates
 }

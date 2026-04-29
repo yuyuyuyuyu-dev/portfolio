@@ -25,7 +25,7 @@ class PluginsRepository {
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Gradle),
             motivation = "Compose MultiplatformでPWAを作るにあたって、新規プロジェクトを作成するたびにPWA化に必要なファイルや記述をコピペしてくるのがめんどくさすぎたため。",
         )
-    ).sortedBy { it.repositoryUrl }
+    ).sortedBy { it.name }
 
     fun getPlugins() = plugins
 }

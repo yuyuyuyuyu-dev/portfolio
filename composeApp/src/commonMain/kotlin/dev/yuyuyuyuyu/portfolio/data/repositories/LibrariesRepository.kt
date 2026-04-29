@@ -70,7 +70,7 @@ class LibrariesRepository {
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android, dev.yuyuyuyuyu.portfolio.data.models.Platform.Ios, dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
             motivation = "自分用のシンプルなアプリバー。アプリを作るごとに毎回同じようなUIコードを書くのは面倒だったため、コンポーネントとして共通化した。",
         ),
-    ).sortedBy { it.repositoryUrl }
+    ).sortedBy { it.name }
 
     fun getLibraries() = libraries
 }

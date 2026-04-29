@@ -242,7 +242,7 @@ class AppsRepository {
             motivation = "US配列キーボードで、Android Studioのターミナル操作中に入力切り替えショートカットが干渉してしまうのが面倒だったため。Android Studioがキーボード入力をフックできるなら自分でも作れるのではないかと考えた。",
             installCommand = "brew tap yuyuyuyuyu-dev/tap\nbrew install --cask input-source-handler",
         ),
-    ).sortedBy { it.repositoryUrl }
+    ).sortedBy { it.name }
 
     fun getApps() = apps
 }
