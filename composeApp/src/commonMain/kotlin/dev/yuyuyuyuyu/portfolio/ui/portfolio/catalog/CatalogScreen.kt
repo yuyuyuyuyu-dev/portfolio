@@ -59,7 +59,7 @@ fun CatalogScreen(
         if (macApps.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "Mac用ツール (homebrew-tap)",
+                    title = "Macアプリ",
                     apps = macApps,
                     onProductClick = onProductClick
                 )
