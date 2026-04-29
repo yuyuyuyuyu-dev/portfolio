@@ -26,12 +26,23 @@ import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.Product
 import org.jetbrains.compose.resources.painterResource
 
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
+
 @Composable
 fun DetailScreen(
     app: App? = null,
     product: Product? = null,
 ) {
     val uriHandler = LocalUriHandler.current
+    val clipboardManager = LocalClipboardManager.current
     val scrollState = rememberScrollState()
 
     // Normalize data between App and Product for unified rendering
@@ -64,18 +75,32 @@ fun DetailScreen(
                     contentScale = ContentScale.Crop,
                 )
             } else {
-                Box(
+                // Terminal Window Style Box
+                Column(
                     modifier = Modifier
                         .size(120.dp)
-                        .clip(RoundedCornerShape(28.dp))
-                        .background(MaterialTheme.colorScheme.surfaceVariant),
-                    contentAlignment = Alignment.Center
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(Color(0xFFFBF1C7)) // Gruvbox Light background
+                        .padding(12.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Product Icon",
-                        modifier = Modifier.size(64.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    // macOS Window Buttons
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    ) {
+                        Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(Color(0xFFCC241D)))
+                        Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(Color(0xFFD79921)))
+                        Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(Color(0xFF98971A)))
+                    }
+                    
+                    // Terminal Prompt
+                    Text(
+                        text = "> $name",
+                        color = Color(0xFF3C3836), // Gruvbox Light text color
+                        fontSize = 14.sp,
+                        maxLines = 3,
+                        overflow = TextOverflow.Ellipsis,
+                        lineHeight = 20.sp
                     )
                 }
             }
@@ -151,11 +176,12 @@ fun DetailScreen(
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
         }
 
-        // --- Install Command Section ---
+        // --- Install/Run Command Section ---
         if (!installCommand.isNullOrBlank()) {
+            val commandTitle = if (installCommand.trim().startsWith("npx")) "実行コマンド" else "インストール"
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
-                    text = "インストール",
+                    text = commandTitle,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -164,12 +190,24 @@ fun DetailScreen(
                     color = MaterialTheme.colorScheme.surfaceVariant,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    SelectionContainer {
-                        Text(
-                            text = installCommand,
-                            style = MaterialTheme.typography.bodyMedium.copy(fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace),
-                            modifier = Modifier.padding(16.dp)
-                        )
+                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
+                        SelectionContainer(modifier = Modifier.fillMaxWidth().padding(end = 48.dp)) {
+                            Text(
+                                text = installCommand,
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.padding(16.dp)
+                            )
+                        }
+                        IconButton(
+                            onClick = { clipboardManager.setText(AnnotatedString(installCommand)) },
+                            modifier = Modifier.padding(8.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ContentCopy,
+                                contentDescription = "Copy command",
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
                     }
                 }
             }
