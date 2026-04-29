@@ -4,19 +4,21 @@ import dev.yuyuyuyuyu.portfolio.data.models.Product
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
 import me.tatarka.inject.annotations.Inject
 
+import portfolio.composeapp.generated.resources.*
+
 @Inject
 class TemplatesRepository {
     private val templates = listOf(
         Product(
-            name = "business-card-template",
-            description = "HTMLとCSSで名刺を作るためのテンプレート",
+            nameFallback = "business-card-template",
+            descriptionRes = Res.string.tpl_desc_businesscard,
             techStack = setOf(TechStack.Html, TechStack.Css),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/business-card-template",
             category = dev.yuyuyuyuyu.portfolio.data.models.ProductCategory.Template,
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
-            motivation = "名刺を作るためだけに、普段使わないデザインツールの使い方を覚えるのがコスパが悪く面倒だったため。使い慣れたHTMLとCSS（CSSならミリ単位のサイズ指定も可能）で作ってみたら良好だったため、次に作る時のためにテンプレート化した。",
+            motivationRes = Res.string.tpl_mot_businesscard,
         )
-    ).sortedBy { it.name }
+    ).sortedBy { it.nameFallback }
 
     fun getTemplates() = templates
 }

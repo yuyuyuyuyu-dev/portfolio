@@ -51,10 +51,10 @@ fun CatalogScreen(
 
     // SSoT: Group by actual data properties
     val allProducts = librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
-    val cliTools = allProducts.filter { it.category == ProductCategory.CliTool }.sortedBy { it.name }
-    val plugins = allProducts.filter { it.category == ProductCategory.Plugin }.sortedBy { it.name }
-    val libraries = allProducts.filter { it.category == ProductCategory.Library }.sortedBy { it.name }
-    val templates = allProducts.filter { it.category == ProductCategory.Template }.sortedBy { it.name }
+    val cliTools = allProducts.filter { it.category == ProductCategory.CliTool }.sortedBy { it.nameFallback }
+    val plugins = allProducts.filter { it.category == ProductCategory.Plugin }.sortedBy { it.nameFallback }
+    val libraries = allProducts.filter { it.category == ProductCategory.Library }.sortedBy { it.nameFallback }
+    val templates = allProducts.filter { it.category == ProductCategory.Template }.sortedBy { it.nameFallback }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),

@@ -33,6 +33,9 @@ import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
 import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
 import dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemIcon
 
+import dev.yuyuyuyuyu.portfolio.utils.displayName
+import dev.yuyuyuyuyu.portfolio.utils.displayDescription
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
@@ -56,19 +59,29 @@ fun SearchScreen(
     // Map all items to a common data structure (PortfolioItem)
     val allItems = remember(appsState, librariesState, pluginsState, cliToolsState, templatesState) {
         val items = appsState.apps + librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
-        items.sortedBy { it.name }
+        items.sortedBy { it.nameFallback }
+    }
+
+    // Resolve strings for filtering
+    val itemWithStrings = allItems.map { item ->
+        val resolvedName = item.displayName
+        val resolvedDesc = item.displayDescription
+        Triple<PortfolioItem, String, String>(item, resolvedName, resolvedDesc)
     }
 
     // Filter logic
-    val filteredItems = allItems.filter { item ->
+    val filteredItems = itemWithStrings.filter { triple ->
+        val item = triple.first
+        val name = triple.second
+        val description = triple.third
         val matchesQuery = if (searchQuery.isBlank()) true else {
-            item.name.contains(searchQuery, ignoreCase = true) || item.description.contains(searchQuery, ignoreCase = true)
+            name.contains(searchQuery, ignoreCase = true) || description.contains(searchQuery, ignoreCase = true)
         }
         val matchesCategory = if (selectedCategory == null) true else item.category == selectedCategory
         val matchesPlatform = if (selectedPlatform == null) true else item.platforms.contains(selectedPlatform)
 
         matchesQuery && matchesCategory && matchesPlatform
-    }
+    }.map { it.first }
 
     Column(modifier = Modifier.fillMaxSize()) {
         // Search Bar
@@ -162,12 +175,12 @@ private fun SearchResultItem(
         
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = item.name,
+                text = item.displayName,
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                 maxLines = 1
             )
             Text(
-                text = item.description,
+                text = item.displayDescription,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 2

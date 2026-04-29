@@ -39,10 +39,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.Product
+import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
+import dev.yuyuyuyuyu.portfolio.utils.displayName
+import dev.yuyuyuyuyu.portfolio.utils.displayDescription
+import portfolio.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -59,12 +63,12 @@ fun TodayScreen(
     val templatesState by templatesViewModel.uiState.collectAsState()
     val uriHandler = LocalUriHandler.current
 
-    val howOldAmI = appsState.apps.find { it.name == "年齢の計算" }
-    val html2pdf = cliToolsState.cliTools.find { it.name == "@yuyuyuyuyu-dev/html2pdf" }
-    val notPullingCalc = appsState.apps.find { it.name == "引けない確率の計算" }
-    val inputSourceHandler = appsState.apps.find { it.name == "Input Source Handler" }
-    val composePwa = pluginsState.plugins.find { it.name == "ComposePWA" }
-    val businessCard = templatesState.templates.find { it.name == "business-card-template" }
+    val howOldAmI = appsState.apps.find { it.nameRes == portfolio.composeapp.generated.resources.Res.string.app_name_howoldami }
+    val html2pdf = cliToolsState.cliTools.find { it.nameFallback == "@yuyuyuyuyu-dev/html2pdf" }
+    val notPullingCalc = appsState.apps.find { it.nameRes == portfolio.composeapp.generated.resources.Res.string.app_name_notpullingcalc }
+    val inputSourceHandler = appsState.apps.find { it.nameFallback == "Input Source Handler" }
+    val composePwa = pluginsState.plugins.find { it.nameFallback == "ComposePWA" }
+    val businessCard = templatesState.templates.find { it.nameFallback == "business-card-template" }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -308,13 +312,13 @@ fun AppOfTheDayCard(app: App, onClick: () -> Unit, modifier: Modifier = Modifier
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = app.name,
+                    text = app.displayName,
                     style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
                     color = Color.White
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = app.description,
+                    text = app.displayDescription,
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.9f),
                     maxLines = 2
@@ -326,15 +330,11 @@ fun AppOfTheDayCard(app: App, onClick: () -> Unit, modifier: Modifier = Modifier
 
 @Composable
 fun ToolOfTheDayCard(
-    product: Any,
+    product: PortfolioItem,
     title: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val name = if (product is App) product.name else if (product is Product) product.name else ""
-    val description =
-        if (product is App) product.description else if (product is Product) product.description else ""
-
     Surface(
         shape = RoundedCornerShape(24.dp),
         color = MaterialTheme.colorScheme.secondaryContainer,
@@ -352,13 +352,13 @@ fun ToolOfTheDayCard(
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = name,
+                    text = product.displayName,
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = description,
+                    text = product.displayDescription,
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )

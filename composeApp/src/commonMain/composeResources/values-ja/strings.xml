@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Apps -->
+    <!-- PureMusicPlayer -->
+    <string name="app_desc_puremusicplayer">フィルターレスのミュージックプレーヤーアプリ</string>
+    <string name="app_mot_puremusicplayer">Macの `afplay` コマンドで再生した時の音が好きで、この音質をそのまま持ち運びたいと思ったため。CoreAudioのAPIを直接叩いて音声ファイルの再生部分を実装している。</string>
+
+    <!-- DigitalClock -->
+    <string name="app_desc_digitalclock">デジタル時計アプリ</string>
+
+    <!-- What is the date today -->
+    <string name="app_name_whatisthedatetoday">今日の日付</string>
+    <string name="app_desc_whatisthedatetoday">現在の日付を表示するアプリ</string>
+    <string name="app_mot_whatisthedatetoday">病院で問診票を書く時に、西暦と和暦と月と日付と曜日をまとめて確認する方法がないのがめんどくさすぎたため。</string>
+
+    <!-- How old am I -->
+    <string name="app_name_howoldami">年齢の計算</string>
+    <string name="app_desc_howoldami">生年月日から年齢を計算するアプリ</string>
+    <string name="app_mot_howoldami">病院で問診票を書くとき、毎回自分の年齢を覚えていなくて生年月日から数えるのが面倒だったため。</string>
+
+    <!-- Location Remover -->
+    <string name="app_desc_locationremover">画像からメタデータを削除するアプリ</string>
+    <string name="app_mot_locationremover">SNS等に写真を投稿する際、自前で位置情報を削除しておけると安心だと考え発案した。専門学校のグループ演習にてチームで開発したもので、自身は主にアプリのアイデア出しとPWA化の対応を担当。</string>
+
+    <!-- Get Random Int -->
+    <string name="app_name_getrandomint">乱数の生成</string>
+    <string name="app_desc_getrandomint">指定した範囲から乱数を生成するアプリ</string>
+    <string name="app_mot_getrandomint">自分でサーバーを建てる時にポート番号をランダムにした方がセキュリティ的に良いが、毎回自分で考えるのは面倒だったため、サクッと生成できるアプリを作った。</string>
+
+    <!-- genkaikor -->
+    <string name="app_desc_genkaikor">入力された文字すべてに濁点をつけるアプリ</string>
+
+    <!-- repeater -->
+    <string name="app_desc_repeater">入力された文字をひたすら繰り返すアプリ</string>
+
+    <!-- YM previewer -->
+    <string name="app_desc_ympreviewer">XでYouTube Musicのリンクをカード表示するためのワークアラウンド</string>
+
+    <!-- deliciouShare.app -->
+    <string name="app_desc_delicioushare">「おいしい！」の情報共有を効率化するWebサービス</string>
+
+    <!-- Password Generator -->
+    <string name="app_name_passwordgenerator">パスワードジェネレーター</string>
+    <string name="app_desc_passwordgenerator">ひらがなカタカナ対応の簡易パスワードジェネレーター</string>
+    <string name="app_mot_passwordgenerator">「秘密の質問」でアルファベットが使えないサービスがあり、正直に答えるのはセキュリティ的に良くないと考えた。毎回自分でランダムな文字列（ひらがな・カタカナ）を考えるのも面倒だったのでツール化した。</string>
+
+    <!-- Not Pulling Probability Calculator -->
+    <string name="app_name_notpullingcalc">引けない確率の計算</string>
+    <string name="app_desc_notpullingcalc">1度も引けない確率を計算するアプリ</string>
+    <string name="app_mot_notpullingcalc">スマホゲームのガシャで排出率0.75%を300回連続で外して天井に到達する、という事象（確率約10%）を4回中3回も経験した恨みと勢いで作成した。ちなみに現在も8回中4回天井を経験しており、私にとっては実質1/2の確率となっている。</string>
+
+    <!-- ToLeet -->
+    <string name="app_desc_toleet">L33t表記へ変換するアプリ</string>
+
+    <!-- Barometer -->
+    <string name="app_name_barometer">気圧計</string>
+    <string name="app_desc_barometer">気圧センサーの値を表示するアプリ</string>
+    <string name="app_mot_barometer">自分が気圧変化の影響を受けて体調を崩しているのではないかと気になり、スマホ内蔵の気圧センサーの生の値を見てみたくなったため。</string>
+
+    <!-- Code Scanner -->
+    <string name="app_name_codescanner">コードスキャナー</string>
+    <string name="app_desc_codescanner">シンプルなコードスキャナーアプリ</string>
+    <string name="app_mot_codescanner">街中にあるQRコードをスキャンして、純粋にどんなデータが埋め込まれているのか（中身の文字列）を見てみたら面白いのではないかという好奇心から作成。</string>
+
+    <!-- Input Source Handler -->
+    <string name="app_desc_inputsourcemanager">A simple macOS utility to switch input sources using custom keyboard shortcuts.</string>
+    <string name="app_mot_inputsourcemanager">US配列キーボードで、Android Studioのターミナル操作中に入力切り替えショートカットが干渉してしまうのが面倒だったため。Android Studioがキーボード入力をフックできるなら自分でも作れるのではないかと考えた。</string>
+
+    <!-- CliTools -->
+    <string name="tool_desc_household">おこづかいと手持ちの現金を管理するためのコマンドラインツール</string>
+    <string name="tool_mot_household">専門学校生で一人暮らしを始めた時、生活費を引いた純粋な「おこづかい」がいくら残っているのかを正確に把握したくて作成した。</string>
+
+    <string name="tool_desc_myde">プラグインがインストール済みのneovimが起動するDockerコンテナ</string>
+    <string name="tool_mot_myde">アルバイト先のPCなど、どこでも自分好みにカスタマイズ済みのNeovim環境をすぐに使えるようにしたかったため。</string>
+
+    <string name="tool_desc_myde_command">myDEを簡単に起動するためのシェルスクリプト</string>
+    <string name="tool_mot_myde_command">上記のDockerコンテナ「myDE」を起動するコマンドすら毎回打つのが面倒だったため、簡単に起動するためのスクリプトを作った。</string>
+
+    <string name="tool_desc_newproject">指定された名前でディレクトリとファイルを一括で作成するシェルスクリプト</string>
+    <string name="tool_mot_newproject">シェルスクリプトを作る時に、毎回ディレクトリとファイルを同じ名前で作成する作業が面倒だったので、コマンド一発でまとめて作れるようにした。</string>
+
+    <string name="tool_desc_myinstaller">引数に指定されたファイルを ~/myCommands/ にコピーしてから実行権限を付与するシェルスクリプト</string>
+    <string name="tool_mot_myinstaller">自作のシェルスクリプトを作った後、毎回パスが通っているディレクトリにコピーして実行権限を付与する手順が面倒だったため、コマンド一つでインストールできるようにした。</string>
+
+    <string name="tool_desc_jarc">jarファイルの生成に必要な作業をひとまとめにしたシェルスクリプト</string>
+    <string name="tool_mot_jarc">専門学校のJavaの授業で、実行可能なjarファイルを生成するまでに定型的なコマンドを何度も打たされるのが面倒だったため、その場でスクリプト化して自動化した。</string>
+
+    <string name="tool_desc_rubberduck">Go言語製のラバーダック</string>
+
+    <string name="tool_desc_gen_licenses">Node.jsプロジェクトのサードパーティライブラリのライセンスを収集し、JSON形式でエクスポートするCLIツール</string>
+    <string name="tool_mot_gen_licenses">自身で作成したライブラリ（ngx-mat-third-party-licenses-list-view）にとって、ライセンス情報をどのように収集・出力するかはコアな部分であり、他のツールの仕様変更に依存したくなかったため自作した。</string>
+
+    <string name="tool_desc_html2pdf">Converts HTML to PDF using Chromium.</string>
+    <string name="tool_mot_html2pdf">AndroidスマホでGeminiを使ってHTMLとCSSの名刺を作っていた時、HTMLをPDFに変換するためだけにわざわざPCを取り出すのが面倒だったため。スマホのTermux環境だけで完結させるために作った。</string>
+
+    <!-- Plugins -->
+    <string name="plugin_desc_composepwa">Compose Multiplatform製WebアプリをPWA化するGradleプラグイン</string>
+    <string name="plugin_mot_composepwa">Compose MultiplatformでPWAを作るにあたって、新規プロジェクトを作成するたびにPWA化に必要なファイルや記述をコピペしてくるのがめんどくさすぎたため。</string>
+
+    <string name="plugin_desc_semicolon">行末に\";\"を挿入するNeovimプラグイン</string>
+    <string name="plugin_mot_semicolon">Rustなど行末にセミコロンが必要な言語で、わざわざ行末にカーソルを移動させてからセミコロンを入力するのが面倒だったため。現在位置を維持したまま行末にセミコロンを挿入する関数を提供するプラグインを作成した。</string>
+
+    <!-- Libraries -->
+    <string name="lib_desc_licenses">サードパーティライセンスのリストを提供するAngular Material用のコンポーネントライブラリ</string>
+    <string name="lib_mot_licenses">今時のアプリに必須のオープンソースライセンス表示において、Angularの標準機能（thirdpartylicenses.txt）がSSR環境で参照できなくなる問題があった。新しいアプリを作るたびに実装をコピペしたり、修正のたびに全アプリに変更を反映して回るのが面倒だったためライブラリ化した。</string>
+
+    <string name="lib_desc_appbar">Angular Material用のシンプルなアプリバー</string>
+    <string name="lib_mot_appbar">AngularでWebアプリを作る時、毎回同じようなアプリバー（ヘッダー）を作るのが面倒だったため、一度作って使い回せるようにライブラリ化した。</string>
+
+    <string name="lib_desc_littlediva">This library is theme of little diva.</string>
+    <string name="lib_mot_littlediva">せっかくアプリを作るなら独自色を出したいが、それを全アプリで毎回設定したりコピペしたりするのは面倒すぎて無理だったため、テーマ自体をライブラリとして切り出した。</string>
+
+    <string name="lib_desc_permissions">権限リクエストと処理の同時実行を実現するAndroid用ライブラリ</string>
+
+    <string name="lib_desc_typography">フォント名やFontFamilyからタイポグラフィを作成する関数を提供するAndroidとCompose Multiplatform用のライブラリ</string>
+    <string name="lib_mot_typography">AndroidアプリでGoogleフォントを使う際、毎回公式ドキュメントからキーをコピペするのが面倒だった。また、フォントサイズごとにデフォルトを上書きする処理をアプリごとに書くなんて面倒すぎてやりたくなかったため、一度書けば使い回せるようにライブラリ化した。</string>
+
+    <string name="lib_desc_simpleappbar">戻るボタンとケバブメニューボタンが含まれているAndroidとCompose Multiplatrorm用のシンプルなTopAppBar</string>
+    <string name="lib_mot_simpleappbar">自分用のシンプルなアプリバー。アプリを作るごとに毎回同じようなUIコードを書くのは面倒だったため、コンポーネントとして共通化した。</string>
+
+    <!-- Templates -->
+    <string name="tpl_desc_businesscard">HTMLとCSSで名刺を作るためのテンプレート</string>
+    <string name="tpl_mot_businesscard">名刺を作るためだけに、普段使わないデザインツールの使い方を覚えるのがコスパが悪く面倒だったため。使い慣れたHTMLとCSS（CSSならミリ単位のサイズ指定も可能）で作ってみたら良好だったため、次に作る時のためにテンプレート化した。</string>
+</resources>

@@ -4,28 +4,30 @@ import dev.yuyuyuyuyu.portfolio.data.models.Product
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
 import me.tatarka.inject.annotations.Inject
 
+import portfolio.composeapp.generated.resources.*
+
 @Inject
 class PluginsRepository {
     private val plugins = listOf(
         Product(
-            name = "insert-end-semicolon.nvim",
-            description = "行末に\";\"を挿入するNeovimプラグイン",
+            nameFallback = "insert-end-semicolon.nvim",
+            descriptionRes = Res.string.plugin_desc_semicolon,
             techStack = setOf(TechStack.Neovim, TechStack.Lua),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/insert-end-semicolon.nvim",
             category = dev.yuyuyuyuyu.portfolio.data.models.ProductCategory.Plugin,
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Neovim),
-            motivation = "Rustなど行末にセミコロンが必要な言語で、わざわざ行末にカーソルを移動させてからセミコロンを入力するのが面倒だったため。現在位置を維持したまま行末にセミコロンを挿入する関数を提供するプラグインを作成した。",
+            motivationRes = Res.string.plugin_mot_semicolon,
         ),
         Product(
-            name = "ComposePWA",
-            description = "Compose Multiplatform製WebアプリをPWA化するGradleプラグイン",
+            nameFallback = "ComposePWA",
+            descriptionRes = Res.string.plugin_desc_composepwa,
             techStack = setOf(TechStack.Kotlin, TechStack.ComposeMultiplatform, TechStack.Gradle),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/ComposePWA",
             category = dev.yuyuyuyuyu.portfolio.data.models.ProductCategory.Plugin,
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Gradle),
-            motivation = "Compose MultiplatformでPWAを作るにあたって、新規プロジェクトを作成するたびにPWA化に必要なファイルや記述をコピペしてくるのがめんどくさすぎたため。",
+            motivationRes = Res.string.plugin_mot_composepwa,
         )
-    ).sortedBy { it.name }
+    ).sortedBy { it.nameFallback }
 
     fun getPlugins() = plugins
 }

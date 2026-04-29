@@ -25,6 +25,9 @@ import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
 import dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemIcon
+import dev.yuyuyuyuyu.portfolio.utils.displayDescription
+import dev.yuyuyuyuyu.portfolio.utils.displayMotivation
+import dev.yuyuyuyuyu.portfolio.utils.displayName
 import org.jetbrains.compose.resources.painterResource
 
 import androidx.compose.foundation.shape.CircleShape
@@ -44,9 +47,9 @@ fun DetailScreen(
     val clipboardManager = LocalClipboardManager.current
     val scrollState = rememberScrollState()
 
-    val name = item.name
-    val description = item.description
-    val motivation = item.motivation
+    val name = item.displayName
+    val description = item.displayDescription
+    val motivation = item.displayMotivation
     val repositoryUrl = item.repositoryUrl
     val installCommand = item.installCommand
     val appUrl = (item as? App)?.url
