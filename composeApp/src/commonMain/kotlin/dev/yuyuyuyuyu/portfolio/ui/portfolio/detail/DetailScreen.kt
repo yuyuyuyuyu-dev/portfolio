@@ -29,6 +29,8 @@ import dev.yuyuyuyuyu.portfolio.utils.displayDescription
 import dev.yuyuyuyuyu.portfolio.utils.displayMotivation
 import dev.yuyuyuyuyu.portfolio.utils.displayName
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.*
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.filled.ContentCopy

@@ -121,4 +121,43 @@
     <!-- Templates -->
     <string name="tpl_desc_businesscard">Template for making business cards with HTML and CSS.</string>
     <string name="tpl_mot_businesscard">Learning how to use a design tool I don't normally use just to make a business card was a bad investment of time and effort. I tried building it with my familiar HTML and CSS (since CSS allows millimeter-precision sizing) and it worked great, so I turned it into a template for next time.</string>
+
+    <!-- UI Strings -->
+    <string name="ui_today">Today</string>
+    <string name="ui_about_me">About Me</string>
+    <string name="ui_philosophy_headline">I hate doing tedious things.</string>
+    <string name="ui_philosophy_body">From minor inconveniences in daily life to repetitive tasks during development, I solve everything I find "tedious" by building apps and tools.</string>
+    <string name="ui_app_of_the_day">App of the Day</string>
+    <string name="ui_dev_companion">Developer\'s Companion</string>
+    <string name="ui_familiar_tools">Built with familiar tools</string>
+    <string name="ui_mac_utility">Mac Utility</string>
+    <string name="ui_ultimate_laziness">Ultimate Laziness</string>
+    
+    <string name="ui_profile">Profile</string>
+    <string name="ui_role">Developer Tools Engineer</string>
+    <string name="ui_skills">Favorite Stack: Kotlin, Compose Multiplatform for Web, Android</string>
+    <string name="ui_github_link">Check out GitHub</string>
+    <string name="ui_youtrust_link">View YOUTRUST</string>
+    <string name="ui_email_link">Send an Email</string>
+
+    <string name="ui_catalog">Apps / Tools</string>
+    <string name="ui_web_apps">Web Apps &amp; PWA</string>
+    <string name="ui_cli_tools">CLI Tools</string>
+    <string name="ui_plugins">Plugins</string>
+    <string name="ui_libraries">Libraries</string>
+    <string name="ui_templates">Templates</string>
+    <string name="ui_mac_apps">Mac Apps</string>
+    <string name="ui_mobile_other_apps">Mobile &amp; Other Apps</string>
+
+    <string name="ui_search">Search</string>
+    <string name="ui_search_placeholder">Search apps, tools, plugins...</string>
+    <string name="ui_no_results">No results found</string>
+
+    <string name="ui_open">Open</string>
+    <string name="ui_screenshots">Screenshots</string>
+    <string name="ui_why_built">Why I built this?</string>
+    <string name="ui_run_command">Run Command</string>
+    <string name="ui_installation">Installation</string>
+    <string name="ui_copy_command">Copy command</string>
+    <string name="ui_clear">Clear</string>
 </resources>

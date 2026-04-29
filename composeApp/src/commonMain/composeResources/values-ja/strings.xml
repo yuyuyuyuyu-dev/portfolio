@@ -121,4 +121,43 @@
     <!-- Templates -->
     <string name="tpl_desc_businesscard">HTMLとCSSで名刺を作るためのテンプレート</string>
     <string name="tpl_mot_businesscard">名刺を作るためだけに、普段使わないデザインツールの使い方を覚えるのがコスパが悪く面倒だったため。使い慣れたHTMLとCSS（CSSならミリ単位のサイズ指定も可能）で作ってみたら良好だったため、次に作る時のためにテンプレート化した。</string>
+
+    <!-- UI Strings -->
+    <string name="ui_today">Today</string>
+    <string name="ui_about_me">私について</string>
+    <string name="ui_philosophy_headline">めんどくさいことは、やりたくない。</string>
+    <string name="ui_philosophy_body">日常で出会ったちょっとした不便から開発時の繰り返しの作業まで、「めんどくさい」と思ったことをアプリやツールを作って解決しています。</string>
+    <string name="ui_app_of_the_day">今日のピックアップ</string>
+    <string name="ui_dev_companion">開発のおとも</string>
+    <string name="ui_familiar_tools">使い慣れた道具で</string>
+    <string name="ui_mac_utility">Macの便利ツール</string>
+    <string name="ui_ultimate_laziness">究極の横着</string>
+    
+    <string name="ui_profile">プロフィール</string>
+    <string name="ui_role">デベロッパーツールエンジニア</string>
+    <string name="ui_skills">好きな技術: Kotlin, Compose Multiplatform for Web, Android</string>
+    <string name="ui_github_link">GitHub をのぞく</string>
+    <string name="ui_youtrust_link">YOUTRUST をみる</string>
+    <string name="ui_email_link">メールをおくる</string>
+
+    <string name="ui_catalog">Apps / Tools</string>
+    <string name="ui_web_apps">Webアプリ・PWA</string>
+    <string name="ui_cli_tools">CLIツール</string>
+    <string name="ui_plugins">プラグイン</string>
+    <string name="ui_libraries">ライブラリ</string>
+    <string name="ui_templates">テンプレート</string>
+    <string name="ui_mac_apps">Macアプリ</string>
+    <string name="ui_mobile_other_apps">モバイル＆その他アプリ</string>
+
+    <string name="ui_search">検索</string>
+    <string name="ui_search_placeholder">アプリ、ツール、プラグインを検索</string>
+    <string name="ui_no_results">見つかりませんでした</string>
+
+    <string name="ui_open">開く</string>
+    <string name="ui_screenshots">スクリーンショット</string>
+    <string name="ui_why_built">なぜ作ったのか？</string>
+    <string name="ui_run_command">実行コマンド</string>
+    <string name="ui_installation">インストール</string>
+    <string name="ui_copy_command">Copy command</string>
+    <string name="ui_clear">Clear</string>
 </resources>

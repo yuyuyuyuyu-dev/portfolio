@@ -25,6 +25,8 @@ import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 
 import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.*
 
 @Composable
 fun CatalogScreen(

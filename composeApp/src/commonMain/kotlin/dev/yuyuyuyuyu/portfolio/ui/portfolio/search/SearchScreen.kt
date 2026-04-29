@@ -28,6 +28,8 @@ import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.*
 
 import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
 import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem

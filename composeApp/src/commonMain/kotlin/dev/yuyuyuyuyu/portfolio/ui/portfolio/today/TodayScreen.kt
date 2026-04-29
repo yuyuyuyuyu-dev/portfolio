@@ -48,6 +48,8 @@ import dev.yuyuyuyuyu.portfolio.utils.displayName
 import dev.yuyuyuyuyu.portfolio.utils.displayDescription
 import portfolio.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.*
 
 @Composable
 fun TodayScreen(
@@ -250,7 +252,7 @@ fun DeveloperPhilosophyCard(modifier: Modifier = Modifier) {
         ) {
             Column {
                 Text(
-                    text = "私について",
+                    text = stringResource(Res.string.ui_about_me),
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
                 )
@@ -263,7 +265,7 @@ fun DeveloperPhilosophyCard(modifier: Modifier = Modifier) {
             }
 
             Text(
-                text = "日常で出会ったちょっとした不便から開発時の繰り返しの作業まで、「めんどくさい」と思ったことをアプリやツールを作って解決しています。",
+                text = stringResource(Res.string.ui_philosophy_body),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * 1.5
