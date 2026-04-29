@@ -28,6 +28,8 @@ import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 
+import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
+
 @Composable
 fun CatalogScreen(
     appsViewModel: AppsViewModel,
@@ -51,21 +53,18 @@ fun CatalogScreen(
     val androidIosApps = allApps.filter { Platform.Android in it.platforms || Platform.Ios in it.platforms }
     val otherApps = allApps - macApps.toSet() - webApps.toSet() - androidIosApps.toSet()
 
+    // SSoT: Group by actual data properties
+    val allProducts = librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
+    val cliTools = allProducts.filter { it.category == ProductCategory.CliTool }.sortedBy { it.name }
+    val plugins = allProducts.filter { it.category == ProductCategory.Plugin }.sortedBy { it.name }
+    val libraries = allProducts.filter { it.category == ProductCategory.Library }.sortedBy { it.name }
+    val templates = allProducts.filter { it.category == ProductCategory.Template }.sortedBy { it.name }
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(32.dp)
     ) {
-        if (macApps.isNotEmpty()) {
-            item {
-                CatalogSection(
-                    title = "Macアプリ",
-                    apps = macApps,
-                    onProductClick = onProductClick
-                )
-            }
-        }
-
         if (webApps.isNotEmpty()) {
             item {
                 CatalogSection(
@@ -76,33 +75,11 @@ fun CatalogScreen(
             }
         }
 
-        if (androidIosApps.isNotEmpty() || otherApps.isNotEmpty()) {
-            item {
-                CatalogSection(
-                    title = "モバイル＆その他アプリ",
-                    apps = androidIosApps + otherApps,
-                    onProductClick = onProductClick
-                )
-            }
-        }
-
-        if (cliToolsState.cliTools.isNotEmpty()) {
-            item {
-                CatalogProductSection(
-                    title = "CLIツール",
-                    products = cliToolsState.cliTools,
-                    icon = Icons.Default.Terminal,
-                    iconDescription = "CLI",
-                    onProductClick = onProductClick
-                )
-            }
-        }
-
-        if (pluginsState.plugins.isNotEmpty()) {
+        if (plugins.isNotEmpty()) {
             item {
                 CatalogProductSection(
                     title = "プラグイン",
-                    products = pluginsState.plugins,
+                    products = plugins,
                     icon = Icons.Default.Bolt,
                     iconDescription = "Plugin",
                     onProductClick = onProductClick
@@ -110,11 +87,11 @@ fun CatalogScreen(
             }
         }
 
-        if (librariesState.libraries.isNotEmpty()) {
+        if (libraries.isNotEmpty()) {
             item {
                 CatalogProductSection(
                     title = "ライブラリ",
-                    products = librariesState.libraries,
+                    products = libraries,
                     icon = Icons.Default.Book,
                     iconDescription = "Library",
                     onProductClick = onProductClick
@@ -122,13 +99,45 @@ fun CatalogScreen(
             }
         }
 
-        if (templatesState.templates.isNotEmpty()) {
+        if (cliTools.isNotEmpty()) {
+            item {
+                CatalogProductSection(
+                    title = "CLIツール",
+                    products = cliTools,
+                    icon = Icons.Default.Terminal,
+                    iconDescription = "CLI",
+                    onProductClick = onProductClick
+                )
+            }
+        }
+
+        if (templates.isNotEmpty()) {
             item {
                 CatalogProductSection(
                     title = "テンプレート",
-                    products = templatesState.templates,
+                    products = templates,
                     icon = Icons.Default.Brush,
                     iconDescription = "Template",
+                    onProductClick = onProductClick
+                )
+            }
+        }
+
+        if (macApps.isNotEmpty()) {
+            item {
+                CatalogSection(
+                    title = "Macアプリ",
+                    apps = macApps,
+                    onProductClick = onProductClick
+                )
+            }
+        }
+
+        if (androidIosApps.isNotEmpty() || otherApps.isNotEmpty()) {
+            item {
+                CatalogSection(
+                    title = "モバイル＆その他アプリ",
+                    apps = androidIosApps + otherApps,
                     onProductClick = onProductClick
                 )
             }

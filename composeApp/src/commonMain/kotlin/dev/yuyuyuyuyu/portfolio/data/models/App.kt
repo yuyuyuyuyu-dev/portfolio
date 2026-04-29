@@ -10,6 +10,7 @@ data class App(
     val techStack: Set<TechStack>,
     val repositoryUrl: String,
     val platforms: Set<Platform>,
+    val category: ProductCategory = ProductCategory.App,
     val screenshots: List<DrawableResource> = listOf(),
     val url: String? = null,
     val icon: DrawableResource = Res.drawable.default_icon,
