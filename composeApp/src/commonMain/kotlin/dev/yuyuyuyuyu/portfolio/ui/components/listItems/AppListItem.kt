@@ -93,6 +93,7 @@ private fun AppListItemPreview() {
             techStack = setOf(TechStack.Kotlin, TechStack.JetpackCompose),
             repositoryUrl = "https://github.com/example/repo",
             icon = Res.drawable.default_icon,
+            platforms = emptySet(),
         )
     )
 }

@@ -56,6 +56,7 @@ private fun ProductListItemPreview() {
             description = "This is a sample product description.",
             techStack = setOf(TechStack.Kotlin, TechStack.JetpackCompose),
             repositoryUrl = "https://github.com/example/repo",
+            platforms = emptySet(),
         ),
         icon = Icons.Default.Star,
         iconDescription = "Star",
