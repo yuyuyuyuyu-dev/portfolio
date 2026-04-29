@@ -33,12 +33,15 @@ class AppsRepository {
             icon = Res.drawable.puremusicplayer_icon,
             techStack = setOf(TechStack.Ios, TechStack.Swift),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/PureMusicPlayer",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Ios),
+            motivation = "Macの `afplay` コマンドで再生した時の音が好きで、この音質をそのまま持ち運びたいと思ったため。CoreAudioのAPIを直接叩いて音声ファイルの再生部分を実装している。",
         ),
         App(
             name = "DigitalClock",
             description = "デジタル時計アプリ",
             techStack = setOf(TechStack.Android, TechStack.Kotlin),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/DigitalClock",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android),
         ),
         App(
             name = "今日の日付",
@@ -53,6 +56,8 @@ class AppsRepository {
             url = "https://what-is-the-date-today.yuyuyuyuyu.dev",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/what-is-the-date-today",
             screenshots = listOf(Res.drawable.what_is_the_date_today_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
+            motivation = "病院で問診票を書く時に、西暦と和暦と月と日付と曜日をまとめて確認する方法がないのがめんどくさすぎたため。",
         ),
         App(
             name = "年齢の計算",
@@ -67,6 +72,8 @@ class AppsRepository {
             url = "https://how-old-am-i.yuyuyuyuyu.dev",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/how-old-am-i",
             screenshots = listOf(Res.drawable.how_old_am_i_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
+            motivation = "病院で問診票を書くとき、毎回自分の年齢を覚えていなくて生年月日から数えるのが面倒だったため。",
         ),
         App(
             name = "Location Remover",
@@ -82,6 +89,8 @@ class AppsRepository {
             url = "https://yuyuyuyuyu-dev.github.io/location-remover/",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/location-remover",
             screenshots = listOf(Res.drawable.LocationRemover_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
+            motivation = "SNS等に写真を投稿する際、自前で位置情報を削除しておけると安心だと考え発案した。専門学校のグループ演習にてチームで開発したもので、自身は主にアプリのアイデア出しとPWA化の対応を担当。",
         ),
         App(
             name = "乱数の生成",
@@ -95,6 +104,8 @@ class AppsRepository {
             url = "https://yuyuyuyuyu-dev.github.io/get-random-int/",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/get-random-int",
             screenshots = listOf(Res.drawable.get_random_int_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
+            motivation = "自分でサーバーを建てる時にポート番号をランダムにした方がセキュリティ的に良いが、毎回自分で考えるのは面倒だったため、サクッと生成できるアプリを作った。",
         ),
         App(
             name = "genkaikor",
@@ -108,6 +119,7 @@ class AppsRepository {
             url = "https://genkaikor.yuyuyuyuyu.dev",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/genkaikor",
             screenshots = listOf(Res.drawable.genkaikor_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
             name = "repeater",
@@ -121,6 +133,7 @@ class AppsRepository {
             url = "https://yuyuyuyuyu-dev.github.io/repeater/",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/repeater",
             screenshots = listOf(Res.drawable.repeater_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
             name = "YM previewer for Twitter",
@@ -134,6 +147,7 @@ class AppsRepository {
             url = "https://ym-previewer.vercel.app",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/ym-previewer",
             screenshots = listOf(Res.drawable.ym_previewer_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
             name = "deliciouShare.app",
@@ -151,6 +165,7 @@ class AppsRepository {
                 TechStack.Pwa,
             ),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/deliciouShare",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
             name = "パスワードジェネレーター",
@@ -164,6 +179,8 @@ class AppsRepository {
             url = "https://password-generator-yu-ko-ba.vercel.app",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/password-generator",
             screenshots = listOf(Res.drawable.PasswordGenerator_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
+            motivation = "「秘密の質問」でアルファベットが使えないサービスがあり、正直に答えるのはセキュリティ的に良くないと考えた。毎回自分でランダムな文字列（ひらがな・カタカナ）を考えるのも面倒だったのでツール化した。",
         ),
         App(
             name = "引けない確率の計算",
@@ -177,6 +194,8 @@ class AppsRepository {
             url = "https://not-pulling-probability-calculator.yuyuyuyuyu.dev",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/not-pulling-probability-calculator",
             screenshots = listOf(Res.drawable.not_pulling_probability_calculator_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
+            motivation = "スマホゲームのガシャで排出率0.75%を300回連続で外して天井に到達する、という事象（確率約10%）を4回中3回も経験した恨みと勢いで作成した。ちなみに現在も8回中4回天井を経験しており、私にとっては実質1/2の確率となっている。",
         ),
         App(
             name = "ToLeet",
@@ -190,6 +209,7 @@ class AppsRepository {
             url = "http://to-leet.yuyuyuyuyu.dev/",
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/to-leet",
             screenshots = listOf(Res.drawable.to_leet_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
             name = "気圧計",
@@ -201,6 +221,8 @@ class AppsRepository {
                 Res.drawable.barometer_en_screenshot,
                 Res.drawable.barometer_ja_screenshot,
             ),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android),
+            motivation = "自分が気圧変化の影響を受けて体調を崩しているのではないかと気になり、スマホ内蔵の気圧センサーの生の値を見てみたくなったため。",
         ),
         App(
             name = "コードスキャナー",
@@ -208,8 +230,19 @@ class AppsRepository {
             techStack = setOf(TechStack.Android, TechStack.Kotlin, TechStack.JetpackCompose),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/CodeScanner",
             screenshots = listOf(Res.drawable.CodeScanner_screenshot),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android),
+            motivation = "街中にあるQRコードをスキャンして、純粋にどんなデータが埋め込まれているのか（中身の文字列）を見てみたら面白いのではないかという好奇心から作成。",
         ),
-    ).sortedBy { it.repositoryUrl }
+        App(
+            name = "Input Source Handler",
+            description = "A simple macOS utility to switch input sources using custom keyboard shortcuts.",
+            techStack = setOf(TechStack.Swift, TechStack.SwiftUi),
+            repositoryUrl = "https://github.com/yuyuyuyuyu-dev/input-source-handler",
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.MacOS),
+            motivation = "US配列キーボードで、Android Studioのターミナル操作中に入力切り替えショートカットが干渉してしまうのが面倒だったため。Android Studioがキーボード入力をフックできるなら自分でも作れるのではないかと考えた。",
+            installCommand = "brew tap yuyuyuyuyu-dev/tap\nbrew install --cask input-source-handler",
+        ),
+    ).sortedBy { it.name }
 
     fun getApps() = apps
 }

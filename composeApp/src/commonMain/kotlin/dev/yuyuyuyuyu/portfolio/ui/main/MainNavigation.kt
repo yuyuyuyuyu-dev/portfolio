@@ -29,7 +29,9 @@ fun MainNavigation(
                 }
 
                 MainNavigationRoute.Licenses -> NavEntry(key) {
-                    LicensesScreen()
+                    LicensesScreen(
+                        onNavigateBack = { backStack.removeLastOrNull() }
+                    )
                 }
             }
         }
