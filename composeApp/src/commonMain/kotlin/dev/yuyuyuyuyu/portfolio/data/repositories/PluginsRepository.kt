@@ -20,7 +20,7 @@ class PluginsRepository {
             description = "Compose Multiplatform製WebアプリをPWA化するGradleプラグイン",
             techStack = setOf(TechStack.Kotlin, TechStack.ComposeMultiplatform, TechStack.Gradle),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/ComposePWA",
-            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Cli),
+            platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Gradle),
             motivation = "Compose MultiplatformでPWAを作るにあたって、新規プロジェクトを作成するたびにPWA化に必要なファイルや記述をコピペしてくるのがめんどくさすぎたため。",
         )
     ).sortedBy { it.repositoryUrl }

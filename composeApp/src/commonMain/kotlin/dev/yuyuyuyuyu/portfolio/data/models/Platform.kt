@@ -8,5 +8,6 @@ enum class Platform(val label: String) {
     Windows("Windows"),
     Linux("Linux"),
     Cli("CLI"),
-    Neovim("Neovim")
+    Neovim("Neovim"),
+    Gradle("Gradle")
 }
