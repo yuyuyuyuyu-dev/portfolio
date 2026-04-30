@@ -142,6 +142,7 @@
     <string name="ui_email_link">メール</string>
 
     <string name="ui_catalog">Apps / Tools</string>
+    <string name="ui_app">アプリ</string>
     <string name="ui_web_apps">Webアプリ・PWA</string>
     <string name="ui_cli_tools">CLIツール</string>
     <string name="ui_plugins">プラグイン</string>

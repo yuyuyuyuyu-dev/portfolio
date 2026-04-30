@@ -66,7 +66,7 @@ fun CatalogScreen(
         if (webApps.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "Webアプリ・PWA",
+                    title = stringResource(Res.string.ui_web_apps),
                     items = webApps,
                     onProductClick = onProductClick
                 )
@@ -86,7 +86,7 @@ fun CatalogScreen(
         if (libraries.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "ライブラリ",
+                    title = stringResource(Res.string.ui_libraries),
                     items = libraries,
                     onProductClick = onProductClick
                 )
@@ -96,7 +96,7 @@ fun CatalogScreen(
         if (cliTools.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "CLIツール",
+                    title = stringResource(Res.string.ui_cli_tools),
                     items = cliTools,
                     onProductClick = onProductClick
                 )
@@ -106,7 +106,7 @@ fun CatalogScreen(
         if (templates.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "テンプレート",
+                    title = stringResource(Res.string.ui_templates),
                     items = templates,
                     onProductClick = onProductClick
                 )
@@ -126,7 +126,7 @@ fun CatalogScreen(
         if (androidIosApps.isNotEmpty() || otherApps.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "モバイル＆その他アプリ",
+                    title = stringResource(Res.string.ui_mobile_other_apps),
                     items = androidIosApps + otherApps,
                     onProductClick = onProductClick
                 )

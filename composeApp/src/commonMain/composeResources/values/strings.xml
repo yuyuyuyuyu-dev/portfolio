@@ -142,6 +142,7 @@
     <string name="ui_email_link">Email</string>
 
     <string name="ui_catalog">Apps / Tools</string>
+    <string name="ui_app">App</string>
     <string name="ui_web_apps">Web Apps &amp; PWA</string>
     <string name="ui_cli_tools">CLI Tools</string>
     <string name="ui_plugins">Plugins</string>

@@ -116,7 +116,7 @@ fun SearchScreen(
                 FilterChip(
                     selected = selectedCategory == category,
                     onClick = { selectedCategory = if (selectedCategory == category) null else category },
-                    label = { Text(category.label) }
+                    label = { Text(stringResource(category.labelRes)) }
                 )
             }
             
@@ -196,7 +196,7 @@ private fun SearchResultItem(
             modifier = Modifier.align(Alignment.Top)
         ) {
             Text(
-                text = item.category.label,
+                text = stringResource(item.category.labelRes),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
