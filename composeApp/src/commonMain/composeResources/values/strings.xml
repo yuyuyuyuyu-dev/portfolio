@@ -9,7 +9,7 @@
     <string name="app_desc_digitalclock">Digital clock app</string>
 
     <!-- What is the date today -->
-    <string name="app_name_whatisthedatetoday">Today&apos;s Date</string>
+    <string name="app_name_whatisthedatetoday">What is the date today</string>
     <string name="app_desc_whatisthedatetoday">App to display the current date</string>
     <string name="app_mot_whatisthedatetoday">When filling out medical questionnaires at hospitals, it was too much of a hassle to check the Gregorian year, Japanese era, month, date, and day of the week separately.</string>
 
@@ -23,7 +23,7 @@
     <string name="app_mot_locationremover">I thought it would be reassuring to be able to remove location data myself before posting photos to social media. Developed as a team project during a group exercise in vocational school; I was mainly responsible for the ideation and PWA implementation.</string>
 
     <!-- Get Random Int -->
-    <string name="app_name_getrandomint">Random Number Generator</string>
+    <string name="app_name_getrandomint">Get random int</string>
     <string name="app_desc_getrandomint">App to generate random numbers within a specified range</string>
     <string name="app_mot_getrandomint">When setting up a server, randomizing the port number is better for security, but thinking of one every time was annoying. So I made an app to generate one quickly.</string>
 
