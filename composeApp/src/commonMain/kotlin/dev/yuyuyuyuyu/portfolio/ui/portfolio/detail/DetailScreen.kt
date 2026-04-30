@@ -86,7 +86,7 @@ fun DetailScreen(
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 8.dp)) {
                     if (appUrl != null) {
                         Button(onClick = { uriHandler.openUri(appUrl) }) {
-                            Text("開く")
+                            Text(stringResource(Res.string.ui_open))
                         }
                     }
                     OutlinedButton(onClick = { uriHandler.openUri(repositoryUrl) }) {
@@ -104,7 +104,7 @@ fun DetailScreen(
         if (item is App && item.screenshots.isNotEmpty()) {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
-                    text = "スクリーンショット",
+                    text = stringResource(Res.string.ui_screenshots),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -128,7 +128,7 @@ fun DetailScreen(
         if (!motivation.isNullOrBlank()) {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
-                    text = "なぜ作ったのか？",
+                    text = stringResource(Res.string.ui_why_built),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -143,7 +143,7 @@ fun DetailScreen(
 
         // --- Install/Run Command Section ---
         if (!installCommand.isNullOrBlank()) {
-            val commandTitle = if (installCommand.trim().startsWith("npx")) "実行コマンド" else "インストール"
+            val commandTitle = if (installCommand.trim().startsWith("npx")) stringResource(Res.string.ui_run_command) else stringResource(Res.string.ui_installation)
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
                     text = commandTitle,
@@ -169,7 +169,7 @@ fun DetailScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.ContentCopy,
-                                contentDescription = "Copy command",
+                                contentDescription = stringResource(Res.string.ui_copy_command),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
