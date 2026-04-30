@@ -97,7 +97,7 @@
     <string name="plugin_desc_composepwa">Compose Multiplatform製WebアプリをPWA化するGradleプラグイン</string>
     <string name="plugin_mot_composepwa">Compose MultiplatformでPWAを作るにあたって、新規プロジェクトを作成するたびにPWA化に必要なファイルや記述をコピペしてくるのがめんどくさすぎたため。</string>
 
-    <string name="plugin_desc_semicolon">行末に\";\"を挿入するNeovimプラグイン</string>
+    <string name="plugin_desc_semicolon">行末に";"を挿入するNeovimプラグイン</string>
     <string name="plugin_mot_semicolon">Rustなど行末にセミコロンが必要な言語で、わざわざ行末にカーソルを移動させてからセミコロンを入力するのが面倒だったため。現在位置を維持したまま行末にセミコロンを挿入する関数を提供するプラグインを作成した。</string>
 
     <!-- Libraries -->
@@ -126,20 +126,18 @@
     <string name="app_name">ポートフォリオ</string>
     <string name="ui_today">Today</string>
     <string name="ui_about_me">私について</string>
-    <string name="ui_philosophy_headline">めんどくさいことは、やりたくない。</string>
+    <string name="ui_philosophy_headline">めんどくさいことはやりたくない。</string>
     <string name="ui_philosophy_body">日常で出会ったちょっとした不便から開発時の繰り返しの作業まで、「めんどくさい」と思ったことをアプリやツールを作って解決しています。</string>
     <string name="ui_app_of_the_day">今日のピックアップ</string>
     <string name="ui_dev_companion">開発のおとも</string>
     <string name="ui_familiar_tools">使い慣れた道具で</string>
     <string name="ui_mac_utility">Macの便利ツール</string>
     <string name="ui_ultimate_laziness">究極の横着</string>
-    
+
     <string name="ui_profile">プロフィール</string>
     <string name="ui_name">小林 勇</string>
     <string name="ui_role">デベロッパーツールエンジニア</string>
     <string name="ui_skills">好きな技術: Kotlin, Compose Multiplatform for Web, Android</string>
-    <string name="ui_github_link">GitHub をのぞく</string>
-    <string name="ui_youtrust_link">YOUTRUST をみる</string>
     <string name="ui_email_link">メール</string>
 
     <string name="ui_catalog">Apps / Tools</string>
