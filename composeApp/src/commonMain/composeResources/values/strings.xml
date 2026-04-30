@@ -123,6 +123,7 @@
     <string name="tpl_mot_businesscard">Learning how to use a design tool I don't normally use just to make a business card was a bad investment of time and effort. I tried building it with my familiar HTML and CSS (since CSS allows millimeter-precision sizing) and it worked great, so I turned it into a template for next time.</string>
 
     <!-- UI Strings -->
+    <string name="app_name">Portfolio</string>
     <string name="ui_today">Today</string>
     <string name="ui_about_me">About Me</string>
     <string name="ui_philosophy_headline">I hate doing tedious things.</string>

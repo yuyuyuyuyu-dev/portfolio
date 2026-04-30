@@ -64,7 +64,7 @@ fun PortfolioScreen(
     Scaffold(
         topBar = {
             SimpleTopAppBar(
-                title = "portfolio",
+                title = stringResource(Res.string.app_name),
                 navigateBackIsPossible = !isTopLevel,
                 onNavigateBackButtonClick = { backStack.removeLastOrNull() },
                 onOpenSourceLicensesButtonClick = onNavigateToLicenses,

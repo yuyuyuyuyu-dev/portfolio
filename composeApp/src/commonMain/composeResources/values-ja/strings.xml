@@ -123,6 +123,7 @@
     <string name="tpl_mot_businesscard">名刺を作るためだけに、普段使わないデザインツールの使い方を覚えるのがコスパが悪く面倒だったため。使い慣れたHTMLとCSS（CSSならミリ単位のサイズ指定も可能）で作ってみたら良好だったため、次に作る時のためにテンプレート化した。</string>
 
     <!-- UI Strings -->
+    <string name="app_name">ポートフォリオ</string>
     <string name="ui_today">Today</string>
     <string name="ui_about_me">私について</string>
     <string name="ui_philosophy_headline">めんどくさいことは、やりたくない。</string>
