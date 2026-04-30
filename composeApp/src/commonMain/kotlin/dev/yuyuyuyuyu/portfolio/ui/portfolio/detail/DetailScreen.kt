@@ -86,6 +86,8 @@ fun DetailScreen(
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 8.dp)) {
                     if (appUrl != null) {
                         Button(onClick = { uriHandler.openUri(appUrl) }) {
+                            Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
+                            Spacer(Modifier.width(8.dp))
                             Text(stringResource(Res.string.ui_open))
                         }
                     }
