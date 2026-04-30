@@ -3,18 +3,18 @@
     <!-- Apps -->
     <!-- PureMusicPlayer -->
     <string name="app_desc_puremusicplayer">A filterless music player app</string>
-    <string name="app_mot_puremusicplayer">I loved the sound quality of the Mac\'s `afplay` command and wanted to carry it with me. I implemented the audio playback by directly tapping into the CoreAudio API.</string>
+    <string name="app_mot_puremusicplayer">I loved the sound quality of the Mac&apos;s `afplay` command and wanted to carry it with me. I implemented the audio playback by directly tapping into the CoreAudio API.</string>
 
     <!-- DigitalClock -->
     <string name="app_desc_digitalclock">Digital clock app</string>
 
     <!-- What is the date today -->
-    <string name="app_name_whatisthedatetoday">Today\'s Date</string>
+    <string name="app_name_whatisthedatetoday">Today&apos;s Date</string>
     <string name="app_desc_whatisthedatetoday">App to display the current date</string>
     <string name="app_mot_whatisthedatetoday">When filling out medical questionnaires at hospitals, it was too much of a hassle to check the Gregorian year, Japanese era, month, date, and day of the week separately.</string>
 
     <!-- How old am I -->
-    <string name="app_name_howoldami">Age Calculator</string>
+    <string name="app_name_howoldami">How old am I</string>
     <string name="app_desc_howoldami">App to calculate age from birthdate</string>
     <string name="app_mot_howoldami">When filling out medical questionnaires at hospitals, I could never remember my exact age and calculating it from my birthdate every time was a hassle.</string>
 
@@ -42,10 +42,10 @@
     <!-- Password Generator -->
     <string name="app_name_passwordgenerator">Password Generator</string>
     <string name="app_desc_passwordgenerator">Simple password generator supporting Hiragana and Katakana</string>
-    <string name="app_mot_passwordgenerator">Some services don\'t allow English alphabets in "Secret Questions", and answering them honestly is bad for security. Coming up with random strings (Hiragana/Katakana) myself every time was tedious, so I made it a tool.</string>
+    <string name="app_mot_passwordgenerator">Some services don&apos;t allow English alphabets in "Secret Questions", and answering them honestly is bad for security. Coming up with random strings (Hiragana/Katakana) myself every time was tedious, so I made it a tool.</string>
 
     <!-- Not Pulling Probability Calculator -->
-    <string name="app_name_notpullingcalc">Gacha Misfortune Calculator</string>
+    <string name="app_name_notpullingcalc">NOT Pulling Probability Calculator</string>
     <string name="app_desc_notpullingcalc">App to calculate the probability of never pulling the desired item</string>
     <string name="app_mot_notpullingcalc">Created out of spite and momentum after experiencing the ~10% probability event of missing a 0.75% drop rate 300 times in a row to hit the "pity" system—3 times out of 4. For the record, I have now hit pity 4 times out of 8, making it an effective 1/2 probability for me.</string>
 
@@ -55,7 +55,7 @@
     <!-- Barometer -->
     <string name="app_name_barometer">Barometer</string>
     <string name="app_desc_barometer">App to display atmospheric pressure sensor values</string>
-    <string name="app_mot_barometer">I wondered if atmospheric pressure changes were causing my poor health, and naturally wanted to see the raw values from my smartphone\'s built-in barometer sensor.</string>
+    <string name="app_mot_barometer">I wondered if atmospheric pressure changes were causing my poor health, and naturally wanted to see the raw values from my smartphone&apos;s built-in barometer sensor.</string>
 
     <!-- Code Scanner -->
     <string name="app_name_codescanner">Code Scanner</string>
@@ -128,17 +128,18 @@
     <string name="ui_philosophy_headline">I hate doing tedious things.</string>
     <string name="ui_philosophy_body">From minor inconveniences in daily life to repetitive tasks during development, I solve everything I find "tedious" by building apps and tools.</string>
     <string name="ui_app_of_the_day">App of the Day</string>
-    <string name="ui_dev_companion">Developer\'s Companion</string>
+    <string name="ui_dev_companion">Developer&apos;s Companion</string>
     <string name="ui_familiar_tools">Built with familiar tools</string>
     <string name="ui_mac_utility">Mac Utility</string>
     <string name="ui_ultimate_laziness">Ultimate Laziness</string>
     
     <string name="ui_profile">Profile</string>
+    <string name="ui_name">Yu Kobayashi</string>
     <string name="ui_role">Developer Tools Engineer</string>
     <string name="ui_skills">Favorite Stack: Kotlin, Compose Multiplatform for Web, Android</string>
     <string name="ui_github_link">Check out GitHub</string>
     <string name="ui_youtrust_link">View YOUTRUST</string>
-    <string name="ui_email_link">Send an Email</string>
+    <string name="ui_email_link">Email</string>
 
     <string name="ui_catalog">Apps / Tools</string>
     <string name="ui_web_apps">Web Apps &amp; PWA</string>

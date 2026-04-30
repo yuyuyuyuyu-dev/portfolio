@@ -134,11 +134,12 @@
     <string name="ui_ultimate_laziness">究極の横着</string>
     
     <string name="ui_profile">プロフィール</string>
+    <string name="ui_name">小林 勇</string>
     <string name="ui_role">デベロッパーツールエンジニア</string>
     <string name="ui_skills">好きな技術: Kotlin, Compose Multiplatform for Web, Android</string>
     <string name="ui_github_link">GitHub をのぞく</string>
     <string name="ui_youtrust_link">YOUTRUST をみる</string>
-    <string name="ui_email_link">メールをおくる</string>
+    <string name="ui_email_link">メール</string>
 
     <string name="ui_catalog">Apps / Tools</string>
     <string name="ui_web_apps">Webアプリ・PWA</string>

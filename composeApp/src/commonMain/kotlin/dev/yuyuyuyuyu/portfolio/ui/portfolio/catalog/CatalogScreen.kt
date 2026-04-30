@@ -76,7 +76,7 @@ fun CatalogScreen(
         if (plugins.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "プラグイン",
+                    title = stringResource(Res.string.ui_plugins),
                     items = plugins,
                     onProductClick = onProductClick
                 )
@@ -116,7 +116,7 @@ fun CatalogScreen(
         if (macApps.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "Macアプリ",
+                    title = stringResource(Res.string.ui_mac_apps),
                     items = macApps,
                     onProductClick = onProductClick
                 )
