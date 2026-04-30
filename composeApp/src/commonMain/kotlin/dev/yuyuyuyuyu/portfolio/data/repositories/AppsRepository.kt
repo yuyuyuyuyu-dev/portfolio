@@ -3,49 +3,30 @@ package dev.yuyuyuyuyu.portfolio.data.repositories
 import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
 import me.tatarka.inject.annotations.Inject
-import portfolio.composeapp.generated.resources.CodeScanner_screenshot
-import portfolio.composeapp.generated.resources.LocationRemover_screenshot
-import portfolio.composeapp.generated.resources.PasswordGenerator_screenshot
-import portfolio.composeapp.generated.resources.Res
-import portfolio.composeapp.generated.resources.barometer_en_screenshot
-import portfolio.composeapp.generated.resources.barometer_icon
-import portfolio.composeapp.generated.resources.barometer_ja_screenshot
-import portfolio.composeapp.generated.resources.delicioushareapp_icon
-import portfolio.composeapp.generated.resources.genkaikor_screenshot
-import portfolio.composeapp.generated.resources.get_random_int_screenshot
-import portfolio.composeapp.generated.resources.how_old_am_i_screenshot
-import portfolio.composeapp.generated.resources.howoldami_icon
-import portfolio.composeapp.generated.resources.locationremover_icon
-import portfolio.composeapp.generated.resources.not_pulling_probability_calculator_screenshot
-import portfolio.composeapp.generated.resources.puremusicplayer_icon
-import portfolio.composeapp.generated.resources.repeater_screenshot
-import portfolio.composeapp.generated.resources.to_leet_screenshot
-import portfolio.composeapp.generated.resources.what_is_the_date_today_screenshot
-import portfolio.composeapp.generated.resources.whatisthedatetoday_icon
-import portfolio.composeapp.generated.resources.ym_previewer_screenshot
+import portfolio.composeapp.generated.resources.*
 
 @Inject
 class AppsRepository {
     private val apps = listOf(
         App(
-            name = "PureMusicPlayer",
-            description = "フィルターレスのミュージックプレーヤーアプリ",
+            nameFallback = "PureMusicPlayer",
+            descriptionRes = Res.string.app_desc_puremusicplayer,
             icon = Res.drawable.puremusicplayer_icon,
             techStack = setOf(TechStack.Ios, TechStack.Swift),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/PureMusicPlayer",
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Ios),
-            motivation = "Macの `afplay` コマンドで再生した時の音が好きで、この音質をそのまま持ち運びたいと思ったため。CoreAudioのAPIを直接叩いて音声ファイルの再生部分を実装している。",
+            motivationRes = Res.string.app_mot_puremusicplayer,
         ),
         App(
-            name = "DigitalClock",
-            description = "デジタル時計アプリ",
+            nameFallback = "DigitalClock",
+            descriptionRes = Res.string.app_desc_digitalclock,
             techStack = setOf(TechStack.Android, TechStack.Kotlin),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/DigitalClock",
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android),
         ),
         App(
-            name = "今日の日付",
-            description = "現在の日付を表示するアプリ",
+            nameRes = Res.string.app_name_whatisthedatetoday,
+            descriptionRes = Res.string.app_desc_whatisthedatetoday,
             icon = Res.drawable.whatisthedatetoday_icon,
             techStack = setOf(
                 TechStack.Web,
@@ -57,11 +38,11 @@ class AppsRepository {
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/what-is-the-date-today",
             screenshots = listOf(Res.drawable.what_is_the_date_today_screenshot),
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
-            motivation = "病院で問診票を書く時に、西暦と和暦と月と日付と曜日をまとめて確認する方法がないのがめんどくさすぎたため。",
+            motivationRes = Res.string.app_mot_whatisthedatetoday,
         ),
         App(
-            name = "年齢の計算",
-            description = "生年月日から年齢を計算するアプリ",
+            nameRes = Res.string.app_name_howoldami,
+            descriptionRes = Res.string.app_desc_howoldami,
             icon = Res.drawable.howoldami_icon,
             techStack = setOf(
                 TechStack.Web,
@@ -73,11 +54,11 @@ class AppsRepository {
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/how-old-am-i",
             screenshots = listOf(Res.drawable.how_old_am_i_screenshot),
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
-            motivation = "病院で問診票を書くとき、毎回自分の年齢を覚えていなくて生年月日から数えるのが面倒だったため。",
+            motivationRes = Res.string.app_mot_howoldami,
         ),
         App(
-            name = "Location Remover",
-            description = "画像からメタデータを削除するアプリ",
+            nameFallback = "Location Remover",
+            descriptionRes = Res.string.app_desc_locationremover,
             icon = Res.drawable.locationremover_icon,
             techStack = setOf(
                 TechStack.Web,
@@ -90,11 +71,11 @@ class AppsRepository {
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/location-remover",
             screenshots = listOf(Res.drawable.LocationRemover_screenshot),
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
-            motivation = "SNS等に写真を投稿する際、自前で位置情報を削除しておけると安心だと考え発案した。専門学校のグループ演習にてチームで開発したもので、自身は主にアプリのアイデア出しとPWA化の対応を担当。",
+            motivationRes = Res.string.app_mot_locationremover,
         ),
         App(
-            name = "乱数の生成",
-            description = "指定した範囲から乱数を生成するアプリ",
+            nameRes = Res.string.app_name_getrandomint,
+            descriptionRes = Res.string.app_desc_getrandomint,
             techStack = setOf(
                 TechStack.Web,
                 TechStack.TypeScript,
@@ -105,11 +86,11 @@ class AppsRepository {
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/get-random-int",
             screenshots = listOf(Res.drawable.get_random_int_screenshot),
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
-            motivation = "自分でサーバーを建てる時にポート番号をランダムにした方がセキュリティ的に良いが、毎回自分で考えるのは面倒だったため、サクッと生成できるアプリを作った。",
+            motivationRes = Res.string.app_mot_getrandomint,
         ),
         App(
-            name = "genkaikor",
-            description = "入力された文字すべてに濁点をつけるアプリ",
+            nameFallback = "genkaikor",
+            descriptionRes = Res.string.app_desc_genkaikor,
             techStack = setOf(
                 TechStack.Web,
                 TechStack.Kotlin,
@@ -122,8 +103,8 @@ class AppsRepository {
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
-            name = "repeater",
-            description = "入力された文字をひたすら繰り返すアプリ",
+            nameFallback = "repeater",
+            descriptionRes = Res.string.app_desc_repeater,
             techStack = setOf(
                 TechStack.Web,
                 TechStack.TypeScript,
@@ -136,8 +117,8 @@ class AppsRepository {
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
-            name = "YM previewer for Twitter",
-            description = "XでYouTube Musicのリンクをカード表示するためのワークアラウンド",
+            nameFallback = "YM previewer for Twitter",
+            descriptionRes = Res.string.app_desc_ympreviewer,
             techStack = setOf(
                 TechStack.Web,
                 TechStack.NextJs,
@@ -150,8 +131,8 @@ class AppsRepository {
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
-            name = "deliciouShare.app",
-            description = "「おいしい！」の情報共有を効率化するWebサービス",
+            nameFallback = "deliciouShare.app",
+            descriptionRes = Res.string.app_desc_delicioushare,
             icon = Res.drawable.delicioushareapp_icon,
             techStack = setOf(
                 TechStack.Web,
@@ -168,8 +149,8 @@ class AppsRepository {
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
-            name = "パスワードジェネレーター",
-            description = "ひらがなカタカナ対応の簡易パスワードジェネレーター",
+            nameRes = Res.string.app_name_passwordgenerator,
+            descriptionRes = Res.string.app_desc_passwordgenerator,
             techStack = setOf(
                 TechStack.Web,
                 TechStack.NextJs,
@@ -180,11 +161,11 @@ class AppsRepository {
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/password-generator",
             screenshots = listOf(Res.drawable.PasswordGenerator_screenshot),
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
-            motivation = "「秘密の質問」でアルファベットが使えないサービスがあり、正直に答えるのはセキュリティ的に良くないと考えた。毎回自分でランダムな文字列（ひらがな・カタカナ）を考えるのも面倒だったのでツール化した。",
+            motivationRes = Res.string.app_mot_passwordgenerator,
         ),
         App(
-            name = "引けない確率の計算",
-            description = "1度も引けない確率を計算するアプリ",
+            nameRes = Res.string.app_name_notpullingcalc,
+            descriptionRes = Res.string.app_desc_notpullingcalc,
             techStack = setOf(
                 TechStack.Web,
                 TechStack.Kotlin,
@@ -195,11 +176,11 @@ class AppsRepository {
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/not-pulling-probability-calculator",
             screenshots = listOf(Res.drawable.not_pulling_probability_calculator_screenshot),
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
-            motivation = "スマホゲームのガシャで排出率0.75%を300回連続で外して天井に到達する、という事象（確率約10%）を4回中3回も経験した恨みと勢いで作成した。ちなみに現在も8回中4回天井を経験しており、私にとっては実質1/2の確率となっている。",
+            motivationRes = Res.string.app_mot_notpullingcalc,
         ),
         App(
-            name = "ToLeet",
-            description = "L33t表記へ変換するアプリ",
+            nameFallback = "ToLeet",
+            descriptionRes = Res.string.app_desc_toleet,
             techStack = setOf(
                 TechStack.Web,
                 TechStack.Kotlin,
@@ -212,8 +193,8 @@ class AppsRepository {
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Web),
         ),
         App(
-            name = "気圧計",
-            description = "気圧センサーの値を表示するアプリ",
+            nameRes = Res.string.app_name_barometer,
+            descriptionRes = Res.string.app_desc_barometer,
             icon = Res.drawable.barometer_icon,
             techStack = setOf(TechStack.Android, TechStack.Kotlin, TechStack.JetpackCompose),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/barometer",
@@ -222,27 +203,27 @@ class AppsRepository {
                 Res.drawable.barometer_ja_screenshot,
             ),
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android),
-            motivation = "自分が気圧変化の影響を受けて体調を崩しているのではないかと気になり、スマホ内蔵の気圧センサーの生の値を見てみたくなったため。",
+            motivationRes = Res.string.app_mot_barometer,
         ),
         App(
-            name = "コードスキャナー",
-            description = "シンプルなコードスキャナーアプリ",
+            nameRes = Res.string.app_name_codescanner,
+            descriptionRes = Res.string.app_desc_codescanner,
             techStack = setOf(TechStack.Android, TechStack.Kotlin, TechStack.JetpackCompose),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/CodeScanner",
             screenshots = listOf(Res.drawable.CodeScanner_screenshot),
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Android),
-            motivation = "街中にあるQRコードをスキャンして、純粋にどんなデータが埋め込まれているのか（中身の文字列）を見てみたら面白いのではないかという好奇心から作成。",
+            motivationRes = Res.string.app_mot_codescanner,
         ),
         App(
-            name = "Input Source Handler",
-            description = "A simple macOS utility to switch input sources using custom keyboard shortcuts.",
+            nameFallback = "Input Source Handler",
+            descriptionRes = Res.string.app_desc_inputsourcemanager,
             techStack = setOf(TechStack.Swift, TechStack.SwiftUi),
             repositoryUrl = "https://github.com/yuyuyuyuyu-dev/input-source-handler",
             platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.MacOS),
-            motivation = "US配列キーボードで、Android Studioのターミナル操作中に入力切り替えショートカットが干渉してしまうのが面倒だったため。Android Studioがキーボード入力をフックできるなら自分でも作れるのではないかと考えた。",
+            motivationRes = Res.string.app_mot_inputsourcemanager,
             installCommand = "brew tap yuyuyuyuyu-dev/tap\nbrew install --cask input-source-handler",
         ),
-    ).sortedBy { it.name }
+    ).sortedBy { it.nameFallback }
 
     fun getApps() = apps
 }

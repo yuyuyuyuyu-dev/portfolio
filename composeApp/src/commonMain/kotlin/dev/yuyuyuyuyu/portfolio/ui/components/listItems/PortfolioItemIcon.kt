@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
 import org.jetbrains.compose.resources.painterResource
+import dev.yuyuyuyuyu.portfolio.utils.displayName
 
 @Composable
 fun PortfolioItemIcon(
@@ -28,7 +29,7 @@ fun PortfolioItemIcon(
     if (item is App) {
         Image(
             painter = painterResource(item.icon),
-            contentDescription = "${item.name} icon",
+            contentDescription = "${item.displayName} icon",
             modifier = modifier
                 .size(size)
                 .clip(RoundedCornerShape(size / 6f)),
@@ -55,7 +56,7 @@ fun PortfolioItemIcon(
             
             // Terminal Prompt
             Text(
-                text = "> ${item.name}",
+                text = "> ${item.displayName}",
                 color = Color(0xFF3C3836),
                 fontSize = (size.value / 8f).sp,
                 maxLines = 4,

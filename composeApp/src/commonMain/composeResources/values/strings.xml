@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Apps -->
+    <!-- PureMusicPlayer -->
+    <string name="app_desc_puremusicplayer">A filterless music player app</string>
+    <string name="app_mot_puremusicplayer">I loved the sound quality of the Mac&apos;s `afplay` command and wanted to carry it with me. I implemented the audio playback by directly tapping into the CoreAudio API.</string>
+
+    <!-- DigitalClock -->
+    <string name="app_desc_digitalclock">Digital clock app</string>
+
+    <!-- What is the date today -->
+    <string name="app_name_whatisthedatetoday">What is the date today</string>
+    <string name="app_desc_whatisthedatetoday">App to display the current date</string>
+    <string name="app_mot_whatisthedatetoday">When filling out medical questionnaires at hospitals, it was too much of a hassle to check the Gregorian year, Japanese era, month, date, and day of the week separately.</string>
+
+    <!-- How old am I -->
+    <string name="app_name_howoldami">How old am I</string>
+    <string name="app_desc_howoldami">App to calculate age from birthdate</string>
+    <string name="app_mot_howoldami">When filling out medical questionnaires at hospitals, I could never remember my exact age and calculating it from my birthdate every time was a hassle.</string>
+
+    <!-- Location Remover -->
+    <string name="app_desc_locationremover">App to remove metadata from images</string>
+    <string name="app_mot_locationremover">I thought it would be reassuring to be able to remove location data myself before posting photos to social media. Developed as a team project during a group exercise in vocational school; I was mainly responsible for the ideation and PWA implementation.</string>
+
+    <!-- Get Random Int -->
+    <string name="app_name_getrandomint">Get random int</string>
+    <string name="app_desc_getrandomint">App to generate random numbers within a specified range</string>
+    <string name="app_mot_getrandomint">When setting up a server, randomizing the port number is better for security, but thinking of one every time was annoying. So I made an app to generate one quickly.</string>
+
+    <!-- genkaikor -->
+    <string name="app_desc_genkaikor">App that adds dakuten (voicing marks) to all entered characters</string>
+
+    <!-- repeater -->
+    <string name="app_desc_repeater">App that endlessly repeats entered text</string>
+
+    <!-- YM previewer -->
+    <string name="app_desc_ympreviewer">Workaround to display YouTube Music links as cards on X (Twitter)</string>
+
+    <!-- deliciouShare.app -->
+    <string name="app_desc_delicioushare">Web service to streamline sharing "Delicious!" information</string>
+
+    <!-- Password Generator -->
+    <string name="app_name_passwordgenerator">Password Generator</string>
+    <string name="app_desc_passwordgenerator">Simple password generator supporting Hiragana and Katakana</string>
+    <string name="app_mot_passwordgenerator">Some services don&apos;t allow English alphabets in "Secret Questions", and answering them honestly is bad for security. Coming up with random strings (Hiragana/Katakana) myself every time was tedious, so I made it a tool.</string>
+
+    <!-- Not Pulling Probability Calculator -->
+    <string name="app_name_notpullingcalc">NOT Pulling Probability Calculator</string>
+    <string name="app_desc_notpullingcalc">App to calculate the probability of never pulling the desired item</string>
+    <string name="app_mot_notpullingcalc">Created out of spite and momentum after experiencing the ~10% probability event of missing a 0.75% drop rate 300 times in a row to hit the "pity" system—3 times out of 4. For the record, I have now hit pity 4 times out of 8, making it an effective 1/2 probability for me.</string>
+
+    <!-- ToLeet -->
+    <string name="app_desc_toleet">App to convert text to L33t speak</string>
+
+    <!-- Barometer -->
+    <string name="app_name_barometer">Barometer</string>
+    <string name="app_desc_barometer">App to display atmospheric pressure sensor values</string>
+    <string name="app_mot_barometer">I wondered if atmospheric pressure changes were causing my poor health, and naturally wanted to see the raw values from my smartphone&apos;s built-in barometer sensor.</string>
+
+    <!-- Code Scanner -->
+    <string name="app_name_codescanner">Code Scanner</string>
+    <string name="app_desc_codescanner">Simple code scanner app</string>
+    <string name="app_mot_codescanner">Created out of pure curiosity to scan QR codes on the street and see exactly what kind of data (string content) was embedded in them.</string>
+
+    <!-- Input Source Handler -->
+    <string name="app_desc_inputsourcemanager">A simple macOS utility to switch input sources using custom keyboard shortcuts.</string>
+    <string name="app_mot_inputsourcemanager">Using a US layout keyboard, the default input switching shortcuts conflicted with terminal operations in Android Studio, which was very annoying. I figured if Android Studio can hook keyboard inputs, I could build something to do it too.</string>
+
+    <!-- CliTools -->
+    <string name="tool_desc_household">A command-line tool to manage pocket money and cash on hand.</string>
+    <string name="tool_mot_household">When I started living alone as a vocational school student, I wanted to accurately track exactly how much "pocket money" I had left after deducting living expenses.</string>
+
+    <string name="tool_desc_myde">Docker container that launches Neovim with plugins pre-installed.</string>
+    <string name="tool_mot_myde">I wanted to be able to instantly use my fully customized Neovim environment anywhere, such as on the PC at my part-time job.</string>
+
+    <string name="tool_desc_myde_command">Shell script to easily launch myDE.</string>
+    <string name="tool_mot_myde_command">Typing the command to launch the `myDE` Docker container every time was annoying, so I made a script to launch it easily.</string>
+
+    <string name="tool_desc_newproject">Shell script to batch create directories and files with a specified name.</string>
+    <string name="tool_mot_newproject">When creating shell scripts, making directories and files with the same name every single time was a hassle, so I made it doable in one command.</string>
+
+    <string name="tool_desc_myinstaller">Shell script to copy a specified file to ~/myCommands/ and grant execution permissions.</string>
+    <string name="tool_mot_myinstaller">After writing a custom shell script, copying it to a directory in my PATH and adding execution permissions every time was annoying, so I made it installable with one command.</string>
+
+    <string name="tool_desc_jarc">Shell script that bundles the necessary steps to generate a jar file.</string>
+    <string name="tool_mot_jarc">In my Java class at vocational school, typing the same boilerplate commands repeatedly to generate an executable jar file was a hassle, so I scripted and automated it on the spot.</string>
+
+    <string name="tool_desc_rubberduck">A rubber duck written in Go.</string>
+
+    <string name="tool_desc_gen_licenses">CLI tool to collect licenses of third-party libraries in a Node.js project and export them in JSON format.</string>
+    <string name="tool_mot_gen_licenses">For my own library (`ngx-mat-third-party-licenses-list-view`), how license info is collected and outputted is a core feature. I didn't want to rely on or be broken by spec changes in other people's tools, so I built my own.</string>
+
+    <string name="tool_desc_html2pdf">Converts HTML to PDF using Chromium.</string>
+    <string name="tool_mot_html2pdf">When I was using Gemini on my Android phone to generate an HTML/CSS business card, it was annoying to have to pull out my PC just to convert it to a PDF. I built this via Gemini CLI in Termux to complete the entire process on my phone.</string>
+
+    <!-- Plugins -->
+    <string name="plugin_desc_composepwa">Gradle plugin to turn Compose Multiplatform Web apps into PWAs.</string>
+    <string name="plugin_mot_composepwa">When building PWAs with Compose Multiplatform, copy-pasting the necessary files and configurations for every new project was too much of a hassle.</string>
+
+    <string name="plugin_desc_semicolon">Neovim plugin to insert a \";\" at the end of the line.</string>
+    <string name="plugin_mot_semicolon">In languages like Rust that require trailing semicolons, manually moving the cursor to the end of the line just to type a semicolon was a pain. I created a plugin that inserts a semicolon at the end of the line while maintaining the current cursor position.</string>
+
+    <!-- Libraries -->
+    <string name="lib_desc_licenses">Component library for Angular Material that provides a list of third-party licenses.</string>
+    <string name="lib_mot_licenses">Displaying open-source licenses is mandatory for modern apps, but Angular's standard feature (`thirdpartylicenses.txt`) couldn't be referenced in SSR environments. Copy-pasting the implementation for every new app or updating all apps whenever a fix was needed was a huge pain, so I turned it into a library.</string>
+
+    <string name="lib_desc_appbar">A simple app bar for Angular Material.</string>
+    <string name="lib_mot_appbar">When building Web apps with Angular, making the same app bar (header) every time was a hassle, so I built it once and turned it into a library for reuse.</string>
+
+    <string name="lib_desc_littlediva">This library is a theme of little diva.</string>
+    <string name="lib_mot_littlediva">Since I'm building apps anyway, I want to add some unique flavor, but configuring or copy-pasting it for every single app was way too tedious, so I extracted the theme itself as a library.</string>
+
+    <string name="lib_desc_permissions">Android library to achieve simultaneous execution of permission requests and processing.</string>
+
+    <string name="lib_desc_typography">Library for Android and Compose Multiplatform providing a function to create typography from font names or FontFamily.</string>
+    <string name="lib_mot_typography">When using Google Fonts in Android apps, copy-pasting the keys from the official documentation every time was a hassle. Also, writing the logic to override default font sizes for each app was too tedious to do manually, so I made it a reusable library.</string>
+
+    <string name="lib_desc_simpleappbar">A simple TopAppBar for Android and Compose Multiplatform containing a back button and a kebab menu button.</string>
+    <string name="lib_mot_simpleappbar">My personal simple app bar. Writing the same UI code for every app I made was annoying, so I commonized it as a component.</string>
+
+    <!-- Templates -->
+    <string name="tpl_desc_businesscard">Template for making business cards with HTML and CSS.</string>
+    <string name="tpl_mot_businesscard">Learning how to use a design tool I don't normally use just to make a business card was a bad investment of time and effort. I tried building it with my familiar HTML and CSS (since CSS allows millimeter-precision sizing) and it worked great, so I turned it into a template for next time.</string>
+
+    <!-- UI Strings -->
+    <string name="app_name">Portfolio</string>
+    <string name="ui_today">Today</string>
+    <string name="ui_about_me">About Me</string>
+    <string name="ui_philosophy_headline">I hate doing tedious things.</string>
+    <string name="ui_philosophy_body">From minor inconveniences in daily life to repetitive tasks during development, I solve everything I find "tedious" by building apps and tools.</string>
+    <string name="ui_app_of_the_day">App of the Day</string>
+    <string name="ui_dev_companion">Developer&apos;s Companion</string>
+    <string name="ui_familiar_tools">Built with familiar tools</string>
+    <string name="ui_mac_utility">Mac Utility</string>
+    <string name="ui_ultimate_laziness">Ultimate Laziness</string>
+    
+    <string name="ui_profile">Profile</string>
+    <string name="ui_name">Yu Kobayashi</string>
+    <string name="ui_role">Developer Tools Engineer</string>
+    <string name="ui_skills">Favorite Stack: Kotlin, Compose Multiplatform for Web, Android</string>
+    <string name="ui_github_link">Check out GitHub</string>
+    <string name="ui_youtrust_link">View YOUTRUST</string>
+    <string name="ui_email_link">Email</string>
+
+    <string name="ui_catalog">Apps / Tools</string>
+    <string name="ui_app">App</string>
+    <string name="ui_web_apps">Web Apps &amp; PWA</string>
+    <string name="ui_cli_tools">CLI Tools</string>
+    <string name="ui_plugins">Plugins</string>
+    <string name="ui_libraries">Libraries</string>
+    <string name="ui_templates">Templates</string>
+    <string name="ui_mac_apps">Mac Apps</string>
+    <string name="ui_mobile_other_apps">Mobile &amp; Other Apps</string>
+
+    <string name="ui_search">Search</string>
+    <string name="ui_search_placeholder">Search apps, tools, plugins...</string>
+    <string name="ui_no_results">No results found</string>
+
+    <string name="ui_open">Open</string>
+    <string name="ui_screenshots">Screenshots</string>
+    <string name="ui_why_built">Why I built this?</string>
+    <string name="ui_run_command">Run Command</string>
+    <string name="ui_installation">Installation</string>
+    <string name="ui_copy_command">Copy command</string>
+    <string name="ui_clear">Clear</string>
+</resources>

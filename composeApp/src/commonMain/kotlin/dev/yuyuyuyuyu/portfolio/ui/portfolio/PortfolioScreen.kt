@@ -19,6 +19,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
 import me.tatarka.inject.annotations.Inject
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.*
 
 typealias PortfolioScreen = @Composable (onNavigateToLicenses: () -> Unit) -> Unit
 
@@ -62,7 +64,7 @@ fun PortfolioScreen(
     Scaffold(
         topBar = {
             SimpleTopAppBar(
-                title = "portfolio",
+                title = stringResource(Res.string.app_name),
                 navigateBackIsPossible = !isTopLevel,
                 onNavigateBackButtonClick = { backStack.removeLastOrNull() },
                 onOpenSourceLicensesButtonClick = onNavigateToLicenses,
@@ -77,19 +79,19 @@ fun PortfolioScreen(
                     selected = currentTab == PortfolioRoute.Today,
                     onClick = { navigateToTab(PortfolioRoute.Today) },
                     icon = { Icon(Icons.Default.Today, null) },
-                    label = { Text("Today") },
+                    label = { Text(stringResource(Res.string.ui_today)) },
                 )
                 NavigationBarItem(
                     selected = currentTab == PortfolioRoute.Catalog,
                     onClick = { navigateToTab(PortfolioRoute.Catalog) },
                     icon = { Icon(Icons.Default.Apps, null) },
-                    label = { Text("Apps / Tools") },
+                    label = { Text(stringResource(Res.string.ui_catalog)) },
                 )
                 NavigationBarItem(
                     selected = currentTab == PortfolioRoute.Search,
                     onClick = { navigateToTab(PortfolioRoute.Search) },
                     icon = { Icon(Icons.Default.Search, null) },
-                    label = { Text("検索") },
+                    label = { Text(stringResource(Res.string.ui_search)) },
                 )
             }
         },
@@ -105,7 +107,6 @@ fun PortfolioScreen(
         )
     }
 }
-
 @Preview
 @Composable
 private fun PortfolioScreenPreview() {

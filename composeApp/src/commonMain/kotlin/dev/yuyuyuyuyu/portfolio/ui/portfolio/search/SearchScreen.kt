@@ -28,10 +28,15 @@ import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.*
 
 import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
 import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
 import dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemIcon
+
+import dev.yuyuyuyuyu.portfolio.utils.displayName
+import dev.yuyuyuyuyu.portfolio.utils.displayDescription
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,19 +61,29 @@ fun SearchScreen(
     // Map all items to a common data structure (PortfolioItem)
     val allItems = remember(appsState, librariesState, pluginsState, cliToolsState, templatesState) {
         val items = appsState.apps + librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
-        items.sortedBy { it.name }
+        items.sortedBy { it.nameFallback }
+    }
+
+    // Resolve strings for filtering
+    val itemWithStrings = allItems.map { item ->
+        val resolvedName = item.displayName
+        val resolvedDesc = item.displayDescription
+        Triple<PortfolioItem, String, String>(item, resolvedName, resolvedDesc)
     }
 
     // Filter logic
-    val filteredItems = allItems.filter { item ->
+    val filteredItems = itemWithStrings.filter { triple ->
+        val item = triple.first
+        val name = triple.second
+        val description = triple.third
         val matchesQuery = if (searchQuery.isBlank()) true else {
-            item.name.contains(searchQuery, ignoreCase = true) || item.description.contains(searchQuery, ignoreCase = true)
+            name.contains(searchQuery, ignoreCase = true) || description.contains(searchQuery, ignoreCase = true)
         }
         val matchesCategory = if (selectedCategory == null) true else item.category == selectedCategory
         val matchesPlatform = if (selectedPlatform == null) true else item.platforms.contains(selectedPlatform)
 
         matchesQuery && matchesCategory && matchesPlatform
-    }
+    }.map { it.first }
 
     Column(modifier = Modifier.fillMaxSize()) {
         // Search Bar
@@ -76,12 +91,12 @@ fun SearchScreen(
             value = searchQuery,
             onValueChange = { searchQuery = it },
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
-            placeholder = { Text("アプリ、ツール、プラグインを検索") },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
+            placeholder = { Text(stringResource(Res.string.ui_search_placeholder)) },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = stringResource(Res.string.ui_search)) },
             trailingIcon = {
                 if (searchQuery.isNotEmpty()) {
                     IconButton(onClick = { searchQuery = "" }) {
-                        Icon(Icons.Default.Clear, contentDescription = "Clear")
+                        Icon(Icons.Default.Clear, contentDescription = stringResource(Res.string.ui_clear))
                     }
                 }
             },
@@ -101,7 +116,7 @@ fun SearchScreen(
                 FilterChip(
                     selected = selectedCategory == category,
                     onClick = { selectedCategory = if (selectedCategory == category) null else category },
-                    label = { Text(category.label) }
+                    label = { Text(stringResource(category.labelRes)) }
                 )
             }
             
@@ -131,7 +146,7 @@ fun SearchScreen(
             if (filteredItems.isEmpty()) {
                 item {
                     Box(modifier = Modifier.fillMaxWidth().padding(top = 64.dp), contentAlignment = Alignment.Center) {
-                        Text("見つかりませんでした", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(Res.string.ui_no_results), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             } else {
@@ -162,12 +177,12 @@ private fun SearchResultItem(
         
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = item.name,
+                text = item.displayName,
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                 maxLines = 1
             )
             Text(
-                text = item.description,
+                text = item.displayDescription,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 2
@@ -181,7 +196,7 @@ private fun SearchResultItem(
             modifier = Modifier.align(Alignment.Top)
         ) {
             Text(
-                text = item.category.label,
+                text = stringResource(item.category.labelRes),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)

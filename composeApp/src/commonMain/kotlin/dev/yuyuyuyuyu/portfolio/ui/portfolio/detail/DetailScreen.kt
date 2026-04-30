@@ -25,7 +25,12 @@ import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
 import dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemIcon
+import dev.yuyuyuyuyu.portfolio.utils.displayDescription
+import dev.yuyuyuyuyu.portfolio.utils.displayMotivation
+import dev.yuyuyuyuyu.portfolio.utils.displayName
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.*
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.filled.ContentCopy
@@ -44,9 +49,9 @@ fun DetailScreen(
     val clipboardManager = LocalClipboardManager.current
     val scrollState = rememberScrollState()
 
-    val name = item.name
-    val description = item.description
-    val motivation = item.motivation
+    val name = item.displayName
+    val description = item.displayDescription
+    val motivation = item.displayMotivation
     val repositoryUrl = item.repositoryUrl
     val installCommand = item.installCommand
     val appUrl = (item as? App)?.url
@@ -81,7 +86,7 @@ fun DetailScreen(
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 8.dp)) {
                     if (appUrl != null) {
                         Button(onClick = { uriHandler.openUri(appUrl) }) {
-                            Text("開く")
+                            Text(stringResource(Res.string.ui_open))
                         }
                     }
                     OutlinedButton(onClick = { uriHandler.openUri(repositoryUrl) }) {
@@ -99,7 +104,7 @@ fun DetailScreen(
         if (item is App && item.screenshots.isNotEmpty()) {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
-                    text = "スクリーンショット",
+                    text = stringResource(Res.string.ui_screenshots),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -123,7 +128,7 @@ fun DetailScreen(
         if (!motivation.isNullOrBlank()) {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
-                    text = "なぜ作ったのか？",
+                    text = stringResource(Res.string.ui_why_built),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -138,7 +143,7 @@ fun DetailScreen(
 
         // --- Install/Run Command Section ---
         if (!installCommand.isNullOrBlank()) {
-            val commandTitle = if (installCommand.trim().startsWith("npx")) "実行コマンド" else "インストール"
+            val commandTitle = if (installCommand.trim().startsWith("npx")) stringResource(Res.string.ui_run_command) else stringResource(Res.string.ui_installation)
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
                     text = commandTitle,
@@ -164,7 +169,7 @@ fun DetailScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.ContentCopy,
-                                contentDescription = "Copy command",
+                                contentDescription = stringResource(Res.string.ui_copy_command),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }

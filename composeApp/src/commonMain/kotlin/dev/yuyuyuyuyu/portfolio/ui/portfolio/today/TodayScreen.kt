@@ -38,12 +38,31 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.App
-import dev.yuyuyuyuyu.portfolio.data.models.Product
+import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
+import dev.yuyuyuyuyu.portfolio.utils.displayDescription
+import dev.yuyuyuyuyu.portfolio.utils.displayName
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.app_name_howoldami
+import portfolio.composeapp.generated.resources.app_name_notpullingcalc
+import portfolio.composeapp.generated.resources.ui_about_me
+import portfolio.composeapp.generated.resources.ui_app_of_the_day
+import portfolio.composeapp.generated.resources.ui_dev_companion
+import portfolio.composeapp.generated.resources.ui_email_link
+import portfolio.composeapp.generated.resources.ui_familiar_tools
+import portfolio.composeapp.generated.resources.ui_mac_utility
+import portfolio.composeapp.generated.resources.ui_name
+import portfolio.composeapp.generated.resources.ui_philosophy_body
+import portfolio.composeapp.generated.resources.ui_philosophy_headline
+import portfolio.composeapp.generated.resources.ui_profile
+import portfolio.composeapp.generated.resources.ui_role
+import portfolio.composeapp.generated.resources.ui_skills
+import portfolio.composeapp.generated.resources.ui_ultimate_laziness
 
 @Composable
 fun TodayScreen(
@@ -59,12 +78,14 @@ fun TodayScreen(
     val templatesState by templatesViewModel.uiState.collectAsState()
     val uriHandler = LocalUriHandler.current
 
-    val howOldAmI = appsState.apps.find { it.name == "年齢の計算" }
-    val html2pdf = cliToolsState.cliTools.find { it.name == "@yuyuyuyuyu-dev/html2pdf" }
-    val notPullingCalc = appsState.apps.find { it.name == "引けない確率の計算" }
-    val inputSourceHandler = appsState.apps.find { it.name == "Input Source Handler" }
-    val composePwa = pluginsState.plugins.find { it.name == "ComposePWA" }
-    val businessCard = templatesState.templates.find { it.name == "business-card-template" }
+    val howOldAmI =
+        appsState.apps.find { it.nameRes == portfolio.composeapp.generated.resources.Res.string.app_name_howoldami }
+    val html2pdf = cliToolsState.cliTools.find { it.nameFallback == "@yuyuyuyuyu-dev/html2pdf" }
+    val notPullingCalc =
+        appsState.apps.find { it.nameRes == portfolio.composeapp.generated.resources.Res.string.app_name_notpullingcalc }
+    val inputSourceHandler = appsState.apps.find { it.nameFallback == "Input Source Handler" }
+    val composePwa = pluginsState.plugins.find { it.nameFallback == "ComposePWA" }
+    val businessCard = templatesState.templates.find { it.nameFallback == "business-card-template" }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -92,16 +113,16 @@ fun TodayScreen(
                     onClick = { onProductClick(howOldAmI.repositoryUrl) })
             }
         }
-        
+
         if (html2pdf != null) {
             item {
                 ToolOfTheDayCard(
                     product = html2pdf,
-                    title = "究極の横着",
+                    title = stringResource(Res.string.ui_ultimate_laziness),
                     onClick = { onProductClick(html2pdf.repositoryUrl) })
             }
         }
-        
+
         if (notPullingCalc != null) {
             item {
                 AppOfTheDayCard(
@@ -114,7 +135,7 @@ fun TodayScreen(
             item {
                 ToolOfTheDayCard(
                     product = composePwa,
-                    title = "開発のおとも",
+                    title = stringResource(Res.string.ui_dev_companion),
                     onClick = { onProductClick(composePwa.repositoryUrl) })
             }
         }
@@ -123,7 +144,7 @@ fun TodayScreen(
             item {
                 ToolOfTheDayCard(
                     product = businessCard,
-                    title = "使い慣れた道具で",
+                    title = stringResource(Res.string.ui_familiar_tools),
                     onClick = { onProductClick(businessCard.repositoryUrl) })
             }
         }
@@ -132,7 +153,7 @@ fun TodayScreen(
             item {
                 ToolOfTheDayCard(
                     product = inputSourceHandler,
-                    title = "Macの便利ツール",
+                    title = stringResource(Res.string.ui_mac_utility),
                     onClick = { onProductClick(inputSourceHandler.repositoryUrl) })
             }
         }
@@ -158,18 +179,18 @@ fun DeveloperProfileCard(onLinkClick: (String) -> Unit, modifier: Modifier = Mod
         ) {
             Column {
                 Text(
-                    text = "プロフィール",
+                    text = stringResource(Res.string.ui_profile),
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.7f)
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = "小林 勇",
+                    text = stringResource(Res.string.ui_name),
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
                 Text(
-                    text = "デベロッパーツールエンジニア",
+                    text = stringResource(Res.string.ui_role),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
                 )
@@ -177,7 +198,7 @@ fun DeveloperProfileCard(onLinkClick: (String) -> Unit, modifier: Modifier = Mod
 
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
-                    text = "好きな技術: Kotlin, Compose Multiplatform for Web, Android",
+                    text = stringResource(Res.string.ui_skills),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
@@ -226,7 +247,7 @@ fun DeveloperProfileCard(onLinkClick: (String) -> Unit, modifier: Modifier = Mod
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(Modifier.width(8.dp))
-                    Text("メール")
+                    Text(stringResource(Res.string.ui_email_link))
                 }
             }
         }
@@ -246,20 +267,20 @@ fun DeveloperPhilosophyCard(modifier: Modifier = Modifier) {
         ) {
             Column {
                 Text(
-                    text = "私について",
+                    text = stringResource(Res.string.ui_about_me),
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = "めんどくさいことはやりたくない。",
+                    text = stringResource(Res.string.ui_philosophy_headline),
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
 
             Text(
-                text = "日常で出会ったちょっとした不便から開発時の繰り返しの作業まで、「めんどくさい」と思ったことをアプリやツールを作って解決しています。",
+                text = stringResource(Res.string.ui_philosophy_body),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * 1.5
@@ -302,19 +323,19 @@ fun AppOfTheDayCard(app: App, onClick: () -> Unit, modifier: Modifier = Modifier
                     .align(Alignment.BottomStart)
             ) {
                 Text(
-                    text = "今日のピックアップ",
+                    text = stringResource(Res.string.ui_app_of_the_day),
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
                     color = Color.White.copy(alpha = 0.8f)
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = app.name,
+                    text = app.displayName,
                     style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
                     color = Color.White
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = app.description,
+                    text = app.displayDescription,
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.9f),
                     maxLines = 2
@@ -326,15 +347,11 @@ fun AppOfTheDayCard(app: App, onClick: () -> Unit, modifier: Modifier = Modifier
 
 @Composable
 fun ToolOfTheDayCard(
-    product: Any,
+    product: PortfolioItem,
     title: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val name = if (product is App) product.name else if (product is Product) product.name else ""
-    val description =
-        if (product is App) product.description else if (product is Product) product.description else ""
-
     Surface(
         shape = RoundedCornerShape(24.dp),
         color = MaterialTheme.colorScheme.secondaryContainer,
@@ -352,13 +369,13 @@ fun ToolOfTheDayCard(
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = name,
+                    text = product.displayName,
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = description,
+                    text = product.displayDescription,
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )

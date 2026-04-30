@@ -25,6 +25,8 @@ import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 
 import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.*
 
 @Composable
 fun CatalogScreen(
@@ -51,10 +53,10 @@ fun CatalogScreen(
 
     // SSoT: Group by actual data properties
     val allProducts = librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
-    val cliTools = allProducts.filter { it.category == ProductCategory.CliTool }.sortedBy { it.name }
-    val plugins = allProducts.filter { it.category == ProductCategory.Plugin }.sortedBy { it.name }
-    val libraries = allProducts.filter { it.category == ProductCategory.Library }.sortedBy { it.name }
-    val templates = allProducts.filter { it.category == ProductCategory.Template }.sortedBy { it.name }
+    val cliTools = allProducts.filter { it.category == ProductCategory.CliTool }.sortedBy { it.nameFallback }
+    val plugins = allProducts.filter { it.category == ProductCategory.Plugin }.sortedBy { it.nameFallback }
+    val libraries = allProducts.filter { it.category == ProductCategory.Library }.sortedBy { it.nameFallback }
+    val templates = allProducts.filter { it.category == ProductCategory.Template }.sortedBy { it.nameFallback }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -64,7 +66,7 @@ fun CatalogScreen(
         if (webApps.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "Webアプリ・PWA",
+                    title = stringResource(Res.string.ui_web_apps),
                     items = webApps,
                     onProductClick = onProductClick
                 )
@@ -74,7 +76,7 @@ fun CatalogScreen(
         if (plugins.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "プラグイン",
+                    title = stringResource(Res.string.ui_plugins),
                     items = plugins,
                     onProductClick = onProductClick
                 )
@@ -84,7 +86,7 @@ fun CatalogScreen(
         if (libraries.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "ライブラリ",
+                    title = stringResource(Res.string.ui_libraries),
                     items = libraries,
                     onProductClick = onProductClick
                 )
@@ -94,7 +96,7 @@ fun CatalogScreen(
         if (cliTools.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "CLIツール",
+                    title = stringResource(Res.string.ui_cli_tools),
                     items = cliTools,
                     onProductClick = onProductClick
                 )
@@ -104,7 +106,7 @@ fun CatalogScreen(
         if (templates.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "テンプレート",
+                    title = stringResource(Res.string.ui_templates),
                     items = templates,
                     onProductClick = onProductClick
                 )
@@ -114,7 +116,7 @@ fun CatalogScreen(
         if (macApps.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "Macアプリ",
+                    title = stringResource(Res.string.ui_mac_apps),
                     items = macApps,
                     onProductClick = onProductClick
                 )
@@ -124,7 +126,7 @@ fun CatalogScreen(
         if (androidIosApps.isNotEmpty() || otherApps.isNotEmpty()) {
             item {
                 CatalogSection(
-                    title = "モバイル＆その他アプリ",
+                    title = stringResource(Res.string.ui_mobile_other_apps),
                     items = androidIosApps + otherApps,
                     onProductClick = onProductClick
                 )

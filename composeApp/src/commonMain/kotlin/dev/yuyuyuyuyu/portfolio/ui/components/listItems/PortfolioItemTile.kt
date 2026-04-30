@@ -9,6 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
+import dev.yuyuyuyuyu.portfolio.utils.displayDescription
+import dev.yuyuyuyuyu.portfolio.utils.displayName
 
 @Composable
 fun PortfolioItemTile(
@@ -27,13 +29,13 @@ fun PortfolioItemTile(
         
         Column {
             Text(
-                text = item.name,
+                text = item.displayName,
                 style = MaterialTheme.typography.bodyLarge,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = item.description,
+                text = item.displayDescription,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 2,
