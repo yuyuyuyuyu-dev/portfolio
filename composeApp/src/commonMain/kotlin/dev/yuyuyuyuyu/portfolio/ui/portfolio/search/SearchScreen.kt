@@ -91,12 +91,12 @@ fun SearchScreen(
             value = searchQuery,
             onValueChange = { searchQuery = it },
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
-            placeholder = { Text("アプリ、ツール、プラグインを検索") },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
+            placeholder = { Text(stringResource(Res.string.ui_search_placeholder)) },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = stringResource(Res.string.ui_search)) },
             trailingIcon = {
                 if (searchQuery.isNotEmpty()) {
                     IconButton(onClick = { searchQuery = "" }) {
-                        Icon(Icons.Default.Clear, contentDescription = "Clear")
+                        Icon(Icons.Default.Clear, contentDescription = stringResource(Res.string.ui_clear))
                     }
                 }
             },
@@ -146,7 +146,7 @@ fun SearchScreen(
             if (filteredItems.isEmpty()) {
                 item {
                     Box(modifier = Modifier.fillMaxWidth().padding(top = 64.dp), contentAlignment = Alignment.Center) {
-                        Text("見つかりませんでした", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(Res.string.ui_no_results), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             } else {
