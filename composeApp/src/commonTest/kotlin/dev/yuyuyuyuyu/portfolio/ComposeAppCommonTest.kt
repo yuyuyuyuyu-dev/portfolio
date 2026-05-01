@@ -1,12 +1,21 @@
 package dev.yuyuyuyuyu.portfolio
 
+import androidx.compose.material3.Text
+import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.runComposeUiTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class ComposeAppCommonTest {
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
-    fun example() {
-        assertEquals(3, 1 + 2)
+    fun testHelloWorldIsDisplayed() = runComposeUiTest {
+        setContent {
+            Text("Hello, World!")
+        }
+
+        onNodeWithText("Hello, World!").assertIsDisplayed()
     }
 }

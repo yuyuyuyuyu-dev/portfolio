@@ -87,6 +87,29 @@ fun TodayScreen(
     val composePwa = pluginsState.plugins.find { it.nameFallback == "ComposePWA" }
     val businessCard = templatesState.templates.find { it.nameFallback == "business-card-template" }
 
+    TodayScreenContent(
+        howOldAmI = howOldAmI,
+        html2pdf = html2pdf,
+        notPullingCalc = notPullingCalc,
+        inputSourceHandler = inputSourceHandler,
+        composePwa = composePwa,
+        businessCard = businessCard,
+        onProductClick = onProductClick,
+        onLinkClick = { url -> uriHandler.openUri(url) }
+    )
+}
+
+@Composable
+fun TodayScreenContent(
+    howOldAmI: App?,
+    html2pdf: PortfolioItem?,
+    notPullingCalc: App?,
+    inputSourceHandler: App?,
+    composePwa: PortfolioItem?,
+    businessCard: PortfolioItem?,
+    onProductClick: (String) -> Unit,
+    onLinkClick: (String) -> Unit,
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(24.dp),
@@ -160,7 +183,7 @@ fun TodayScreen(
 
         item {
             DeveloperProfileCard(
-                onLinkClick = { url -> uriHandler.openUri(url) }
+                onLinkClick = onLinkClick
             )
         }
     }
