@@ -54,15 +54,27 @@ fun SearchScreen(
     val cliToolsState by cliToolsViewModel.uiState.collectAsState()
     val templatesState by templatesViewModel.uiState.collectAsState()
 
-    var searchQuery by remember { mutableStateOf("") }
-    var selectedCategory by remember { mutableStateOf<ProductCategory?>(null) }
-    var selectedPlatform by remember { mutableStateOf<Platform?>(null) }
-
     // Map all items to a common data structure (PortfolioItem)
     val allItems = remember(appsState, librariesState, pluginsState, cliToolsState, templatesState) {
         val items = appsState.apps + librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
         items.sortedBy { it.nameFallback }
     }
+
+    SearchScreenContent(
+        allItems = allItems,
+        onProductClick = onProductClick
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SearchScreenContent(
+    allItems: List<PortfolioItem>,
+    onProductClick: (String) -> Unit,
+) {
+    var searchQuery by remember { mutableStateOf("") }
+    var selectedCategory by remember { mutableStateOf<ProductCategory?>(null) }
+    var selectedPlatform by remember { mutableStateOf<Platform?>(null) }
 
     // Resolve strings for filtering
     val itemWithStrings = allItems.map { item ->
