@@ -43,8 +43,19 @@ fun CatalogScreen(
     val cliToolsState by cliToolsViewModel.uiState.collectAsState()
     val templatesState by templatesViewModel.uiState.collectAsState()
 
-    val allApps = appsState.apps
+    CatalogScreenContent(
+        allApps = appsState.apps,
+        allProducts = librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates,
+        onProductClick = onProductClick
+    )
+}
 
+@Composable
+fun CatalogScreenContent(
+    allApps: List<dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem>,
+    allProducts: List<dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem>,
+    onProductClick: (String) -> Unit,
+) {
     // Group apps
     val macApps = allApps.filter { Platform.MacOS in it.platforms }
     val webApps = allApps.filter { Platform.Web in it.platforms }
@@ -52,7 +63,6 @@ fun CatalogScreen(
     val otherApps = allApps - macApps.toSet() - webApps.toSet() - androidIosApps.toSet()
 
     // SSoT: Group by actual data properties
-    val allProducts = librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
     val cliTools = allProducts.filter { it.category == ProductCategory.CliTool }.sortedBy { it.nameFallback }
     val plugins = allProducts.filter { it.category == ProductCategory.Plugin }.sortedBy { it.nameFallback }
     val libraries = allProducts.filter { it.category == ProductCategory.Library }.sortedBy { it.nameFallback }
