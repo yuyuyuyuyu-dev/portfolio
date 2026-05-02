@@ -78,7 +78,9 @@ fun PortfolioNavigation(
                 is PortfolioRoute.Detail ->
                     NavEntry(key) {
                         val url = key.repositoryUrl
-                        val allItems = appsState.apps + librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
+                        val allItems =
+                            appsState.apps + librariesState.libraries + pluginsState.plugins +
+                                cliToolsState.cliTools + templatesState.templates
                         val item = allItems.find { it.repositoryUrl == url }
 
                         if (item != null) {

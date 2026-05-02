@@ -88,7 +88,11 @@ class CliToolsRepository {
                 category = dev.yuyuyuyuyu.portfolio.data.models.ProductCategory.CliTool,
                 platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Cli),
                 motivationRes = Res.string.tool_mot_html2pdf,
-                installCommand = "npx @yuyuyuyuyu-dev/html2pdf --chromium-path \"\$(type -p chromium-browser)\" --src {Source HTML file path} --dest {Destination PDF path}",
+                installCommand =
+                    "npx @yuyuyuyuyu-dev/html2pdf " +
+                        "--chromium-path \"\$(type -p chromium-browser)\" " +
+                        "--src {Source HTML file path} " +
+                        "--dest {Destination PDF path}",
             ),
         ).sortedBy { it.nameFallback }
 
