@@ -19,20 +19,21 @@ fun PortfolioItemTile(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
-            .width(140.dp)
-            .clickable { onClick() }
-            .padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier =
+            modifier
+                .width(140.dp)
+                .clickable { onClick() }
+                .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         PortfolioItemIcon(item = item, size = 124.dp)
-        
+
         Column {
             Text(
                 text = item.displayName,
                 style = MaterialTheme.typography.bodyLarge,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
             Text(
                 text = item.displayDescription,
@@ -40,7 +41,7 @@ fun PortfolioItemTile(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.height(32.dp)
+                modifier = Modifier.height(32.dp),
             )
         }
     }

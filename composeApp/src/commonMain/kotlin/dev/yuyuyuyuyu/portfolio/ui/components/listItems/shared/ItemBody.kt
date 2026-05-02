@@ -35,24 +35,26 @@ fun ItemBody(
 
         val interactionSource = remember { MutableInteractionSource() }
         Column(
-            modifier = Modifier.padding(horizontal = 10.dp)
-                .clickable(interactionSource = interactionSource, indication = null, onClick = onSourceCodeLinkClick)
-                .semantics {
-                    onClick(label = "ソースコードのページを新しいタブで開く") {
-                        onSourceCodeLinkClick()
-                        true
-                    }
-                },
+            modifier =
+                Modifier.padding(horizontal = 10.dp)
+                    .clickable(interactionSource = interactionSource, indication = null, onClick = onSourceCodeLinkClick)
+                    .semantics {
+                        onClick(label = "ソースコードのページを新しいタブで開く") {
+                            onSourceCodeLinkClick()
+                            true
+                        }
+                    },
         ) {
             Text(
                 text = sourceCodeLabel,
                 style = MaterialTheme.typography.titleMedium,
             )
             Row(
-                modifier = Modifier.indication(
-                    interactionSource = interactionSource,
-                    indication = LocalIndication.current,
-                )
+                modifier =
+                    Modifier.indication(
+                        interactionSource = interactionSource,
+                        indication = LocalIndication.current,
+                    ),
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Default.OpenInNew,

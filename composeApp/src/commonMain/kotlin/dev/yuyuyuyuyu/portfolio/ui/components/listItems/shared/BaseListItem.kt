@@ -43,16 +43,17 @@ fun BaseListItem(
     val interactionSource = remember { MutableInteractionSource() }
     val onClick = { expanded = !expanded }
     Column(
-        modifier = modifier
-            .clickable(interactionSource = interactionSource, indication = null, onClick = onClick)
-            .background(MaterialTheme.colorScheme.surface)
-            .semantics {
-                stateDescription = if (expanded) "展開済み" else "折りたたみ済み"
-                onClick(label = if (expanded) "たたむ" else "開く") {
-                    onClick()
-                    true
-                }
-            },
+        modifier =
+            modifier
+                .clickable(interactionSource = interactionSource, indication = null, onClick = onClick)
+                .background(MaterialTheme.colorScheme.surface)
+                .semantics {
+                    stateDescription = if (expanded) "展開済み" else "折りたたみ済み"
+                    onClick(label = if (expanded) "たたむ" else "開く") {
+                        onClick()
+                        true
+                    }
+                },
     ) {
         ListItem(
             leadingContent = {
@@ -72,10 +73,11 @@ fun BaseListItem(
             trailingContent = {
                 ExpandMoreIcon(
                     expanded = expanded,
-                    modifier = Modifier.indication(
-                        interactionSource = interactionSource,
-                        indication = LocalIndication.current,
-                    ),
+                    modifier =
+                        Modifier.indication(
+                            interactionSource = interactionSource,
+                            indication = LocalIndication.current,
+                        ),
                 )
             },
         )

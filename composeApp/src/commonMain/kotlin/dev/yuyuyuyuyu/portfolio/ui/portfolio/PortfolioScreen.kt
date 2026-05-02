@@ -32,7 +32,7 @@ fun PortfolioScreen(
     pluginsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModelImpl,
     cliToolsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModelImpl,
     templatesViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModelImpl,
-    @me.tatarka.inject.annotations.Assisted onNavigateToLicenses: () -> Unit
+    @me.tatarka.inject.annotations.Assisted onNavigateToLicenses: () -> Unit,
 ) {
     val backStack: MutableList<PortfolioRoute> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
@@ -51,7 +51,7 @@ fun PortfolioScreen(
             }
             return
         }
-        
+
         backStack.clear()
         backStack.add(PortfolioRoute.Today)
         if (route != PortfolioRoute.Today) {
@@ -107,6 +107,7 @@ fun PortfolioScreen(
         )
     }
 }
+
 @Preview
 @Composable
 private fun PortfolioScreenPreview() {

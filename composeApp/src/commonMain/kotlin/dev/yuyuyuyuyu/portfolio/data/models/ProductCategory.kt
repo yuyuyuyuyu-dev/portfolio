@@ -8,5 +8,5 @@ enum class ProductCategory(val labelRes: StringResource) {
     CliTool(Res.string.ui_cli_tools),
     Plugin(Res.string.ui_plugins),
     Library(Res.string.ui_libraries),
-    Template(Res.string.ui_templates)
+    Template(Res.string.ui_templates),
 }

@@ -8,14 +8,14 @@ import androidx.compose.ui.test.v2.runComposeUiTest
 import kotlin.test.Test
 
 class ComposeAppCommonTest {
-
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun testHelloWorldIsDisplayed() = runComposeUiTest {
-        setContent {
-            Text("Hello, World!")
-        }
+    fun testHelloWorldIsDisplayed() =
+        runComposeUiTest {
+            setContent {
+                Text("Hello, World!")
+            }
 
-        onNodeWithText("Hello, World!").assertIsDisplayed()
-    }
+            onNodeWithText("Hello, World!").assertIsDisplayed()
+        }
 }

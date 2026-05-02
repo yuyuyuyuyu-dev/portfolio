@@ -1,8 +1,8 @@
 package dev.yuyuyuyuyu.portfolio.utils
 
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.resources.stringResource
 import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
+import org.jetbrains.compose.resources.stringResource
 
 val PortfolioItem.displayName: String
     @Composable

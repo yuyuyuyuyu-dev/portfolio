@@ -29,19 +29,20 @@ fun SupportingContent(
     Text(description)
     Row(
         modifier = Modifier.horizontalScroll(rememberScrollState()),
-        horizontalArrangement = Arrangement.spacedBy(5.dp)
+        horizontalArrangement = Arrangement.spacedBy(5.dp),
     ) {
         val techStacks = remember(techStackSet) { techStackSet.sortedBy { it.ordinal } }
         techStacks.forEach {
             Text(
                 text = it.label,
-                modifier = Modifier
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.outline,
-                        shape = RoundedCornerShape(5.dp),
-                    )
-                    .padding(horizontal = 4.dp),
+                modifier =
+                    Modifier
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.outline,
+                            shape = RoundedCornerShape(5.dp),
+                        )
+                        .padding(horizontal = 4.dp),
             )
         }
     }
