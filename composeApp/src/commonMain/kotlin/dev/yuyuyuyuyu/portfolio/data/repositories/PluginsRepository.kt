@@ -3,7 +3,11 @@ package dev.yuyuyuyuyu.portfolio.data.repositories
 import dev.yuyuyuyuyu.portfolio.data.models.Product
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
 import me.tatarka.inject.annotations.Inject
-import portfolio.composeapp.generated.resources.*
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.plugin_desc_composepwa
+import portfolio.composeapp.generated.resources.plugin_desc_semicolon
+import portfolio.composeapp.generated.resources.plugin_mot_composepwa
+import portfolio.composeapp.generated.resources.plugin_mot_semicolon
 
 @Inject
 class PluginsRepository {

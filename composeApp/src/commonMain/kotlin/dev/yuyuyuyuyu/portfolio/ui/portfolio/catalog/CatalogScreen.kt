@@ -1,6 +1,10 @@
 package dev.yuyuyuyuyu.portfolio.ui.portfolio.catalog
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -20,7 +24,14 @@ import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 import org.jetbrains.compose.resources.stringResource
-import portfolio.composeapp.generated.resources.*
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.ui_cli_tools
+import portfolio.composeapp.generated.resources.ui_libraries
+import portfolio.composeapp.generated.resources.ui_mac_apps
+import portfolio.composeapp.generated.resources.ui_mobile_other_apps
+import portfolio.composeapp.generated.resources.ui_plugins
+import portfolio.composeapp.generated.resources.ui_templates
+import portfolio.composeapp.generated.resources.ui_web_apps
 
 @Composable
 fun CatalogScreen(

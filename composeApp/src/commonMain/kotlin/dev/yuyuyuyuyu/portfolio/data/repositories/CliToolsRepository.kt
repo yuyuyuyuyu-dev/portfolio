@@ -3,7 +3,24 @@ package dev.yuyuyuyuyu.portfolio.data.repositories
 import dev.yuyuyuyuyu.portfolio.data.models.Product
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
 import me.tatarka.inject.annotations.Inject
-import portfolio.composeapp.generated.resources.*
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.tool_desc_gen_licenses
+import portfolio.composeapp.generated.resources.tool_desc_household
+import portfolio.composeapp.generated.resources.tool_desc_html2pdf
+import portfolio.composeapp.generated.resources.tool_desc_jarc
+import portfolio.composeapp.generated.resources.tool_desc_myde
+import portfolio.composeapp.generated.resources.tool_desc_myde_command
+import portfolio.composeapp.generated.resources.tool_desc_myinstaller
+import portfolio.composeapp.generated.resources.tool_desc_newproject
+import portfolio.composeapp.generated.resources.tool_desc_rubberduck
+import portfolio.composeapp.generated.resources.tool_mot_gen_licenses
+import portfolio.composeapp.generated.resources.tool_mot_household
+import portfolio.composeapp.generated.resources.tool_mot_html2pdf
+import portfolio.composeapp.generated.resources.tool_mot_jarc
+import portfolio.composeapp.generated.resources.tool_mot_myde
+import portfolio.composeapp.generated.resources.tool_mot_myde_command
+import portfolio.composeapp.generated.resources.tool_mot_myinstaller
+import portfolio.composeapp.generated.resources.tool_mot_newproject
 
 @Inject
 class CliToolsRepository {

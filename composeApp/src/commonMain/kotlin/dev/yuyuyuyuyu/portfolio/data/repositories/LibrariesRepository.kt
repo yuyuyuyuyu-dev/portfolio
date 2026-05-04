@@ -3,7 +3,18 @@ package dev.yuyuyuyuyu.portfolio.data.repositories
 import dev.yuyuyuyuyu.portfolio.data.models.Product
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
 import me.tatarka.inject.annotations.Inject
-import portfolio.composeapp.generated.resources.*
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.lib_desc_appbar
+import portfolio.composeapp.generated.resources.lib_desc_licenses
+import portfolio.composeapp.generated.resources.lib_desc_littlediva
+import portfolio.composeapp.generated.resources.lib_desc_permissions
+import portfolio.composeapp.generated.resources.lib_desc_simpleappbar
+import portfolio.composeapp.generated.resources.lib_desc_typography
+import portfolio.composeapp.generated.resources.lib_mot_appbar
+import portfolio.composeapp.generated.resources.lib_mot_licenses
+import portfolio.composeapp.generated.resources.lib_mot_littlediva
+import portfolio.composeapp.generated.resources.lib_mot_simpleappbar
+import portfolio.composeapp.generated.resources.lib_mot_typography
 
 @Inject
 class LibrariesRepository {
