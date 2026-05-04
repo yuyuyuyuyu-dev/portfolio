@@ -9,7 +9,8 @@ import dev.yuyuyuyuyu.portfolio.di.AppComponent
 import dev.yuyuyuyuyu.portfolio.di.create
 import dev.yuyuyuyuyu.portfolio.ui.main.MainScreen
 import org.jetbrains.compose.resources.stringResource
-import portfolio.composeapp.generated.resources.*
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.app_name
 
 @Composable
 @Preview

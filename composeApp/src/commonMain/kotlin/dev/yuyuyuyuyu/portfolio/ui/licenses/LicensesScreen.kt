@@ -19,7 +19,7 @@ import portfolio.composeapp.generated.resources.Res
 @Composable
 fun LicensesScreen(
     onNavigateBack: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var aboutLibsJson by remember { mutableStateOf("") }
     val uriHandler = LocalUriHandler.current
@@ -40,12 +40,12 @@ fun LicensesScreen(
                 },
             )
         },
-        modifier = modifier
+        modifier = modifier,
     ) { innerPadding ->
         if (aboutLibsJson.isNotEmpty()) {
             LibrariesContainer(
-                aboutLibsJson = aboutLibsJson, 
-                modifier = Modifier.padding(innerPadding)
+                aboutLibsJson = aboutLibsJson,
+                modifier = Modifier.padding(innerPadding),
             )
         }
     }

@@ -11,27 +11,28 @@ import portfolio.composeapp.generated.resources.app_name
 import kotlin.test.Test
 
 class SearchScreenContentTest {
-
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun searchScreenContent_rendersWithoutCrashing() = runComposeUiTest {
-        val mockApp = App(
-            nameFallback = "Mock Search App",
-            descriptionRes = Res.string.app_name,
-            techStack = emptySet(),
-            repositoryUrl = "https://github.com",
-            platforms = emptySet(),
-            category = ProductCategory.App
-        )
+    fun searchScreenContent_rendersWithoutCrashing() =
+        runComposeUiTest {
+            val mockApp =
+                App(
+                    nameFallback = "Mock Search App",
+                    descriptionRes = Res.string.app_name,
+                    techStack = emptySet(),
+                    repositoryUrl = "https://github.com",
+                    platforms = emptySet(),
+                    category = ProductCategory.App,
+                )
 
-        setContent {
-            SearchScreenContent(
-                allItems = listOf(mockApp),
-                onProductClick = {}
-            )
+            setContent {
+                SearchScreenContent(
+                    allItems = listOf(mockApp),
+                    onProductClick = {},
+                )
+            }
+
+            // Verify that the search result is rendered
+            onNodeWithText("Mock Search App").assertIsDisplayed()
         }
-
-        // Verify that the search result is rendered
-        onNodeWithText("Mock Search App").assertIsDisplayed()
-    }
 }

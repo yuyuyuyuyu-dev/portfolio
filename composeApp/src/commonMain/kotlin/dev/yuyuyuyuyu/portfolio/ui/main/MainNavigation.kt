@@ -15,26 +15,27 @@ fun MainNavigation(
     appComponent: AppComponent,
     modifier: Modifier = Modifier,
 ) {
-
     NavDisplay(
         backStack = backStack,
         modifier = modifier,
         onBack = { backStack.removeLastOrNull() },
         entryProvider = { key ->
             when (key) {
-                MainNavigationRoute.Portfolio -> NavEntry(key) {
-                    appComponent.portfolioScreen {
-                        backStack.add(MainNavigationRoute.Licenses)
+                MainNavigationRoute.Portfolio ->
+                    NavEntry(key) {
+                        appComponent.portfolioScreen {
+                            backStack.add(MainNavigationRoute.Licenses)
+                        }
                     }
-                }
 
-                MainNavigationRoute.Licenses -> NavEntry(key) {
-                    LicensesScreen(
-                        onNavigateBack = { backStack.removeLastOrNull() }
-                    )
-                }
+                MainNavigationRoute.Licenses ->
+                    NavEntry(key) {
+                        LicensesScreen(
+                            onNavigateBack = { backStack.removeLastOrNull() },
+                        )
+                    }
             }
-        }
+        },
     )
 }
 
@@ -43,6 +44,6 @@ fun MainNavigation(
 private fun MainNavigationPreview() {
     MainNavigation(
         backStack = mutableListOf(MainNavigationRoute.Portfolio),
-        appComponent = AppComponent::class.create()
+        appComponent = AppComponent::class.create(),
     )
 }

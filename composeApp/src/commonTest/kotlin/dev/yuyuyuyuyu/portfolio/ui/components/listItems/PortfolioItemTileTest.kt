@@ -10,26 +10,27 @@ import portfolio.composeapp.generated.resources.app_name
 import kotlin.test.Test
 
 class PortfolioItemTileTest {
-
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun portfolioItemTile_displaysAppName() = runComposeUiTest {
-        val mockItem = App(
-            nameFallback = "Test Portfolio App",
-            descriptionRes = Res.string.app_name,
-            techStack = emptySet(),
-            repositoryUrl = "https://github.com",
-            platforms = emptySet(),
-            url = "https://example.com"
-        )
+    fun portfolioItemTile_displaysAppName() =
+        runComposeUiTest {
+            val mockItem =
+                App(
+                    nameFallback = "Test Portfolio App",
+                    descriptionRes = Res.string.app_name,
+                    techStack = emptySet(),
+                    repositoryUrl = "https://github.com",
+                    platforms = emptySet(),
+                    url = "https://example.com",
+                )
 
-        setContent {
-            PortfolioItemTile(
-                item = mockItem,
-                onClick = {}
-            )
+            setContent {
+                PortfolioItemTile(
+                    item = mockItem,
+                    onClick = {},
+                )
+            }
+
+            onNodeWithText("Test Portfolio App").assertIsDisplayed()
         }
-
-        onNodeWithText("Test Portfolio App").assertIsDisplayed()
-    }
 }

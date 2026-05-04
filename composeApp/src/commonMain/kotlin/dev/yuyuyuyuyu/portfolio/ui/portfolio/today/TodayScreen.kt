@@ -95,7 +95,7 @@ fun TodayScreen(
         composePwa = composePwa,
         businessCard = businessCard,
         onProductClick = onProductClick,
-        onLinkClick = { url -> uriHandler.openUri(url) }
+        onLinkClick = { url -> uriHandler.openUri(url) },
     )
 }
 
@@ -113,14 +113,14 @@ fun TodayScreenContent(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(24.dp),
-        verticalArrangement = Arrangement.spacedBy(32.dp)
+        verticalArrangement = Arrangement.spacedBy(32.dp),
     ) {
         item {
             // Header
             Text(
                 text = "Today",
                 style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold),
-                modifier = Modifier.padding(bottom = 8.dp)
+                modifier = Modifier.padding(bottom = 8.dp),
             )
         }
 
@@ -133,7 +133,8 @@ fun TodayScreenContent(
             item {
                 AppOfTheDayCard(
                     app = howOldAmI,
-                    onClick = { onProductClick(howOldAmI.repositoryUrl) })
+                    onClick = { onProductClick(howOldAmI.repositoryUrl) },
+                )
             }
         }
 
@@ -142,7 +143,8 @@ fun TodayScreenContent(
                 ToolOfTheDayCard(
                     product = html2pdf,
                     title = stringResource(Res.string.ui_ultimate_laziness),
-                    onClick = { onProductClick(html2pdf.repositoryUrl) })
+                    onClick = { onProductClick(html2pdf.repositoryUrl) },
+                )
             }
         }
 
@@ -150,7 +152,8 @@ fun TodayScreenContent(
             item {
                 AppOfTheDayCard(
                     app = notPullingCalc,
-                    onClick = { onProductClick(notPullingCalc.repositoryUrl) })
+                    onClick = { onProductClick(notPullingCalc.repositoryUrl) },
+                )
             }
         }
 
@@ -159,7 +162,8 @@ fun TodayScreenContent(
                 ToolOfTheDayCard(
                     product = composePwa,
                     title = stringResource(Res.string.ui_dev_companion),
-                    onClick = { onProductClick(composePwa.repositoryUrl) })
+                    onClick = { onProductClick(composePwa.repositoryUrl) },
+                )
             }
         }
 
@@ -168,7 +172,8 @@ fun TodayScreenContent(
                 ToolOfTheDayCard(
                     product = businessCard,
                     title = stringResource(Res.string.ui_familiar_tools),
-                    onClick = { onProductClick(businessCard.repositoryUrl) })
+                    onClick = { onProductClick(businessCard.repositoryUrl) },
+                )
             }
         }
 
@@ -177,45 +182,49 @@ fun TodayScreenContent(
                 ToolOfTheDayCard(
                     product = inputSourceHandler,
                     title = stringResource(Res.string.ui_mac_utility),
-                    onClick = { onProductClick(inputSourceHandler.repositoryUrl) })
+                    onClick = { onProductClick(inputSourceHandler.repositoryUrl) },
+                )
             }
         }
 
         item {
             DeveloperProfileCard(
-                onLinkClick = onLinkClick
+                onLinkClick = onLinkClick,
             )
         }
     }
 }
 
 @Composable
-fun DeveloperProfileCard(onLinkClick: (String) -> Unit, modifier: Modifier = Modifier) {
+fun DeveloperProfileCard(
+    onLinkClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Surface(
         shape = RoundedCornerShape(24.dp),
         color = MaterialTheme.colorScheme.tertiaryContainer,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
     ) {
         Column(
             modifier = Modifier.padding(24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Column {
                 Text(
                     text = stringResource(Res.string.ui_profile),
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                    color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.7f),
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
                     text = stringResource(Res.string.ui_name),
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
-                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
                 )
                 Text(
                     text = stringResource(Res.string.ui_role),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
+                    color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f),
                 )
             }
 
@@ -223,23 +232,23 @@ fun DeveloperProfileCard(onLinkClick: (String) -> Unit, modifier: Modifier = Mod
                 Text(
                     text = stringResource(Res.string.ui_skills),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
                 )
             }
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier.padding(top = 8.dp),
             ) {
                 OutlinedButton(
                     onClick = { onLinkClick("https://github.com/yuyuyuyuyu-dev") },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer)
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
                 ) {
                     Icon(
                         Icons.Default.Code,
                         contentDescription = null,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(18.dp),
                     )
                     Spacer(Modifier.width(8.dp))
                     Text("GitHub")
@@ -248,12 +257,12 @@ fun DeveloperProfileCard(onLinkClick: (String) -> Unit, modifier: Modifier = Mod
                 OutlinedButton(
                     onClick = { onLinkClick("https://youtrust.jp/users/bb7902cca964b92558d0116a5f44f362") },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer)
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
                 ) {
                     Icon(
                         Icons.Default.Person,
                         contentDescription = null,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(18.dp),
                     )
                     Spacer(Modifier.width(8.dp))
                     Text("YOUTRUST")
@@ -262,12 +271,12 @@ fun DeveloperProfileCard(onLinkClick: (String) -> Unit, modifier: Modifier = Mod
                 OutlinedButton(
                     onClick = { onLinkClick("mailto:yu.kobayashi@yuyuyuyuyu.dev") },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer)
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
                 ) {
                     Icon(
                         Icons.Default.Email,
                         contentDescription = null,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(18.dp),
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(stringResource(Res.string.ui_email_link))
@@ -282,23 +291,23 @@ fun DeveloperPhilosophyCard(modifier: Modifier = Modifier) {
     Surface(
         shape = RoundedCornerShape(24.dp),
         color = MaterialTheme.colorScheme.primaryContainer,
-        modifier = modifier.fillMaxWidth().height(400.dp)
+        modifier = modifier.fillMaxWidth().height(400.dp),
     ) {
         Column(
             modifier = Modifier.padding(24.dp).fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Column {
                 Text(
                     text = stringResource(Res.string.ui_about_me),
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
                     text = stringResource(Res.string.ui_philosophy_headline),
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
             }
 
@@ -306,18 +315,22 @@ fun DeveloperPhilosophyCard(modifier: Modifier = Modifier) {
                 text = stringResource(Res.string.ui_philosophy_body),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
-                lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * 1.5
+                lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * 1.5,
             )
         }
     }
 }
 
 @Composable
-fun AppOfTheDayCard(app: App, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun AppOfTheDayCard(
+    app: App,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Surface(
         shape = RoundedCornerShape(24.dp),
         color = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = modifier.fillMaxWidth().height(400.dp).clickable { onClick() }
+        modifier = modifier.fillMaxWidth().height(400.dp).clickable { onClick() },
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             if (app.screenshots.isNotEmpty()) {
@@ -325,43 +338,45 @@ fun AppOfTheDayCard(app: App, onClick: () -> Unit, modifier: Modifier = Modifier
                     painter = painterResource(app.screenshots.first()),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
                 )
                 // Gradient overlay
                 Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.8f)),
-                                startY = 100f
-                            )
-                        )
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.8f)),
+                                    startY = 100f,
+                                ),
+                            ),
                 )
             }
 
             Column(
-                modifier = Modifier
-                    .padding(24.dp)
-                    .align(Alignment.BottomStart)
+                modifier =
+                    Modifier
+                        .padding(24.dp)
+                        .align(Alignment.BottomStart),
             ) {
                 Text(
                     text = stringResource(Res.string.ui_app_of_the_day),
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                    color = Color.White.copy(alpha = 0.8f)
+                    color = Color.White.copy(alpha = 0.8f),
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
                     text = app.displayName,
                     style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-                    color = Color.White
+                    color = Color.White,
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
                     text = app.displayDescription,
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.9f),
-                    maxLines = 2
+                    maxLines = 2,
                 )
             }
         }
@@ -373,34 +388,34 @@ fun ToolOfTheDayCard(
     product: PortfolioItem,
     title: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         shape = RoundedCornerShape(24.dp),
         color = MaterialTheme.colorScheme.secondaryContainer,
-        modifier = modifier.fillMaxWidth().height(250.dp).clickable { onClick() }
+        modifier = modifier.fillMaxWidth().height(250.dp).clickable { onClick() },
     ) {
         Column(
             modifier = Modifier.padding(24.dp).fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Column {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                    color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f),
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
                     text = product.displayName,
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
-                    color = MaterialTheme.colorScheme.onSecondaryContainer
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
                     text = product.displayDescription,
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
             }
         }

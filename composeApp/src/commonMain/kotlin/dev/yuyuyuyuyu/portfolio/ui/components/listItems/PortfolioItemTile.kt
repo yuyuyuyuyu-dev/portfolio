@@ -1,7 +1,11 @@
 package dev.yuyuyuyuyu.portfolio.ui.components.listItems
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,20 +23,21 @@ fun PortfolioItemTile(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
-            .width(140.dp)
-            .clickable { onClick() }
-            .padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier =
+            modifier
+                .width(140.dp)
+                .clickable { onClick() }
+                .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         PortfolioItemIcon(item = item, size = 124.dp)
-        
+
         Column {
             Text(
                 text = item.displayName,
                 style = MaterialTheme.typography.bodyLarge,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
             Text(
                 text = item.displayDescription,
@@ -40,7 +45,7 @@ fun PortfolioItemTile(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.height(32.dp)
+                modifier = Modifier.height(32.dp),
             )
         }
     }

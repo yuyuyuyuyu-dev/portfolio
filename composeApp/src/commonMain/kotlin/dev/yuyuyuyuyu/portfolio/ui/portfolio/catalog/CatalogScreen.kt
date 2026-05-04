@@ -1,14 +1,13 @@
 package dev.yuyuyuyuyu.portfolio.ui.portfolio.catalog
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Bolt
-import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.Brush
-import androidx.compose.material.icons.filled.Terminal
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,15 +17,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.Platform
+import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
-
-import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
 import org.jetbrains.compose.resources.stringResource
-import portfolio.composeapp.generated.resources.*
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.ui_cli_tools
+import portfolio.composeapp.generated.resources.ui_libraries
+import portfolio.composeapp.generated.resources.ui_mac_apps
+import portfolio.composeapp.generated.resources.ui_mobile_other_apps
+import portfolio.composeapp.generated.resources.ui_plugins
+import portfolio.composeapp.generated.resources.ui_templates
+import portfolio.composeapp.generated.resources.ui_web_apps
 
 @Composable
 fun CatalogScreen(
@@ -46,7 +51,7 @@ fun CatalogScreen(
     CatalogScreenContent(
         allApps = appsState.apps,
         allProducts = librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates,
-        onProductClick = onProductClick
+        onProductClick = onProductClick,
     )
 }
 
@@ -71,14 +76,14 @@ fun CatalogScreenContent(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(32.dp)
+        verticalArrangement = Arrangement.spacedBy(32.dp),
     ) {
         if (webApps.isNotEmpty()) {
             item {
                 CatalogSection(
                     title = stringResource(Res.string.ui_web_apps),
                     items = webApps,
-                    onProductClick = onProductClick
+                    onProductClick = onProductClick,
                 )
             }
         }
@@ -88,7 +93,7 @@ fun CatalogScreenContent(
                 CatalogSection(
                     title = stringResource(Res.string.ui_plugins),
                     items = plugins,
-                    onProductClick = onProductClick
+                    onProductClick = onProductClick,
                 )
             }
         }
@@ -98,7 +103,7 @@ fun CatalogScreenContent(
                 CatalogSection(
                     title = stringResource(Res.string.ui_libraries),
                     items = libraries,
-                    onProductClick = onProductClick
+                    onProductClick = onProductClick,
                 )
             }
         }
@@ -108,7 +113,7 @@ fun CatalogScreenContent(
                 CatalogSection(
                     title = stringResource(Res.string.ui_cli_tools),
                     items = cliTools,
-                    onProductClick = onProductClick
+                    onProductClick = onProductClick,
                 )
             }
         }
@@ -118,7 +123,7 @@ fun CatalogScreenContent(
                 CatalogSection(
                     title = stringResource(Res.string.ui_templates),
                     items = templates,
-                    onProductClick = onProductClick
+                    onProductClick = onProductClick,
                 )
             }
         }
@@ -128,7 +133,7 @@ fun CatalogScreenContent(
                 CatalogSection(
                     title = stringResource(Res.string.ui_mac_apps),
                     items = macApps,
-                    onProductClick = onProductClick
+                    onProductClick = onProductClick,
                 )
             }
         }
@@ -138,7 +143,7 @@ fun CatalogScreenContent(
                 CatalogSection(
                     title = stringResource(Res.string.ui_mobile_other_apps),
                     items = androidIosApps + otherApps,
-                    onProductClick = onProductClick
+                    onProductClick = onProductClick,
                 )
             }
         }
@@ -156,16 +161,16 @@ fun CatalogSection(
         Text(
             text = title,
             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
         )
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp)
+            contentPadding = PaddingValues(horizontal = 16.dp),
         ) {
             items(items) { item ->
                 dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemTile(
                     item = item,
-                    onClick = { onProductClick(item.repositoryUrl) }
+                    onClick = { onProductClick(item.repositoryUrl) },
                 )
             }
         }

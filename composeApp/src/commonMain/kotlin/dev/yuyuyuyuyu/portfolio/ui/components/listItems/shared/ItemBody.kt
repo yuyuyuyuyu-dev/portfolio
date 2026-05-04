@@ -4,7 +4,12 @@ import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material3.Icon
@@ -35,24 +40,26 @@ fun ItemBody(
 
         val interactionSource = remember { MutableInteractionSource() }
         Column(
-            modifier = Modifier.padding(horizontal = 10.dp)
-                .clickable(interactionSource = interactionSource, indication = null, onClick = onSourceCodeLinkClick)
-                .semantics {
-                    onClick(label = "ソースコードのページを新しいタブで開く") {
-                        onSourceCodeLinkClick()
-                        true
-                    }
-                },
+            modifier =
+                Modifier.padding(horizontal = 10.dp)
+                    .clickable(interactionSource = interactionSource, indication = null, onClick = onSourceCodeLinkClick)
+                    .semantics {
+                        onClick(label = "ソースコードのページを新しいタブで開く") {
+                            onSourceCodeLinkClick()
+                            true
+                        }
+                    },
         ) {
             Text(
                 text = sourceCodeLabel,
                 style = MaterialTheme.typography.titleMedium,
             )
             Row(
-                modifier = Modifier.indication(
-                    interactionSource = interactionSource,
-                    indication = LocalIndication.current,
-                )
+                modifier =
+                    Modifier.indication(
+                        interactionSource = interactionSource,
+                        indication = LocalIndication.current,
+                    ),
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Default.OpenInNew,

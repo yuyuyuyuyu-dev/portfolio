@@ -14,8 +14,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalUriHandler
@@ -43,16 +47,17 @@ fun BaseListItem(
     val interactionSource = remember { MutableInteractionSource() }
     val onClick = { expanded = !expanded }
     Column(
-        modifier = modifier
-            .clickable(interactionSource = interactionSource, indication = null, onClick = onClick)
-            .background(MaterialTheme.colorScheme.surface)
-            .semantics {
-                stateDescription = if (expanded) "展開済み" else "折りたたみ済み"
-                onClick(label = if (expanded) "たたむ" else "開く") {
-                    onClick()
-                    true
-                }
-            },
+        modifier =
+            modifier
+                .clickable(interactionSource = interactionSource, indication = null, onClick = onClick)
+                .background(MaterialTheme.colorScheme.surface)
+                .semantics {
+                    stateDescription = if (expanded) "展開済み" else "折りたたみ済み"
+                    onClick(label = if (expanded) "たたむ" else "開く") {
+                        onClick()
+                        true
+                    }
+                },
     ) {
         ListItem(
             leadingContent = {
@@ -72,10 +77,11 @@ fun BaseListItem(
             trailingContent = {
                 ExpandMoreIcon(
                     expanded = expanded,
-                    modifier = Modifier.indication(
-                        interactionSource = interactionSource,
-                        indication = LocalIndication.current,
-                    ),
+                    modifier =
+                        Modifier.indication(
+                            interactionSource = interactionSource,
+                            indication = LocalIndication.current,
+                        ),
                 )
             },
         )

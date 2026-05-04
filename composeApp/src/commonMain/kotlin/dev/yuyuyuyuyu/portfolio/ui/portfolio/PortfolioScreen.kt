@@ -20,7 +20,11 @@ import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSe
 import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
 import me.tatarka.inject.annotations.Inject
 import org.jetbrains.compose.resources.stringResource
-import portfolio.composeapp.generated.resources.*
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.app_name
+import portfolio.composeapp.generated.resources.ui_catalog
+import portfolio.composeapp.generated.resources.ui_search
+import portfolio.composeapp.generated.resources.ui_today
 
 typealias PortfolioScreen = @Composable (onNavigateToLicenses: () -> Unit) -> Unit
 
@@ -32,7 +36,7 @@ fun PortfolioScreen(
     pluginsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModelImpl,
     cliToolsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModelImpl,
     templatesViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModelImpl,
-    @me.tatarka.inject.annotations.Assisted onNavigateToLicenses: () -> Unit
+    @me.tatarka.inject.annotations.Assisted onNavigateToLicenses: () -> Unit,
 ) {
     val backStack: MutableList<PortfolioRoute> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
@@ -51,7 +55,7 @@ fun PortfolioScreen(
             }
             return
         }
-        
+
         backStack.clear()
         backStack.add(PortfolioRoute.Today)
         if (route != PortfolioRoute.Today) {
@@ -107,6 +111,7 @@ fun PortfolioScreen(
         )
     }
 }
+
 @Preview
 @Composable
 private fun PortfolioScreenPreview() {

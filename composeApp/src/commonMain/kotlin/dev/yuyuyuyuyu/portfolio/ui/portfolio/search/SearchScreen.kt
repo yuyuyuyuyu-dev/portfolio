@@ -1,42 +1,61 @@
 package dev.yuyuyuyuyu.portfolio.ui.portfolio.search
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import dev.yuyuyuyuyu.portfolio.data.models.Platform
+import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
+import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
+import dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemIcon
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
-import portfolio.composeapp.generated.resources.*
-
-import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
-import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
-import dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemIcon
-
-import dev.yuyuyuyuyu.portfolio.utils.displayName
 import dev.yuyuyuyuyu.portfolio.utils.displayDescription
+import dev.yuyuyuyuyu.portfolio.utils.displayName
+import org.jetbrains.compose.resources.stringResource
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.ui_clear
+import portfolio.composeapp.generated.resources.ui_no_results
+import portfolio.composeapp.generated.resources.ui_search
+import portfolio.composeapp.generated.resources.ui_search_placeholder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,14 +74,15 @@ fun SearchScreen(
     val templatesState by templatesViewModel.uiState.collectAsState()
 
     // Map all items to a common data structure (PortfolioItem)
-    val allItems = remember(appsState, librariesState, pluginsState, cliToolsState, templatesState) {
-        val items = appsState.apps + librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
-        items.sortedBy { it.nameFallback }
-    }
+    val allItems =
+        remember(appsState, librariesState, pluginsState, cliToolsState, templatesState) {
+            val items = appsState.apps + librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates
+            items.sortedBy { it.nameFallback }
+        }
 
     SearchScreenContent(
         allItems = allItems,
-        onProductClick = onProductClick
+        onProductClick = onProductClick,
     )
 }
 
@@ -77,25 +97,30 @@ fun SearchScreenContent(
     var selectedPlatform by remember { mutableStateOf<Platform?>(null) }
 
     // Resolve strings for filtering
-    val itemWithStrings = allItems.map { item ->
-        val resolvedName = item.displayName
-        val resolvedDesc = item.displayDescription
-        Triple<PortfolioItem, String, String>(item, resolvedName, resolvedDesc)
-    }
+    val itemWithStrings =
+        allItems.map { item ->
+            val resolvedName = item.displayName
+            val resolvedDesc = item.displayDescription
+            Triple<PortfolioItem, String, String>(item, resolvedName, resolvedDesc)
+        }
 
     // Filter logic
-    val filteredItems = itemWithStrings.filter { triple ->
-        val item = triple.first
-        val name = triple.second
-        val description = triple.third
-        val matchesQuery = if (searchQuery.isBlank()) true else {
-            name.contains(searchQuery, ignoreCase = true) || description.contains(searchQuery, ignoreCase = true)
-        }
-        val matchesCategory = if (selectedCategory == null) true else item.category == selectedCategory
-        val matchesPlatform = if (selectedPlatform == null) true else item.platforms.contains(selectedPlatform)
+    val filteredItems =
+        itemWithStrings.filter { triple ->
+            val item = triple.first
+            val name = triple.second
+            val description = triple.third
+            val matchesQuery =
+                if (searchQuery.isBlank()) {
+                    true
+                } else {
+                    name.contains(searchQuery, ignoreCase = true) || description.contains(searchQuery, ignoreCase = true)
+                }
+            val matchesCategory = if (selectedCategory == null) true else item.category == selectedCategory
+            val matchesPlatform = if (selectedPlatform == null) true else item.platforms.contains(selectedPlatform)
 
-        matchesQuery && matchesCategory && matchesPlatform
-    }.map { it.first }
+            matchesQuery && matchesCategory && matchesPlatform
+        }.map { it.first }
 
     Column(modifier = Modifier.fillMaxSize()) {
         // Search Bar
@@ -113,7 +138,8 @@ fun SearchScreenContent(
                 }
             },
             singleLine = true,
-            shape = RoundedCornerShape(100) // Pill shape
+            // Pill shape
+            shape = RoundedCornerShape(100),
         )
 
         // Filters (Categories & Platforms)
@@ -121,17 +147,17 @@ fun SearchScreenContent(
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.padding(bottom = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             // Category filters
             items(ProductCategory.entries.toTypedArray()) { category ->
                 FilterChip(
                     selected = selectedCategory == category,
                     onClick = { selectedCategory = if (selectedCategory == category) null else category },
-                    label = { Text(stringResource(category.labelRes)) }
+                    label = { Text(stringResource(category.labelRes)) },
                 )
             }
-            
+
             item {
                 VerticalDivider(modifier = Modifier.height(24.dp).padding(horizontal = 8.dp))
             }
@@ -142,7 +168,7 @@ fun SearchScreenContent(
                 FilterChip(
                     selected = selectedPlatform == platform,
                     onClick = { selectedPlatform = if (selectedPlatform == platform) null else platform },
-                    label = { Text(platform.label) }
+                    label = { Text(platform.label) },
                 )
             }
         }
@@ -153,12 +179,16 @@ fun SearchScreenContent(
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             if (filteredItems.isEmpty()) {
                 item {
                     Box(modifier = Modifier.fillMaxWidth().padding(top = 64.dp), contentAlignment = Alignment.Center) {
-                        Text(stringResource(Res.string.ui_no_results), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(
+                            stringResource(Res.string.ui_no_results),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
                     }
                 }
             } else {
@@ -174,44 +204,45 @@ fun SearchScreenContent(
 private fun SearchResultItem(
     item: PortfolioItem,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .clickable { onClick() }
-            .padding(8.dp),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
+                .clickable { onClick() }
+                .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         PortfolioItemIcon(item = item, size = 48.dp)
-        
+
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = item.displayName,
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                maxLines = 1
+                maxLines = 1,
             )
             Text(
                 text = item.displayDescription,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 2
+                maxLines = 2,
             )
         }
-        
+
         // Category Label
         Surface(
             color = MaterialTheme.colorScheme.secondaryContainer,
             shape = RoundedCornerShape(100),
-            modifier = Modifier.align(Alignment.Top)
+            modifier = Modifier.align(Alignment.Top),
         ) {
             Text(
                 text = stringResource(item.category.labelRes),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
             )
         }
     }

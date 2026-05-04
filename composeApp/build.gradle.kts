@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.aboutlibraries)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.ktlint)
 }
 
 kotlin {
@@ -101,5 +102,15 @@ dependencies {
 tasks.withType<KspAATask>().configureEach {
     if (name != "kspCommonMainKotlinMetadata") {
         dependsOn("kspCommonMainKotlinMetadata")
+    }
+}
+
+tasks.matching { it.name.contains("Ktlint", ignoreCase = true) }.configureEach {
+    dependsOn("kspCommonMainKotlinMetadata")
+}
+
+ktlint {
+    filter {
+        exclude { it.file.path.contains("build/generated/") }
     }
 }
