@@ -20,7 +20,7 @@ kotlinxSerialization = "1.11.0"
 ksp = "2.3.7"
 ktlint = "14.2.0"
 material3 = "1.11.0-alpha07"
-multiplatform-nav3-ui = "1.1.0"
+multiplatform-nav3-ui = "1.1.1"
 simpleTopAppBar = "0.4.0"
 myMaterialTheme = "0.4.0"
 
