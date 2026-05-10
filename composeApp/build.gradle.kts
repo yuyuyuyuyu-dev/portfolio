@@ -11,6 +11,16 @@ plugins {
     alias(libs.plugins.aboutlibraries)
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    // Use true if we want all rules, but default rules are usually
+    // enough to catch UnusedPrivateMember and EmptyFunctionBlock.
+    config.setFrom(file("../detekt.yml"))
+    baseline = file("detekt-baseline.xml")
 }
 
 kotlin {
