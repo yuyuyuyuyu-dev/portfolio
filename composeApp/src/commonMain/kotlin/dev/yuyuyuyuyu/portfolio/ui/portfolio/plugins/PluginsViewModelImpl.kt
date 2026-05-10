@@ -10,7 +10,8 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class PluginsViewModelImpl(
     pluginsRepository: PluginsRepository,
-) : PluginsViewModel, ViewModel() {
+) : ViewModel(),
+    PluginsViewModel {
     private val _uiState = MutableStateFlow(PluginsUiState(plugins = pluginsRepository.getPlugins()))
     override val uiState: StateFlow<PluginsUiState> = _uiState.asStateFlow()
 }

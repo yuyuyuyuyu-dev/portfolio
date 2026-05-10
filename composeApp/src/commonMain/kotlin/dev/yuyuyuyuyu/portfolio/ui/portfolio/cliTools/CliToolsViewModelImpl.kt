@@ -10,7 +10,8 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class CliToolsViewModelImpl(
     cliToolsRepository: CliToolsRepository,
-) : CliToolsViewModel, ViewModel() {
+) : ViewModel(),
+    CliToolsViewModel {
     private val _uiState = MutableStateFlow(CliToolsUiState(cliTools = cliToolsRepository.getCliTools()))
     override val uiState: StateFlow<CliToolsUiState> = _uiState.asStateFlow()
 }

@@ -31,13 +31,13 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.App
@@ -46,6 +46,8 @@ import dev.yuyuyuyuyu.portfolio.ui.components.listItems.PortfolioItemIcon
 import dev.yuyuyuyuyu.portfolio.utils.displayDescription
 import dev.yuyuyuyuyu.portfolio.utils.displayMotivation
 import dev.yuyuyuyuyu.portfolio.utils.displayName
+import dev.yuyuyuyuyu.portfolio.utils.setPlainText
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import portfolio.composeapp.generated.resources.Res
@@ -59,7 +61,8 @@ import portfolio.composeapp.generated.resources.ui_why_built
 @Composable
 fun DetailScreen(item: PortfolioItem) {
     val uriHandler = LocalUriHandler.current
-    val clipboardManager = LocalClipboardManager.current
+    val clipboard = LocalClipboard.current
+    val coroutineScope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
 
     val name = item.displayName
@@ -189,7 +192,11 @@ fun DetailScreen(item: PortfolioItem) {
                             )
                         }
                         IconButton(
-                            onClick = { clipboardManager.setText(AnnotatedString(installCommand)) },
+                            onClick = {
+                                coroutineScope.launch {
+                                    clipboard.setPlainText(installCommand)
+                                }
+                            },
                             modifier = Modifier.padding(8.dp),
                         ) {
                             Icon(

@@ -41,7 +41,8 @@ fun ItemBody(
         val interactionSource = remember { MutableInteractionSource() }
         Column(
             modifier =
-                Modifier.padding(horizontal = 10.dp)
+                Modifier
+                    .padding(horizontal = 10.dp)
                     .clickable(interactionSource = interactionSource, indication = null, onClick = onSourceCodeLinkClick)
                     .semantics {
                         onClick(label = "ソースコードのページを新しいタブで開く") {

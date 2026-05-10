@@ -1,6 +1,8 @@
 package dev.yuyuyuyuyu.portfolio.data.models
 
-enum class Platform(val label: String) {
+enum class Platform(
+    val label: String,
+) {
     Android("Android"),
     Ios("iOS"),
     Web("Web"),

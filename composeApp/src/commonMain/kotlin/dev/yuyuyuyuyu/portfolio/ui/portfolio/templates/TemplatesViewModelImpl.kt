@@ -10,7 +10,8 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class TemplatesViewModelImpl(
     templatesRepository: TemplatesRepository,
-) : TemplatesViewModel, ViewModel() {
+) : ViewModel(),
+    TemplatesViewModel {
     private val _uiState = MutableStateFlow(TemplatesUiState(templates = templatesRepository.getTemplates()))
     override val uiState: StateFlow<TemplatesUiState> = _uiState.asStateFlow()
 }
