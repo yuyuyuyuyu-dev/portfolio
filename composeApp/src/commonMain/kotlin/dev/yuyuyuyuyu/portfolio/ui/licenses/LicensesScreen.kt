@@ -11,6 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
+import com.mikepenz.aboutlibraries.ui.compose.produceLibraries
 import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import portfolio.composeapp.generated.resources.Res
@@ -28,6 +29,8 @@ fun LicensesScreen(
         aboutLibsJson = Res.readBytes("files/aboutlibraries.json").decodeToString()
     }
 
+    val libs by produceLibraries(aboutLibsJson)
+
     Scaffold(
         topBar = {
             SimpleTopAppBar(
@@ -42,9 +45,9 @@ fun LicensesScreen(
         },
         modifier = modifier,
     ) { innerPadding ->
-        if (aboutLibsJson.isNotEmpty()) {
+        if (aboutLibsJson.isNotEmpty() && libs != null) {
             LibrariesContainer(
-                aboutLibsJson = aboutLibsJson,
+                libraries = libs!!,
                 modifier = Modifier.padding(innerPadding),
             )
         }
