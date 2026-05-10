@@ -10,7 +10,8 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class AppsViewModelImpl(
     appsRepository: AppsRepository,
-) : AppsViewModel, ViewModel() {
+) : ViewModel(),
+    AppsViewModel {
     private val _uiState = MutableStateFlow(AppsUiState(apps = appsRepository.getApps()))
     override val uiState: StateFlow<AppsUiState> = _uiState.asStateFlow()
 }

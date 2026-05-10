@@ -1,6 +1,8 @@
 package dev.yuyuyuyuyu.portfolio.data.models
 
-enum class TechStack(val label: String) {
+enum class TechStack(
+    val label: String,
+) {
     Ios("iOS"),
     Android("Android"),
     Web("Web"),

@@ -10,7 +10,8 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class LibrariesViewModelImpl(
     librariesRepository: LibrariesRepository,
-) : LibrariesViewModel, ViewModel() {
+) : ViewModel(),
+    LibrariesViewModel {
     private val _uiState = MutableStateFlow(LibrariesUiState(libraries = librariesRepository.getLibraries()))
     override val uiState: StateFlow<LibrariesUiState> = _uiState.asStateFlow()
 }

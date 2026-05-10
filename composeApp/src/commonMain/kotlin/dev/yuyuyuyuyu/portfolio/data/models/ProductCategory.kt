@@ -8,7 +8,9 @@ import portfolio.composeapp.generated.resources.ui_libraries
 import portfolio.composeapp.generated.resources.ui_plugins
 import portfolio.composeapp.generated.resources.ui_templates
 
-enum class ProductCategory(val labelRes: StringResource) {
+enum class ProductCategory(
+    val labelRes: StringResource,
+) {
     App(Res.string.ui_app),
     CliTool(Res.string.ui_cli_tools),
     Plugin(Res.string.ui_plugins),

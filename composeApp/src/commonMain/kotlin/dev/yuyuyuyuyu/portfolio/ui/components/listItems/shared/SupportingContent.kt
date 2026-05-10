@@ -41,8 +41,7 @@ fun SupportingContent(
                             width = 1.dp,
                             color = MaterialTheme.colorScheme.outline,
                             shape = RoundedCornerShape(5.dp),
-                        )
-                        .padding(horizontal = 4.dp),
+                        ).padding(horizontal = 4.dp),
             )
         }
     }
