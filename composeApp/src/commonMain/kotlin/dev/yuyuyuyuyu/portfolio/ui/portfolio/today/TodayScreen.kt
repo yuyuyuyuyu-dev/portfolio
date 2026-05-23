@@ -241,6 +241,20 @@ fun DeveloperProfileCard(
                 modifier = Modifier.padding(top = 8.dp),
             ) {
                 OutlinedButton(
+                    onClick = { onLinkClick("https://x.com/yuyuyuyuyu_dev") },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
+                ) {
+                    Icon(
+                        Icons.Default.Person,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp),
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text("X")
+                }
+
+                OutlinedButton(
                     onClick = { onLinkClick("https://github.com/yuyuyuyuyu-dev") },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
