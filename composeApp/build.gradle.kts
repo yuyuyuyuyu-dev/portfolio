@@ -39,6 +39,12 @@ kotlin {
         binaries.executable()
     }
 
+    jvm {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
@@ -72,6 +78,9 @@ kotlin {
             implementation(libs.yuyuyuyuyu.simpleTopAppBar)
             implementation(compose.materialIconsExtended)
             implementation(libs.yuyuyuyuyu.myMaterialTheme)
+        }
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -114,6 +123,12 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+compose.desktop {
+    application {
+        mainClass = "dev.yuyuyuyuyu.portfolio.MainKt"
     }
 }
 
