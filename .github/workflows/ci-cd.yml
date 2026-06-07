@@ -1,0 +1,72 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write    # to deploy to Pages
+  id-token: write # to verify the deployment originates from an appropriate source
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'jetbrains'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Check code formatting (ktlint)
+        run: ./gradlew ktlintCheck
+
+      - name: Static code analysis (detekt)
+        run: ./gradlew detekt
+
+      - name: Run tests
+        run: ./gradlew wasmJsTest
+
+      # The steps below run the exact same build as the deployment, so that a
+      # broken production build is caught on pull requests instead of only after
+      # merging to main.
+      - name: Export Library Definitions
+        run: ./gradlew :composeApp:exportLibraryDefinitions -PaboutLibraries.exportPath=src/commonMain/composeResources/files/
+
+      - name: Build
+        run: ./gradlew :composeApp:wasmJsBrowserDistribution
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: composeApp/build/dist/wasmJs/productionExecutable
+
+  deploy:
+    name: Deploy
+    needs: build
+    # Deploy the artifact built (and verified) by the build job, but only for
+    # pushes to main. Pull requests run the build job for verification only.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # Allow only one concurrent deployment and let in-progress deployments
+    # finish, so a queued run never cancels a deployment that is already live.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
