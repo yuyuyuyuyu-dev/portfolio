@@ -8,32 +8,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.catalog.CatalogScreen
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.detail.DetailScreen
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.search.SearchScreen
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.today.TodayScreen
 
 @Composable
 fun PortfolioNavigation(
     backStack: MutableList<PortfolioRoute>,
-    appsViewModel: AppsViewModel,
-    librariesViewModel: LibrariesViewModel,
-    pluginsViewModel: PluginsViewModel,
-    cliToolsViewModel: CliToolsViewModel,
-    templatesViewModel: TemplatesViewModel,
+    viewModels: PortfolioViewModels,
     modifier: Modifier = Modifier,
 ) {
-    val appsState by appsViewModel.uiState.collectAsState()
-    val librariesState by librariesViewModel.uiState.collectAsState()
-    val pluginsState by pluginsViewModel.uiState.collectAsState()
-    val cliToolsState by cliToolsViewModel.uiState.collectAsState()
-    val templatesState by templatesViewModel.uiState.collectAsState()
-
     NavDisplay(
         backStack = backStack,
         modifier = modifier,
@@ -43,10 +28,7 @@ fun PortfolioNavigation(
                 PortfolioRoute.Today ->
                     NavEntry(key) {
                         TodayScreen(
-                            appsViewModel = appsViewModel,
-                            pluginsViewModel = pluginsViewModel,
-                            cliToolsViewModel = cliToolsViewModel,
-                            templatesViewModel = templatesViewModel,
+                            viewModels = viewModels,
                             onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) },
                         )
                     }
@@ -54,11 +36,7 @@ fun PortfolioNavigation(
                 PortfolioRoute.Catalog ->
                     NavEntry(key) {
                         CatalogScreen(
-                            appsViewModel = appsViewModel,
-                            librariesViewModel = librariesViewModel,
-                            pluginsViewModel = pluginsViewModel,
-                            cliToolsViewModel = cliToolsViewModel,
-                            templatesViewModel = templatesViewModel,
+                            viewModels = viewModels,
                             onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) },
                         )
                     }
@@ -66,33 +44,45 @@ fun PortfolioNavigation(
                 PortfolioRoute.Search ->
                     NavEntry(key) {
                         SearchScreen(
-                            appsViewModel = appsViewModel,
-                            librariesViewModel = librariesViewModel,
-                            pluginsViewModel = pluginsViewModel,
-                            cliToolsViewModel = cliToolsViewModel,
-                            templatesViewModel = templatesViewModel,
+                            viewModels = viewModels,
                             onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) },
                         )
                     }
 
                 is PortfolioRoute.Detail ->
                     NavEntry(key) {
-                        val url = key.repositoryUrl
-                        val allItems =
-                            appsState.apps + librariesState.libraries + pluginsState.plugins +
-                                cliToolsState.cliTools + templatesState.templates
-                        val item = allItems.find { it.repositoryUrl == url }
-
-                        if (item != null) {
-                            DetailScreen(item = item)
-                        } else {
-                            // Fallback or error state
-                            Text("Item not found")
-                        }
+                        DetailEntry(
+                            viewModels = viewModels,
+                            repositoryUrl = key.repositoryUrl,
+                        )
                     }
             }
         },
     )
+}
+
+@Composable
+private fun DetailEntry(
+    viewModels: PortfolioViewModels,
+    repositoryUrl: String,
+) {
+    val appsState by viewModels.apps.uiState.collectAsState()
+    val librariesState by viewModels.libraries.uiState.collectAsState()
+    val pluginsState by viewModels.plugins.uiState.collectAsState()
+    val cliToolsState by viewModels.cliTools.uiState.collectAsState()
+    val templatesState by viewModels.templates.uiState.collectAsState()
+
+    val allItems =
+        appsState.apps + librariesState.libraries + pluginsState.plugins +
+            cliToolsState.cliTools + templatesState.templates
+    val item = allItems.find { it.repositoryUrl == repositoryUrl }
+
+    if (item != null) {
+        DetailScreen(item = item)
+    } else {
+        // Fallback or error state
+        Text("Item not found")
+    }
 }
 
 @Preview
