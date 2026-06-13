@@ -16,11 +16,11 @@ plugins {
 
 detekt {
     buildUponDefaultConfig = true
-    allRules = false
-    // Use true if we want all rules, but default rules are usually
-    // enough to catch UnusedPrivateMember and EmptyFunctionBlock.
     config.setFrom(file("../detekt.yml"))
-    baseline = file("detekt-baseline.xml")
+    // The plain detekt task only knows the default JVM layout (src/main/kotlin
+    // etc.), which does not exist in a KMP project, so point it at all source
+    // sets. Without this the detekt task analyzes no files at all.
+    source.setFrom("src")
 }
 
 kotlin {
