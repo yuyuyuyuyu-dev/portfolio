@@ -60,17 +60,7 @@ import portfolio.composeapp.generated.resources.ui_why_built
 
 @Composable
 fun DetailScreen(item: PortfolioItem) {
-    val uriHandler = LocalUriHandler.current
-    val clipboard = LocalClipboard.current
-    val coroutineScope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
-
-    val name = item.displayName
-    val description = item.displayDescription
-    val motivation = item.displayMotivation
-    val repositoryUrl = item.repositoryUrl
-    val installCommand = item.installCommand
-    val appUrl = (item as? App)?.url
 
     Column(
         modifier =
@@ -80,132 +70,154 @@ fun DetailScreen(item: PortfolioItem) {
                 .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(32.dp),
     ) {
-        // --- Header Section ---
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(24.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            PortfolioItemIcon(item = item, size = 120.dp)
-
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(
-                    text = name,
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = description,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-
-                // Action Buttons
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 8.dp)) {
-                    if (appUrl != null) {
-                        Button(onClick = { uriHandler.openUri(appUrl) }) {
-                            Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
-                            Spacer(Modifier.width(8.dp))
-                            Text(stringResource(Res.string.ui_open))
-                        }
-                    }
-                    OutlinedButton(onClick = { uriHandler.openUri(repositoryUrl) }) {
-                        Icon(Icons.Default.Code, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
-                        Text("GitHub")
-                    }
-                }
-            }
-        }
+        DetailHeader(item = item)
 
         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-        // --- Screenshots Section (Only for Apps) ---
         if (item is App && item.screenshots.isNotEmpty()) {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(
-                    text = stringResource(Res.string.ui_screenshots),
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                )
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    items(item.screenshots) { screenshot ->
-                        Image(
-                            painter = painterResource(screenshot),
-                            contentDescription = "Screenshot of $name",
-                            modifier =
-                                Modifier
-                                    .height(400.dp)
-                                    .clip(RoundedCornerShape(12.dp)),
-                            contentScale = ContentScale.Fit,
-                        )
-                    }
-                }
-            }
+            ScreenshotsSection(app = item)
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
         }
 
-        // --- Motivation / Story Section ---
+        val motivation = item.displayMotivation
         if (!motivation.isNullOrBlank()) {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(
-                    text = stringResource(Res.string.ui_why_built),
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = motivation,
-                    style = MaterialTheme.typography.bodyLarge,
-                    lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * 1.5,
-                )
-            }
+            MotivationSection(motivation = motivation)
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
         }
 
-        // --- Install/Run Command Section ---
+        val installCommand = item.installCommand
         if (!installCommand.isNullOrBlank()) {
-            val commandTitle =
-                if (installCommand.trim().startsWith(
-                        "npx",
-                    )
-                ) {
-                    stringResource(Res.string.ui_run_command)
-                } else {
-                    stringResource(Res.string.ui_installation)
-                }
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(
-                    text = commandTitle,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                )
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant,
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
-                        SelectionContainer(modifier = Modifier.fillMaxWidth().padding(end = 48.dp)) {
-                            Text(
-                                text = installCommand,
-                                style = MaterialTheme.typography.bodyMedium,
-                                modifier = Modifier.padding(16.dp),
-                            )
-                        }
-                        IconButton(
-                            onClick = {
-                                coroutineScope.launch {
-                                    clipboard.setPlainText(installCommand)
-                                }
-                            },
-                            modifier = Modifier.padding(8.dp),
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.ContentCopy,
-                                contentDescription = stringResource(Res.string.ui_copy_command),
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
-                        }
+            InstallCommandSection(installCommand = installCommand)
+        }
+    }
+}
+
+@Composable
+private fun DetailHeader(item: PortfolioItem) {
+    val uriHandler = LocalUriHandler.current
+    val appUrl = (item as? App)?.url
+
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(24.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        PortfolioItemIcon(item = item, size = 120.dp)
+
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(
+                text = item.displayName,
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = item.displayDescription,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+
+            // Action Buttons
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 8.dp)) {
+                if (appUrl != null) {
+                    Button(onClick = { uriHandler.openUri(appUrl) }) {
+                        Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(Modifier.width(8.dp))
+                        Text(stringResource(Res.string.ui_open))
                     }
+                }
+                OutlinedButton(onClick = { uriHandler.openUri(item.repositoryUrl) }) {
+                    Icon(Icons.Default.Code, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(8.dp))
+                    Text("GitHub")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ScreenshotsSection(app: App) {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Text(
+            text = stringResource(Res.string.ui_screenshots),
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+        )
+        LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            items(app.screenshots) { screenshot ->
+                Image(
+                    painter = painterResource(screenshot),
+                    contentDescription = "Screenshot of ${app.displayName}",
+                    modifier =
+                        Modifier
+                            .height(400.dp)
+                            .clip(RoundedCornerShape(12.dp)),
+                    contentScale = ContentScale.Fit,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun MotivationSection(motivation: String) {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Text(
+            text = stringResource(Res.string.ui_why_built),
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+        )
+        Text(
+            text = motivation,
+            style = MaterialTheme.typography.bodyLarge,
+            lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * 1.5,
+        )
+    }
+}
+
+@Composable
+private fun InstallCommandSection(installCommand: String) {
+    val clipboard = LocalClipboard.current
+    val coroutineScope = rememberCoroutineScope()
+
+    val commandTitle =
+        if (installCommand.trim().startsWith("npx")) {
+            stringResource(Res.string.ui_run_command)
+        } else {
+            stringResource(Res.string.ui_installation)
+        }
+
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Text(
+            text = commandTitle,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+        )
+        Surface(
+            shape = RoundedCornerShape(12.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
+                SelectionContainer(modifier = Modifier.fillMaxWidth().padding(end = 48.dp)) {
+                    Text(
+                        text = installCommand,
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(16.dp),
+                    )
+                }
+                IconButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            clipboard.setPlainText(installCommand)
+                        }
+                    },
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ContentCopy,
+                        contentDescription = stringResource(Res.string.ui_copy_command),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                 }
             }
         }

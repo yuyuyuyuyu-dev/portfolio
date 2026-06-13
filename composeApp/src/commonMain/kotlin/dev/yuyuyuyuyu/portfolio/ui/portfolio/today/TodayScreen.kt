@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Code
@@ -33,16 +34,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.models.PortfolioItem
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
-import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModel
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.PortfolioViewModels
 import dev.yuyuyuyuyu.portfolio.utils.displayDescription
 import dev.yuyuyuyuyu.portfolio.utils.displayName
 import org.jetbrains.compose.resources.painterResource
@@ -66,34 +65,27 @@ import portfolio.composeapp.generated.resources.ui_ultimate_laziness
 
 @Composable
 fun TodayScreen(
-    appsViewModel: AppsViewModel,
-    pluginsViewModel: PluginsViewModel,
-    cliToolsViewModel: CliToolsViewModel,
-    templatesViewModel: TemplatesViewModel,
+    viewModels: PortfolioViewModels,
     onProductClick: (String) -> Unit,
 ) {
-    val appsState by appsViewModel.uiState.collectAsState()
-    val pluginsState by pluginsViewModel.uiState.collectAsState()
-    val cliToolsState by cliToolsViewModel.uiState.collectAsState()
-    val templatesState by templatesViewModel.uiState.collectAsState()
+    val appsState by viewModels.apps.uiState.collectAsState()
+    val pluginsState by viewModels.plugins.uiState.collectAsState()
+    val cliToolsState by viewModels.cliTools.uiState.collectAsState()
+    val templatesState by viewModels.templates.uiState.collectAsState()
     val uriHandler = LocalUriHandler.current
 
-    val howOldAmI =
-        appsState.apps.find { it.nameRes == portfolio.composeapp.generated.resources.Res.string.app_name_howoldami }
-    val html2pdf = cliToolsState.cliTools.find { it.nameFallback == "@yuyuyuyuyu-dev/html2pdf" }
-    val notPullingCalc =
-        appsState.apps.find { it.nameRes == portfolio.composeapp.generated.resources.Res.string.app_name_notpullingcalc }
-    val inputSourceHandler = appsState.apps.find { it.nameFallback == "Input Source Handler" }
-    val composePwa = pluginsState.plugins.find { it.nameFallback == "ComposePWA" }
-    val businessCard = templatesState.templates.find { it.nameFallback == "business-card-template" }
+    val featuredItems =
+        TodayFeaturedItems(
+            howOldAmI = appsState.apps.find { it.nameRes == Res.string.app_name_howoldami },
+            html2pdf = cliToolsState.cliTools.find { it.nameFallback == "@yuyuyuyuyu-dev/html2pdf" },
+            notPullingCalc = appsState.apps.find { it.nameRes == Res.string.app_name_notpullingcalc },
+            inputSourceHandler = appsState.apps.find { it.nameFallback == "Input Source Handler" },
+            composePwa = pluginsState.plugins.find { it.nameFallback == "ComposePWA" },
+            businessCard = templatesState.templates.find { it.nameFallback == "business-card-template" },
+        )
 
     TodayScreenContent(
-        howOldAmI = howOldAmI,
-        html2pdf = html2pdf,
-        notPullingCalc = notPullingCalc,
-        inputSourceHandler = inputSourceHandler,
-        composePwa = composePwa,
-        businessCard = businessCard,
+        featuredItems = featuredItems,
         onProductClick = onProductClick,
         onLinkClick = { url -> uriHandler.openUri(url) },
     )
@@ -101,12 +93,7 @@ fun TodayScreen(
 
 @Composable
 fun TodayScreenContent(
-    howOldAmI: App?,
-    html2pdf: PortfolioItem?,
-    notPullingCalc: App?,
-    inputSourceHandler: App?,
-    composePwa: PortfolioItem?,
-    businessCard: PortfolioItem?,
+    featuredItems: TodayFeaturedItems,
     onProductClick: (String) -> Unit,
     onLinkClick: (String) -> Unit,
 ) {
@@ -129,67 +116,77 @@ fun TodayScreenContent(
             DeveloperPhilosophyCard()
         }
 
-        if (howOldAmI != null) {
-            item {
-                AppOfTheDayCard(
-                    app = howOldAmI,
-                    onClick = { onProductClick(howOldAmI.repositoryUrl) },
-                )
-            }
-        }
-
-        if (html2pdf != null) {
-            item {
-                ToolOfTheDayCard(
-                    product = html2pdf,
-                    title = stringResource(Res.string.ui_ultimate_laziness),
-                    onClick = { onProductClick(html2pdf.repositoryUrl) },
-                )
-            }
-        }
-
-        if (notPullingCalc != null) {
-            item {
-                AppOfTheDayCard(
-                    app = notPullingCalc,
-                    onClick = { onProductClick(notPullingCalc.repositoryUrl) },
-                )
-            }
-        }
-
-        if (composePwa != null) {
-            item {
-                ToolOfTheDayCard(
-                    product = composePwa,
-                    title = stringResource(Res.string.ui_dev_companion),
-                    onClick = { onProductClick(composePwa.repositoryUrl) },
-                )
-            }
-        }
-
-        if (businessCard != null) {
-            item {
-                ToolOfTheDayCard(
-                    product = businessCard,
-                    title = stringResource(Res.string.ui_familiar_tools),
-                    onClick = { onProductClick(businessCard.repositoryUrl) },
-                )
-            }
-        }
-
-        if (inputSourceHandler != null) {
-            item {
-                ToolOfTheDayCard(
-                    product = inputSourceHandler,
-                    title = stringResource(Res.string.ui_mac_utility),
-                    onClick = { onProductClick(inputSourceHandler.repositoryUrl) },
-                )
-            }
-        }
+        featuredProductItems(
+            featuredItems = featuredItems,
+            onProductClick = onProductClick,
+        )
 
         item {
             DeveloperProfileCard(
                 onLinkClick = onLinkClick,
+            )
+        }
+    }
+}
+
+private fun LazyListScope.featuredProductItems(
+    featuredItems: TodayFeaturedItems,
+    onProductClick: (String) -> Unit,
+) {
+    featuredItems.howOldAmI?.let { app ->
+        item {
+            AppOfTheDayCard(
+                app = app,
+                onClick = { onProductClick(app.repositoryUrl) },
+            )
+        }
+    }
+
+    featuredItems.html2pdf?.let { product ->
+        item {
+            ToolOfTheDayCard(
+                product = product,
+                title = stringResource(Res.string.ui_ultimate_laziness),
+                onClick = { onProductClick(product.repositoryUrl) },
+            )
+        }
+    }
+
+    featuredItems.notPullingCalc?.let { app ->
+        item {
+            AppOfTheDayCard(
+                app = app,
+                onClick = { onProductClick(app.repositoryUrl) },
+            )
+        }
+    }
+
+    featuredItems.composePwa?.let { product ->
+        item {
+            ToolOfTheDayCard(
+                product = product,
+                title = stringResource(Res.string.ui_dev_companion),
+                onClick = { onProductClick(product.repositoryUrl) },
+            )
+        }
+    }
+
+    featuredItems.businessCard?.let { product ->
+        item {
+            ToolOfTheDayCard(
+                product = product,
+                title = stringResource(Res.string.ui_familiar_tools),
+                onClick = { onProductClick(product.repositoryUrl) },
+            )
+        }
+    }
+
+    featuredItems.inputSourceHandler?.let { product ->
+        item {
+            ToolOfTheDayCard(
+                product = product,
+                title = stringResource(Res.string.ui_mac_utility),
+                onClick = { onProductClick(product.repositoryUrl) },
             )
         }
     }
@@ -236,67 +233,65 @@ fun DeveloperProfileCard(
                 )
             }
 
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ProfileLinks(
+                onLinkClick = onLinkClick,
                 modifier = Modifier.padding(top = 8.dp),
-            ) {
-                OutlinedButton(
-                    onClick = { onLinkClick("https://x.com/yuyuyuyuyu_dev") },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
-                ) {
-                    Icon(
-                        Icons.Default.Person,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp),
-                    )
-                    Spacer(Modifier.width(8.dp))
-                    Text("X")
-                }
-
-                OutlinedButton(
-                    onClick = { onLinkClick("https://github.com/yuyuyuyuyu-dev") },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
-                ) {
-                    Icon(
-                        Icons.Default.Code,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp),
-                    )
-                    Spacer(Modifier.width(8.dp))
-                    Text("GitHub")
-                }
-
-                OutlinedButton(
-                    onClick = { onLinkClick("https://youtrust.jp/users/bb7902cca964b92558d0116a5f44f362") },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
-                ) {
-                    Icon(
-                        Icons.Default.Person,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp),
-                    )
-                    Spacer(Modifier.width(8.dp))
-                    Text("YOUTRUST")
-                }
-
-                OutlinedButton(
-                    onClick = { onLinkClick("mailto:yu.kobayashi@yuyuyuyuyu.dev") },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
-                ) {
-                    Icon(
-                        Icons.Default.Email,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp),
-                    )
-                    Spacer(Modifier.width(8.dp))
-                    Text(stringResource(Res.string.ui_email_link))
-                }
-            }
+            )
         }
+    }
+}
+
+@Composable
+private fun ProfileLinks(
+    onLinkClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier,
+    ) {
+        ProfileLinkButton(
+            icon = Icons.Default.Person,
+            label = "X",
+            onClick = { onLinkClick("https://x.com/yuyuyuyuyu_dev") },
+        )
+        ProfileLinkButton(
+            icon = Icons.Default.Code,
+            label = "GitHub",
+            onClick = { onLinkClick("https://github.com/yuyuyuyuyu-dev") },
+        )
+        ProfileLinkButton(
+            icon = Icons.Default.Person,
+            label = "YOUTRUST",
+            onClick = { onLinkClick("https://youtrust.jp/users/bb7902cca964b92558d0116a5f44f362") },
+        )
+        ProfileLinkButton(
+            icon = Icons.Default.Email,
+            label = stringResource(Res.string.ui_email_link),
+            onClick = { onLinkClick("mailto:yu.kobayashi@yuyuyuyuyu.dev") },
+        )
+    }
+}
+
+@Composable
+private fun ProfileLinkButton(
+    icon: ImageVector,
+    label: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    OutlinedButton(
+        onClick = onClick,
+        modifier = modifier.fillMaxWidth(),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onTertiaryContainer),
+    ) {
+        Icon(
+            icon,
+            contentDescription = null,
+            modifier = Modifier.size(18.dp),
+        )
+        Spacer(Modifier.width(8.dp))
+        Text(label)
     }
 }
 

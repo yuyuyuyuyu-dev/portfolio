@@ -27,12 +27,7 @@ class TodayScreenContentTest {
 
             setContent {
                 TodayScreenContent(
-                    howOldAmI = mockApp,
-                    html2pdf = null,
-                    notPullingCalc = null,
-                    inputSourceHandler = null,
-                    composePwa = null,
-                    businessCard = null,
+                    featuredItems = TodayFeaturedItems(howOldAmI = mockApp),
                     onProductClick = {},
                     onLinkClick = {},
                 )

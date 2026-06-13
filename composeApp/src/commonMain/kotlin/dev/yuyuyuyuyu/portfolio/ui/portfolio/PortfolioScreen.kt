@@ -31,11 +31,7 @@ typealias PortfolioScreen = @Composable (onNavigateToLicenses: () -> Unit) -> Un
 @Inject
 @Composable
 fun PortfolioScreen(
-    appsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModelImpl,
-    librariesViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModelImpl,
-    pluginsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModelImpl,
-    cliToolsViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModelImpl,
-    templatesViewModel: dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModelImpl,
+    viewModels: PortfolioViewModels,
     @me.tatarka.inject.annotations.Assisted onNavigateToLicenses: () -> Unit,
 ) {
     val backStack: MutableList<PortfolioRoute> =
@@ -102,11 +98,7 @@ fun PortfolioScreen(
     ) { innerPadding ->
         PortfolioNavigation(
             backStack = backStack,
-            appsViewModel = appsViewModel,
-            librariesViewModel = librariesViewModel,
-            pluginsViewModel = pluginsViewModel,
-            cliToolsViewModel = cliToolsViewModel,
-            templatesViewModel = templatesViewModel,
+            viewModels = viewModels,
             modifier = Modifier.padding(innerPadding),
         )
     }
