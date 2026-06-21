@@ -86,32 +86,18 @@ fun SearchScreenContent(
     var selectedCategory by remember { mutableStateOf<ProductCategory?>(null) }
     var selectedPlatform by remember { mutableStateOf<Platform?>(null) }
 
-    // Resolve strings for filtering
-    val itemWithStrings =
+    // Resolve strings here (requires a @Composable context), then delegate the
+    // actual filtering to the pure filterResolvedItems so it stays testable.
+    val resolvedItems =
         allItems.map { item ->
-            val resolvedName = item.displayName
-            val resolvedDesc = item.displayDescription
-            Triple<PortfolioItem, String, String>(item, resolvedName, resolvedDesc)
+            ResolvedPortfolioItem(
+                item = item,
+                name = item.displayName,
+                description = item.displayDescription,
+            )
         }
 
-    // Filter logic
-    val filteredItems =
-        itemWithStrings
-            .filter { triple ->
-                val item = triple.first
-                val name = triple.second
-                val description = triple.third
-                val matchesQuery =
-                    if (searchQuery.isBlank()) {
-                        true
-                    } else {
-                        name.contains(searchQuery, ignoreCase = true) || description.contains(searchQuery, ignoreCase = true)
-                    }
-                val matchesCategory = if (selectedCategory == null) true else item.category == selectedCategory
-                val matchesPlatform = if (selectedPlatform == null) true else item.platforms.contains(selectedPlatform)
-
-                matchesQuery && matchesCategory && matchesPlatform
-            }.map { it.first }
+    val filteredItems = filterResolvedItems(resolvedItems, searchQuery, selectedCategory, selectedPlatform)
 
     Column(modifier = Modifier.fillMaxSize()) {
         SearchQueryField(
