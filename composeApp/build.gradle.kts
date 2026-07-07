@@ -93,18 +93,21 @@ kotlin {
 android {
     namespace = "dev.yuyuyuyuyu.portfolio"
     compileSdk =
-        libs.versions.android.compileSdk
+        providers
+            .gradleProperty("android.compileSdk")
             .get()
             .toInt()
 
     defaultConfig {
         applicationId = "dev.yuyuyuyuyu.portfolio"
         minSdk =
-            libs.versions.android.minSdk
+            providers
+                .gradleProperty("android.minSdk")
                 .get()
                 .toInt()
         targetSdk =
-            libs.versions.android.targetSdk
+            providers
+                .gradleProperty("android.targetSdk")
                 .get()
                 .toInt()
         versionCode = 1

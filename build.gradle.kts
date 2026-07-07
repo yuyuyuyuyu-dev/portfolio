@@ -10,4 +10,8 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.detekt) apply false
+
+    // applied (not `apply false`) because it contributes the version catalog
+    // update tasks to this root project, where the catalog lives
+    alias(libs.plugins.versionCatalogUpdate)
 }
