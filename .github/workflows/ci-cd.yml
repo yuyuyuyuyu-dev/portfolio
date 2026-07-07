@@ -2,9 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -20,14 +20,33 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '21'
-          distribution: 'jetbrains'
+          java-version: "21"
+          distribution: "jetbrains"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
       - name: Check code formatting (ktlint)
         run: ./gradlew ktlintCheck
+
+  prettier:
+    name: Check code formatting (Prettier)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check code formatting (Prettier)
+        run: npm run format:check
 
   detekt:
     name: Static code analysis (detekt)
@@ -39,8 +58,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '21'
-          distribution: 'jetbrains'
+          java-version: "21"
+          distribution: "jetbrains"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
@@ -58,8 +77,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '21'
-          distribution: 'jetbrains'
+          java-version: "21"
+          distribution: "jetbrains"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
@@ -82,8 +101,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '21'
-          distribution: 'jetbrains'
+          java-version: "21"
+          distribution: "jetbrains"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
@@ -101,8 +120,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '21'
-          distribution: 'jetbrains'
+          java-version: "21"
+          distribution: "jetbrains"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
@@ -125,11 +144,11 @@ jobs:
     # Deploy only after every check and the build have passed, and only for
     # pushes to main. Pull requests run the checks and the build for
     # verification only.
-    needs: [ ktlint, detekt, version-catalog, test, build ]
+    needs: [ktlint, prettier, detekt, version-catalog, test, build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      pages: write    # to deploy to Pages
+      pages: write # to deploy to Pages
       id-token: write # to verify the deployment originates from an appropriate source
     # Allow only one concurrent deployment and let in-progress deployments
     # finish, so a queued run never cancels a deployment that is already live.

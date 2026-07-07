@@ -7,13 +7,13 @@ complexity:
   LongParameterList:
     ignoreDefaultParameters: true
   TooManyFunctions:
-    ignoreAnnotatedFunctions: ['Preview']
+    ignoreAnnotatedFunctions: ["Preview"]
 
 naming:
   FunctionNaming:
-    ignoreAnnotated: ['Composable']
+    ignoreAnnotated: ["Composable"]
   TopLevelPropertyNaming:
-    constantPattern: '[A-Z][A-Za-z0-9]*'
+    constantPattern: "[A-Z][A-Za-z0-9]*"
 
 style:
   MagicNumber:
@@ -22,4 +22,4 @@ style:
     # Line length is enforced by ktlint (140 in the ktlint_official code style).
     active: false
   UnusedPrivateMember:
-    ignoreAnnotated: ['Preview']
+    ignoreAnnotated: ["Preview"]
