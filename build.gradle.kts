@@ -15,3 +15,11 @@ plugins {
     // update tasks to this root project, where the catalog lives
     alias(libs.plugins.versionCatalogUpdate)
 }
+
+versionCatalogUpdate {
+    // Keep the catalog sorted alphabetically by key. The plugin already sorts by
+    // default, but we set it explicitly so the intent is documented in the build
+    // and a canonical ordering keeps being enforced even if the plugin ever
+    // changes its default.
+    sortByKey.set(true)
+}
