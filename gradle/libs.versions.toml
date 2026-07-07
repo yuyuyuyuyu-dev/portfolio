@@ -21,6 +21,7 @@ kotlinxSerialization = "1.11.0"
 ksp = "2.3.9"
 ktlint = "14.2.0"
 material3 = "1.12.0-alpha02"
+version-catalog-update = "1.1.0"
 multiplatform-nav3-ui = "1.1.1"
 simpleTopAppBar = "0.4.0"
 myMaterialTheme = "0.4.0"
@@ -64,3 +65,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+versionCatalogUpdate = { id = "nl.littlerobots.version-catalog-update", version.ref = "version-catalog-update" }
