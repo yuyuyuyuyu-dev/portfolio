@@ -1,8 +1,11 @@
 [versions]
 aboutlibraries = "15.0.3"
 agp = "9.2.0"
+# @keep read through the libs.versions.android.* accessors, so no library or plugin references it here
 android-compileSdk = "37"
+# @keep read through the libs.versions.android.* accessors, so no library or plugin references it here
 android-minSdk = "24"
+# @keep read through the libs.versions.android.* accessors, so no library or plugin references it here
 android-targetSdk = "36"
 androidx-activity = "1.13.0"
 androidx-appcompat = "1.7.1"
@@ -21,10 +24,10 @@ kotlinxSerialization = "1.11.0"
 ksp = "2.3.9"
 ktlint = "14.2.0"
 material3 = "1.12.0-alpha02"
-version-catalog-update = "1.1.0"
 multiplatform-nav3-ui = "1.1.1"
-simpleTopAppBar = "0.4.0"
 myMaterialTheme = "0.4.0"
+simpleTopAppBar = "0.4.0"
+version-catalog-update = "1.1.0"
 
 [libraries]
 aboutlibraries-compose = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutlibraries" }
@@ -51,8 +54,8 @@ kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.
 kotlinInject-compiler = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlin-inject" }
 kotlinInject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlin-inject" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
-yuyuyuyuyu-simpleTopAppBar = { group = "dev.yuyuyuyuyu", name = "simpletopappbar", version.ref = "simpleTopAppBar" }
-yuyuyuyuyu-myMaterialTheme = { group = "dev.yuyuyuyuyu", name = "mymaterialtheme", version.ref = "myMaterialTheme" }
+yuyuyuyuyu-myMaterialTheme = { module = "dev.yuyuyuyuyu:mymaterialtheme", version.ref = "myMaterialTheme" }
+yuyuyuyuyu-simpleTopAppBar = { module = "dev.yuyuyuyuyu:simpletopappbar", version.ref = "simpleTopAppBar" }
 
 [plugins]
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutlibraries" }
