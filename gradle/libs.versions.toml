@@ -1,12 +1,6 @@
 [versions]
 aboutlibraries = "15.0.3"
 agp = "9.2.0"
-# @keep read through the libs.versions.android.* accessors, so no library or plugin references it here
-android-compileSdk = "37"
-# @keep read through the libs.versions.android.* accessors, so no library or plugin references it here
-android-minSdk = "24"
-# @keep read through the libs.versions.android.* accessors, so no library or plugin references it here
-android-targetSdk = "36"
 androidx-activity = "1.13.0"
 androidx-appcompat = "1.7.1"
 androidx-core = "1.18.0"
