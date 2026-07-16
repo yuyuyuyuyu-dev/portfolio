@@ -21,6 +21,10 @@ jobs:
         with:
           java-version: "21"
           distribution: "jetbrains"
+        # The JetBrains distribution resolves its version via the GitHub API;
+        # authenticate so it isn't throttled by the 60 req/hour/IP limit.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Send dependencies to Dependabot
         uses: gradle/actions/dependency-submission@v6
