@@ -28,7 +28,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
 
       - name: Check code formatting (ktlint)
         run: ./gradlew ktlintCheck
@@ -70,7 +70,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
 
       - name: Static code analysis (detekt)
         run: ./gradlew detekt
@@ -93,7 +93,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
 
       # Reformat the catalog in place and fail if anything changed, so the
       # committed gradle/libs.versions.toml stays sorted and canonically
@@ -121,7 +121,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
 
       - name: Run tests
         run: ./gradlew wasmJsTest
@@ -144,7 +144,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
 
       # Run the exact same build as the deployment, so that a broken production
       # build is caught on pull requests instead of only after merging to main.
