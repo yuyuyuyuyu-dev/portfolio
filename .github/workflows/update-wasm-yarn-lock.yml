@@ -1,0 +1,78 @@
+name: Update Wasm yarn.lock
+
+on:
+  schedule:
+    # Offset from the top of the hour because GitHub drops or delays scheduled
+    # runs that land in its busiest windows.
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One run at a time, because concurrent runs would race each other force
+# pushing the same pull request branch.
+concurrency:
+  group: update-wasm-yarn-lock
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Update Wasm yarn.lock
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: "21"
+          distribution: "jetbrains"
+        # The JetBrains distribution resolves its version via the GitHub API;
+        # authenticate so it isn't throttled by the 60 req/hour/IP limit.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6.3.0
+
+      # This task only regenerates kotlin-js-store/wasm/yarn.lock. The JS
+      # target keeps its own kotlin-js-store/yarn.lock, which stays untouched.
+      - name: Upgrade Wasm yarn.lock
+        run: ./gradlew kotlinWasmUpgradeYarnLock
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3.2.0
+        with:
+          app-id: ${{ secrets.PR_BOT_APP_ID }}
+          private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
+
+      # The pull request is opened with the App token rather than the default
+      # GITHUB_TOKEN, so that the CI/CD workflow actually runs on it and the
+      # refreshed lock file gets verified before merging.
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8.1.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          # Committing this one path keeps the JS lock file out of the pull
+          # request even if some other task rewrites it along the way.
+          add-paths: kotlin-js-store/wasm/yarn.lock
+          branch: chore/update-wasm-yarn-lock
+          commit-message: "build(deps): update Wasm yarn.lock"
+          # Route the commit through the API so it is attributed to the App and
+          # signed, instead of to whoever happens to trigger the run.
+          sign-commits: true
+          title: "build(deps): update Wasm yarn.lock"
+          body: |
+            The Wasm target resolves its npm dependencies through
+            `kotlin-js-store/wasm/yarn.lock`. This pull request is the output of
+            `./gradlew kotlinWasmUpgradeYarnLock`, opened automatically because the
+            resolved versions have moved since the lock file was last committed.
+
+            The JS target's `kotlin-js-store/yarn.lock` is left alone on purpose.
+          labels: dependencies
+          # Close the pull request and drop the branch once the lock file no
+          # longer differs from main, instead of leaving a stale one open.
+          delete-branch: true
