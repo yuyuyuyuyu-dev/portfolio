@@ -1,0 +1,44 @@
+name: Dependabot auto-merge
+
+# Dependabot's own pull_request runs get a read-only token and no access to the
+# Actions secrets, so the App credentials are only reachable through
+# pull_request_target, which runs this file as it exists on main.
+on:
+  pull_request_target:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  auto-merge:
+    name: Auto-merge
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      # This step fails when the pull request carries commits that Dependabot
+      # did not sign, which leaves every later step skipped.
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v3.1.0
+
+      - name: Create GitHub App token
+        id: app-token
+        if: contains(fromJSON('["version-update:semver-minor", "version-update:semver-patch"]'), steps.metadata.outputs.update-type)
+        uses: actions/create-github-app-token@v3.2.0
+        with:
+          app-id: ${{ secrets.PR_BOT_APP_ID }}
+          private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
+
+      # Auto-merge is enabled with the App token rather than the default
+      # GITHUB_TOKEN, so that the merge into main triggers the CI/CD workflow
+      # and the site is actually deployed.
+      - name: Enable auto-merge
+        if: contains(fromJSON('["version-update:semver-minor", "version-update:semver-patch"]'), steps.metadata.outputs.update-type)
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
