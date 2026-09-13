@@ -6,6 +6,7 @@ import dev.yuyuyuyuyu.portfolio.data.models.ProductCategory
 import org.jetbrains.compose.resources.StringResource
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.ui_cli_tools
+import portfolio.composeapp.generated.resources.ui_github_actions
 import portfolio.composeapp.generated.resources.ui_libraries
 import portfolio.composeapp.generated.resources.ui_mac_apps
 import portfolio.composeapp.generated.resources.ui_mobile_other_apps
@@ -34,12 +35,14 @@ fun catalogSections(
 
     val cliTools = allProducts.filter { it.category == ProductCategory.CliTool }.sortedBy { it.nameFallback }
     val plugins = allProducts.filter { it.category == ProductCategory.Plugin }.sortedBy { it.nameFallback }
+    val gitHubActions = allProducts.filter { it.category == ProductCategory.GitHubAction }.sortedBy { it.nameFallback }
     val libraries = allProducts.filter { it.category == ProductCategory.Library }.sortedBy { it.nameFallback }
     val templates = allProducts.filter { it.category == ProductCategory.Template }.sortedBy { it.nameFallback }
 
     return listOf(
         Res.string.ui_web_apps to webApps,
         Res.string.ui_plugins to plugins,
+        Res.string.ui_github_actions to gitHubActions,
         Res.string.ui_libraries to libraries,
         Res.string.ui_cli_tools to cliTools,
         Res.string.ui_templates to templates,

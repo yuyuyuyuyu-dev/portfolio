@@ -8,12 +8,14 @@ import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.v2.runComposeUiTest
 import dev.yuyuyuyuyu.portfolio.data.repositories.AppsRepository
 import dev.yuyuyuyuyu.portfolio.data.repositories.CliToolsRepository
+import dev.yuyuyuyuyu.portfolio.data.repositories.GitHubActionsRepository
 import dev.yuyuyuyuyu.portfolio.data.repositories.LibrariesRepository
 import dev.yuyuyuyuyu.portfolio.data.repositories.PluginsRepository
 import dev.yuyuyuyuyu.portfolio.data.repositories.TemplatesRepository
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.PortfolioViewModels
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModelImpl
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModelImpl
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.gitHubActions.GitHubActionsViewModelImpl
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModelImpl
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModelImpl
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.templates.TemplatesViewModelImpl
@@ -58,11 +60,27 @@ class SearchScreenWiringTest {
             onNodeWithText("@yuyuyuyuyu-dev/html2pdf").assertIsDisplayed()
         }
 
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun searchScreen_surfacesAGitHubActionFromRealViewModels() =
+        runComposeUiTest {
+            val viewModels = realViewModels()
+
+            setContent {
+                SearchScreen(viewModels = viewModels, onProductClick = {})
+            }
+
+            onNode(hasSetTextAction()).performTextInput("no-unexpected")
+
+            onNodeWithText("assert-no-unexpected-changes").assertIsDisplayed()
+        }
+
     private fun realViewModels(): PortfolioViewModels =
         PortfolioViewModels(
             apps = AppsViewModelImpl(AppsRepository()),
             libraries = LibrariesViewModelImpl(LibrariesRepository()),
             plugins = PluginsViewModelImpl(PluginsRepository()),
+            gitHubActions = GitHubActionsViewModelImpl(GitHubActionsRepository()),
             cliTools = CliToolsViewModelImpl(CliToolsRepository()),
             templates = TemplatesViewModelImpl(TemplatesRepository()),
         )

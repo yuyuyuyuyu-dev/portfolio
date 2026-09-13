@@ -66,6 +66,8 @@
     <string name="app_desc_inputsourcemanager">A simple macOS utility to switch input sources using custom keyboard shortcuts.</string>
     <string name="app_mot_inputsourcemanager">Using a US layout keyboard, the default input switching shortcuts conflicted with terminal operations in Android Studio, which was very annoying. I figured if Android Studio can hook keyboard inputs, I could build something to do it too.</string>
 
+    <string name="app_desc_cdripper">A desktop app that rips CDs without compression, with automatic metadata lookup, secure ripping and AccurateRip.</string>
+
     <!-- CliTools -->
     <string name="tool_desc_household">A command-line tool to manage pocket money and cash on hand.</string>
     <string name="tool_mot_household">When I started living alone as a vocational school student, I wanted to accurately track exactly how much "pocket money" I had left after deducting living expenses.</string>
@@ -99,6 +101,12 @@
 
     <string name="plugin_desc_semicolon">Neovim plugin to insert a \";\" at the end of the line.</string>
     <string name="plugin_mot_semicolon">In languages like Rust that require trailing semicolons, manually moving the cursor to the end of the line just to type a semicolon was a pain. I created a plugin that inserts a semicolon at the end of the line while maintaining the current cursor position.</string>
+
+    <string name="plugin_desc_ghadmissionhook">A Claude Code hook that keeps GitHub access through the `gh` command read-only, and asks before creating or editing a pull request.</string>
+    <string name="plugin_mot_ghadmissionhook">Claude Code now starts in auto mode by default, so I gave up on preventing every unintended change to my local files. I chose to accept that risk locally and defend the remote side properly instead, and the only remote my command line could reach was GitHub through the `gh` command.</string>
+
+    <string name="action_desc_assertnochanges">A GitHub Action that asserts your desktop app, CLI tool or anything else makes no unexpected changes to files.</string>
+    <string name="action_mot_assertnochanges">I was about to post on social media about a desktop app I had built, when I realized that if I said an AI built it, some people would worry it might delete or rewrite files behind their back. Nothing seemed to exist that catches that, so I built it.</string>
 
     <!-- Libraries -->
     <string name="lib_desc_licenses">Component library for Angular Material that provides a list of third-party licenses.</string>
@@ -147,6 +155,7 @@
     <string name="ui_web_apps">Web Apps &amp; PWA</string>
     <string name="ui_cli_tools">CLI Tools</string>
     <string name="ui_plugins">Plugins</string>
+    <string name="ui_github_actions">GitHub Actions</string>
     <string name="ui_libraries">Libraries</string>
     <string name="ui_templates">Templates</string>
     <string name="ui_mac_apps">Mac Apps</string>

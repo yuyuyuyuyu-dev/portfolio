@@ -9,6 +9,7 @@ import org.jetbrains.compose.resources.StringResource
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.app_name
 import portfolio.composeapp.generated.resources.ui_cli_tools
+import portfolio.composeapp.generated.resources.ui_github_actions
 import portfolio.composeapp.generated.resources.ui_libraries
 import portfolio.composeapp.generated.resources.ui_mac_apps
 import portfolio.composeapp.generated.resources.ui_mobile_other_apps
@@ -118,6 +119,7 @@ class CatalogSectionsTest {
                 allProducts =
                     listOf(
                         product("plug", ProductCategory.Plugin),
+                        product("action", ProductCategory.GitHubAction),
                         product("lib", ProductCategory.Library),
                         product("cli", ProductCategory.CliTool),
                         product("tmpl", ProductCategory.Template),
@@ -128,6 +130,7 @@ class CatalogSectionsTest {
             listOf(
                 Res.string.ui_web_apps,
                 Res.string.ui_plugins,
+                Res.string.ui_github_actions,
                 Res.string.ui_libraries,
                 Res.string.ui_cli_tools,
                 Res.string.ui_templates,

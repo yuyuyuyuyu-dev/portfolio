@@ -69,12 +69,13 @@ private fun DetailEntry(
     val appsState by viewModels.apps.uiState.collectAsState()
     val librariesState by viewModels.libraries.uiState.collectAsState()
     val pluginsState by viewModels.plugins.uiState.collectAsState()
+    val gitHubActionsState by viewModels.gitHubActions.uiState.collectAsState()
     val cliToolsState by viewModels.cliTools.uiState.collectAsState()
     val templatesState by viewModels.templates.uiState.collectAsState()
 
     val allItems =
         appsState.apps + librariesState.libraries + pluginsState.plugins +
-            cliToolsState.cliTools + templatesState.templates
+            gitHubActionsState.gitHubActions + cliToolsState.cliTools + templatesState.templates
     val item = allItems.find { it.repositoryUrl == repositoryUrl }
 
     if (item != null) {

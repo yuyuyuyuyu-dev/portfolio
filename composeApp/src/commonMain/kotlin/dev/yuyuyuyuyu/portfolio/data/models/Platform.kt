@@ -12,4 +12,6 @@ enum class Platform(
     Cli("CLI"),
     Neovim("Neovim"),
     Gradle("Gradle"),
+    ClaudeCode("Claude Code"),
+    GitHubActions("GitHub Actions"),
 }

@@ -8,6 +8,7 @@ import portfolio.composeapp.generated.resources.LocationRemover_screenshot
 import portfolio.composeapp.generated.resources.PasswordGenerator_screenshot
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.app_desc_barometer
+import portfolio.composeapp.generated.resources.app_desc_cdripper
 import portfolio.composeapp.generated.resources.app_desc_codescanner
 import portfolio.composeapp.generated.resources.app_desc_delicioushare
 import portfolio.composeapp.generated.resources.app_desc_digitalclock
@@ -287,6 +288,18 @@ class AppsRepository {
                 platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.MacOS),
                 motivationRes = Res.string.app_mot_inputsourcemanager,
                 installCommand = "brew tap yuyuyuyuyu-dev/tap\nbrew install --cask input-source-handler",
+            ),
+            App(
+                nameFallback = "Uncompressed CD Ripper",
+                descriptionRes = Res.string.app_desc_cdripper,
+                techStack = setOf(TechStack.Tauri, TechStack.TypeScript, TechStack.React, TechStack.Rust),
+                repositoryUrl = "https://github.com/yuyuyuyuyu-dev/uncompressed-cd-ripper",
+                platforms =
+                    setOf(
+                        dev.yuyuyuyuyu.portfolio.data.models.Platform.MacOS,
+                        dev.yuyuyuyuyu.portfolio.data.models.Platform.Windows,
+                        dev.yuyuyuyuyu.portfolio.data.models.Platform.Linux,
+                    ),
             ),
         ).sortedBy { it.nameFallback }
 

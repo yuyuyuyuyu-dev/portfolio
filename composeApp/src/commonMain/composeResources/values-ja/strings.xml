@@ -66,6 +66,8 @@
     <string name="app_desc_inputsourcemanager">A simple macOS utility to switch input sources using custom keyboard shortcuts.</string>
     <string name="app_mot_inputsourcemanager">US配列キーボードで、Android Studioのターミナル操作中に入力切り替えショートカットが干渉してしまうのが面倒だったため。Android Studioがキーボード入力をフックできるなら自分でも作れるのではないかと考えた。</string>
 
+    <string name="app_desc_cdripper">CDを無圧縮でリッピングするデスクトップアプリ。メタデータの自動取得、セキュアリッピング、AccurateRipに対応</string>
+
     <!-- CliTools -->
     <string name="tool_desc_household">おこづかいと手持ちの現金を管理するためのコマンドラインツール</string>
     <string name="tool_mot_household">専門学校生で一人暮らしを始めた時、生活費を引いた純粋な「おこづかい」がいくら残っているのかを正確に把握したくて作成した。</string>
@@ -99,6 +101,12 @@
 
     <string name="plugin_desc_semicolon">行末に";"を挿入するNeovimプラグイン</string>
     <string name="plugin_mot_semicolon">Rustなど行末にセミコロンが必要な言語で、わざわざ行末にカーソルを移動させてからセミコロンを入力するのが面倒だったため。現在位置を維持したまま行末にセミコロンを挿入する関数を提供するプラグインを作成した。</string>
+
+    <string name="plugin_desc_ghadmissionhook">`gh`コマンドによるGitHubへのアクセスを読み取り専用に制限し、プルリクエストの作成と編集の前には確認を求めるClaude Codeのフック</string>
+    <string name="plugin_mot_ghadmissionhook">Claude Codeがデフォルトでオートモードで起動するようになり、ローカルファイルへの意図しない変更をすべて防ぐのは諦めたため。ローカルのリスクは受け入れる代わりにリモート側をしっかり守ることにしたが、コマンドラインから届くリモートは`gh`コマンド経由のGitHubだけだったので、そこを制限するフックを作った。</string>
+
+    <string name="action_desc_assertnochanges">デスクトップアプリやCLIツールなどがファイルに予期しない変更を加えないことを検証するGitHub Actionsのアクション</string>
+    <string name="action_mot_assertnochanges">自作のデスクトップアプリをSNSで紹介しようとした時、AIが作ったと言えば、ファイルを勝手に削除したり書き換えたりするのではないかと心配する人がいるだろうと気づいたため。それを検出する仕組みが見当たらなかったので自作した。</string>
 
     <!-- Libraries -->
     <string name="lib_desc_licenses">サードパーティライセンスのリストを提供するAngular Material用のコンポーネントライブラリ</string>
@@ -145,6 +153,7 @@
     <string name="ui_web_apps">Webアプリ・PWA</string>
     <string name="ui_cli_tools">CLIツール</string>
     <string name="ui_plugins">プラグイン</string>
+    <string name="ui_github_actions">GitHub Actions</string>
     <string name="ui_libraries">ライブラリ</string>
     <string name="ui_templates">テンプレート</string>
     <string name="ui_mac_apps">Macアプリ</string>

@@ -4,6 +4,8 @@ import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.apps.AppsViewModelImpl
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.cliTools.CliToolsViewModelImpl
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.gitHubActions.GitHubActionsViewModel
+import dev.yuyuyuyuyu.portfolio.ui.portfolio.gitHubActions.GitHubActionsViewModelImpl
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModel
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.libraries.LibrariesViewModelImpl
 import dev.yuyuyuyuyu.portfolio.ui.portfolio.plugins.PluginsViewModel
@@ -21,12 +23,14 @@ class PortfolioViewModels(
     apps: AppsViewModelImpl,
     libraries: LibrariesViewModelImpl,
     plugins: PluginsViewModelImpl,
+    gitHubActions: GitHubActionsViewModelImpl,
     cliTools: CliToolsViewModelImpl,
     templates: TemplatesViewModelImpl,
 ) {
     val apps: AppsViewModel = apps
     val libraries: LibrariesViewModel = libraries
     val plugins: PluginsViewModel = plugins
+    val gitHubActions: GitHubActionsViewModel = gitHubActions
     val cliTools: CliToolsViewModel = cliTools
     val templates: TemplatesViewModel = templates
 }
