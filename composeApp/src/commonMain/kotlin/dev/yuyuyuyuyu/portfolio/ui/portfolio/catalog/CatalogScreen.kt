@@ -29,12 +29,15 @@ fun CatalogScreen(
     val appsState by viewModels.apps.uiState.collectAsState()
     val librariesState by viewModels.libraries.uiState.collectAsState()
     val pluginsState by viewModels.plugins.uiState.collectAsState()
+    val gitHubActionsState by viewModels.gitHubActions.uiState.collectAsState()
     val cliToolsState by viewModels.cliTools.uiState.collectAsState()
     val templatesState by viewModels.templates.uiState.collectAsState()
 
     CatalogScreenContent(
         allApps = appsState.apps,
-        allProducts = librariesState.libraries + pluginsState.plugins + cliToolsState.cliTools + templatesState.templates,
+        allProducts =
+            librariesState.libraries + pluginsState.plugins + gitHubActionsState.gitHubActions +
+                cliToolsState.cliTools + templatesState.templates,
         onProductClick = onProductClick,
     )
 }
