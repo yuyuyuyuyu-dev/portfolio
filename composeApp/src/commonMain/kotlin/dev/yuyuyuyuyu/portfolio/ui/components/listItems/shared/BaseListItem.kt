@@ -67,7 +67,6 @@ fun BaseListItem(
                         .clip(CircleShape),
                 )
             },
-            headlineContent = { Text(name) },
             supportingContent = {
                 SupportingContent(
                     description = description,
@@ -84,7 +83,9 @@ fun BaseListItem(
                         ),
                 )
             },
-        )
+        ) {
+            Text(name)
+        }
 
         AnimatedVisibility(visible = expanded) {
             expandedItem(uriHandler)
