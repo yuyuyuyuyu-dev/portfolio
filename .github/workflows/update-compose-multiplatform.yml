@@ -1,0 +1,116 @@
+name: Update Compose Multiplatform
+
+on:
+  schedule:
+    - cron: "47 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update-compose-multiplatform
+  cancel-in-progress: false
+
+jobs:
+  select:
+    name: Select versions
+    runs-on: ubuntu-latest
+    outputs:
+      alert: ${{ steps.select.outputs.alert }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: "21"
+          distribution: "jetbrains"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6.3.0
+
+      - name: Select versions
+        id: select
+        run: python3 .github/scripts/update_compose.py
+        env:
+          PULL_REQUEST_BODY: ${{ runner.temp }}/compose-update/body.md
+
+      - name: Upgrade Wasm yarn.lock
+        if: steps.select.outputs.changed == 'true'
+        run: ./gradlew kotlinWasmUpgradeYarnLock
+
+      - name: Save changes
+        run: git diff -- gradle/libs.versions.toml kotlin-js-store/wasm/yarn.lock > "$RUNNER_TEMP/compose-update/changes.patch"
+
+      - name: Upload changes
+        uses: actions/upload-artifact@v7
+        with:
+          name: compose-update
+          path: ${{ runner.temp }}/compose-update
+
+  pull-request:
+    name: Open pull request
+    needs: select
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Download changes
+        uses: actions/download-artifact@v8
+        with:
+          name: compose-update
+          path: ${{ runner.temp }}/compose-update
+
+      - name: Apply changes
+        run: |
+          if [ -s "$RUNNER_TEMP/compose-update/changes.patch" ]; then
+            git apply "$RUNNER_TEMP/compose-update/changes.patch"
+          fi
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3.2.0
+        with:
+          app-id: ${{ secrets.PR_BOT_APP_ID }}
+          private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
+
+      - name: Create pull request
+        id: pull-request
+        uses: peter-evans/create-pull-request@v8.1.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          add-paths: |
+            gradle/libs.versions.toml
+            kotlin-js-store/wasm/yarn.lock
+          branch: chore/update-compose-multiplatform
+          commit-message: "build(deps): update Compose Multiplatform dependencies"
+          sign-commits: true
+          title: "build(deps): update Compose Multiplatform dependencies"
+          body-path: ${{ runner.temp }}/compose-update/body.md
+          labels: dependencies
+          delete-branch: true
+
+      - name: Enable auto-merge
+        if: steps.pull-request.outputs.pull-request-operation == 'created' || steps.pull-request.outputs.pull-request-operation == 'updated'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_URL: ${{ steps.pull-request.outputs.pull-request-url }}
+
+  report:
+    name: Report Material3 Adaptive
+    needs: select
+    if: needs.select.outputs.alert != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report
+        run: |
+          echo "::error::$ALERT"
+          exit 1
+        env:
+          ALERT: ${{ needs.select.outputs.alert }}
