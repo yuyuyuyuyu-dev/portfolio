@@ -155,3 +155,36 @@ ktlint {
         exclude { it.file.path.contains("build/generated/") }
     }
 }
+
+val composeVersion = libs.versions.composeMultiplatform.get()
+val material3Version = libs.versions.material3.get()
+
+fun versionSeries(version: String): String =
+    Regex("""^(\d+\.\d+)\.""").find(version)?.groupValues?.get(1)
+        ?: throw GradleException("Cannot read the series of version $version")
+
+if (versionSeries(material3Version) != versionSeries(composeVersion)) {
+    throw GradleException(
+        "material3 $material3Version does not belong to the Compose Multiplatform $composeVersion series",
+    )
+}
+
+val composeLockstepGroups =
+    setOf(
+        "org.jetbrains.compose.animation",
+        "org.jetbrains.compose.components",
+        "org.jetbrains.compose.foundation",
+        "org.jetbrains.compose.material",
+        "org.jetbrains.compose.runtime",
+        "org.jetbrains.compose.ui",
+    )
+val newerThanCompose = "($composeVersion,)"
+
+dependencies.components.all {
+    allVariants {
+        withDependencies {
+            filter { it.group in composeLockstepGroups }
+                .forEach { dependency -> dependency.version { reject(newerThanCompose) } }
+        }
+    }
+}
