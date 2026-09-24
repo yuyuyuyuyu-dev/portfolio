@@ -15,14 +15,8 @@ CATALOG = Path("gradle/libs.versions.toml")
 COMPOSE_KEY = "composeMultiplatform"
 MATERIAL3_KEY = "material3"
 ADAPTIVE_KEY = "compose-multiplatform-adaptive"
-LOCKSTEP_GROUPS = {
-    "org.jetbrains.compose.animation",
-    "org.jetbrains.compose.components",
-    "org.jetbrains.compose.foundation",
-    "org.jetbrains.compose.material",
-    "org.jetbrains.compose.runtime",
-    "org.jetbrains.compose.ui",
-}
+COMPOSE_GROUP_PREFIX = "org.jetbrains.compose."
+MATERIAL3_GROUP_PREFIX = "org.jetbrains.compose.material3"
 CHANGELOG_GRACE = datetime.timedelta(days=3)
 VERSION = re.compile(r"(\d+)\.(\d+)\.(\d+)(?:-(alpha|beta|rc)(\d+))?")
 STAGES = {"alpha": 0, "beta": 1, "rc": 2, None: 3}
@@ -72,7 +66,9 @@ def compose_requirement(material3):
         dependency["version"].get("requires") or dependency["version"].get("strictly")
         for variant in module["variants"]
         for dependency in variant.get("dependencies", [])
-        if dependency["group"] in LOCKSTEP_GROUPS and "version" in dependency
+        if dependency["group"].startswith(COMPOSE_GROUP_PREFIX)
+        and not dependency["group"].startswith(MATERIAL3_GROUP_PREFIX)
+        and "version" in dependency
     ]
     comparable = [version for version in required if version and order(version) is not None]
     return max(comparable, key=order, default=None)
