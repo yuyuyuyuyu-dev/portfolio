@@ -179,12 +179,20 @@ val composeLockstepGroups =
         "org.jetbrains.compose.ui",
     )
 val newerThanCompose = "($composeVersion,)"
+val laterThanComposeSeries =
+    versionSeries(composeVersion)
+        .split(".")
+        .let { (major, minor) -> "[$major.${minor.toInt() + 1},)" }
 
 dependencies.components.all {
     allVariants {
         withDependencies {
-            filter { it.group in composeLockstepGroups }
-                .forEach { dependency -> dependency.version { reject(newerThanCompose) } }
+            forEach { dependency ->
+                when (dependency.group) {
+                    in composeLockstepGroups -> dependency.version { reject(newerThanCompose) }
+                    "org.jetbrains.compose.material3" -> dependency.version { reject(laterThanComposeSeries) }
+                }
+            }
         }
     }
 }
