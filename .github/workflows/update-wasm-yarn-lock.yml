@@ -37,8 +37,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6.3.0
 
-      # This task only regenerates kotlin-js-store/wasm/yarn.lock. The JS
-      # target keeps its own kotlin-js-store/yarn.lock, which stays untouched.
       - name: Resolve Wasm yarn.lock from scratch
         run: |
           rm -f kotlin-js-store/wasm/yarn.lock build/wasm/yarn.lock
@@ -75,12 +73,11 @@ jobs:
       # GITHUB_TOKEN, so that the CI/CD workflow actually runs on it and the
       # refreshed lock file gets verified before merging.
       - name: Create pull request
+        id: pull-request
         if: steps.lock.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8.1.1
         with:
           token: ${{ steps.app-token.outputs.token }}
-          # Committing this one path keeps the JS lock file out of the pull
-          # request even if some other task rewrites it along the way.
           add-paths: kotlin-js-store/wasm/yarn.lock
           branch: chore/update-wasm-yarn-lock
           commit-message: "build(deps): update Wasm yarn.lock"
@@ -92,6 +89,11 @@ jobs:
             The Wasm target resolves its npm dependencies through `kotlin-js-store/wasm/yarn.lock`. This pull request deletes that lock file, resolves it again with `./gradlew kotlinWasmUpgradeYarnLock`, and was opened automatically because the result differs from main.
 
             Deleting the lock file first is what picks up newer releases within the declared version ranges. Running the upgrade task on the stored lock file only reconciles it with the declared dependencies.
-
-            The JS target's `kotlin-js-store/yarn.lock` is left alone on purpose.
           labels: dependencies
+
+      - name: Enable auto-merge
+        if: steps.pull-request.outputs.pull-request-operation == 'created'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_URL: ${{ steps.pull-request.outputs.pull-request-url }}
