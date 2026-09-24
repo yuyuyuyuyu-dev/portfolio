@@ -34,11 +34,6 @@ kotlin {
         }
     }
 
-    js {
-        browser()
-        binaries.executable()
-    }
-
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
