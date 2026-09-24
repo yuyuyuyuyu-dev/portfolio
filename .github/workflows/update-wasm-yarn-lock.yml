@@ -17,12 +17,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  update:
-    name: Update Wasm yarn.lock
+  resolve:
+    name: Resolve Wasm yarn.lock
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.lock.outputs.changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Setup JDK
         uses: actions/setup-java@v6
@@ -51,6 +55,35 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Save changes
+        run: |
+          mkdir -p "$RUNNER_TEMP/lock-update"
+          git diff -- kotlin-js-store/wasm/yarn.lock > "$RUNNER_TEMP/lock-update/changes.patch"
+
+      - name: Upload changes
+        uses: actions/upload-artifact@v7
+        with:
+          name: lock-update
+          path: ${{ runner.temp }}/lock-update
+
+  pull-request:
+    name: Open pull request
+    needs: resolve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Download changes
+        uses: actions/download-artifact@v8
+        with:
+          name: lock-update
+          path: ${{ runner.temp }}/lock-update
+
+      - name: Apply changes
+        if: needs.resolve.outputs.changed == 'true'
+        run: git apply "$RUNNER_TEMP/lock-update/changes.patch"
+
       - name: Create GitHub App token
         id: app-token
         uses: actions/create-github-app-token@v3.2.0
@@ -59,7 +92,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: Close outdated pull request
-        if: steps.lock.outputs.changed != 'true'
+        if: needs.resolve.outputs.changed != 'true'
         run: |
           number="$(gh pr list --head chore/update-wasm-yarn-lock --base main --state open --json number --jq '.[0].number // empty')"
           if [ -n "$number" ]; then
@@ -74,7 +107,7 @@ jobs:
       # refreshed lock file gets verified before merging.
       - name: Create pull request
         id: pull-request
-        if: steps.lock.outputs.changed == 'true'
+        if: needs.resolve.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8.1.1
         with:
           token: ${{ steps.app-token.outputs.token }}
