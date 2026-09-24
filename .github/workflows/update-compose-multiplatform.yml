@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       alert: ${{ steps.select.outputs.alert }}
+      changed: ${{ steps.select.outputs.changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -69,10 +70,8 @@ jobs:
           path: ${{ runner.temp }}/compose-update
 
       - name: Apply changes
-        run: |
-          if [ -s "$RUNNER_TEMP/compose-update/changes.patch" ]; then
-            git apply "$RUNNER_TEMP/compose-update/changes.patch"
-          fi
+        if: needs.select.outputs.changed == 'true'
+        run: git apply "$RUNNER_TEMP/compose-update/changes.patch"
 
       - name: Create GitHub App token
         id: app-token
@@ -81,8 +80,20 @@ jobs:
           app-id: ${{ secrets.PR_BOT_APP_ID }}
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
+      - name: Close outdated pull request
+        if: needs.select.outputs.changed != 'true'
+        run: |
+          number="$(gh pr list --head chore/update-compose-multiplatform --base main --state open --json number --jq '.[0].number // empty')"
+          if [ -n "$number" ]; then
+            gh pr close "$number" --delete-branch --comment "Closing because main already has the Compose Multiplatform, material3 and Material3 Adaptive versions that this pull request would set."
+          fi
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
+
       - name: Create pull request
         id: pull-request
+        if: needs.select.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8.1.1
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -95,7 +106,6 @@ jobs:
           title: "build(deps): update Compose Multiplatform dependencies"
           body-path: ${{ runner.temp }}/compose-update/body.md
           labels: dependencies
-          delete-branch: true
 
       - name: Enable auto-merge
         if: steps.pull-request.outputs.pull-request-operation == 'created'
