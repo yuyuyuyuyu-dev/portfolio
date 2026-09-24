@@ -39,8 +39,19 @@ jobs:
 
       # This task only regenerates kotlin-js-store/wasm/yarn.lock. The JS
       # target keeps its own kotlin-js-store/yarn.lock, which stays untouched.
-      - name: Upgrade Wasm yarn.lock
-        run: ./gradlew kotlinWasmUpgradeYarnLock
+      - name: Resolve Wasm yarn.lock from scratch
+        run: |
+          rm -f kotlin-js-store/wasm/yarn.lock build/wasm/yarn.lock
+          ./gradlew kotlinWasmUpgradeYarnLock
+
+      - name: Check for changes
+        id: lock
+        run: |
+          if git diff --quiet -- kotlin-js-store/wasm/yarn.lock; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Create GitHub App token
         id: app-token
@@ -49,10 +60,22 @@ jobs:
           app-id: ${{ secrets.PR_BOT_APP_ID }}
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
+      - name: Close outdated pull request
+        if: steps.lock.outputs.changed != 'true'
+        run: |
+          number="$(gh pr list --head chore/update-wasm-yarn-lock --base main --state open --json number --jq '.[0].number // empty')"
+          if [ -n "$number" ]; then
+            gh pr close "$number" --delete-branch --comment "Closing because main already has the Wasm yarn.lock that a fresh resolve produces today."
+          fi
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
+
       # The pull request is opened with the App token rather than the default
       # GITHUB_TOKEN, so that the CI/CD workflow actually runs on it and the
       # refreshed lock file gets verified before merging.
       - name: Create pull request
+        if: steps.lock.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8.1.1
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -66,13 +89,9 @@ jobs:
           sign-commits: true
           title: "build(deps): update Wasm yarn.lock"
           body: |
-            The Wasm target resolves its npm dependencies through
-            `kotlin-js-store/wasm/yarn.lock`. This pull request is the output of
-            `./gradlew kotlinWasmUpgradeYarnLock`, opened automatically because the
-            resolved versions have moved since the lock file was last committed.
+            The Wasm target resolves its npm dependencies through `kotlin-js-store/wasm/yarn.lock`. This pull request deletes that lock file, resolves it again with `./gradlew kotlinWasmUpgradeYarnLock`, and was opened automatically because the result differs from main.
+
+            Deleting the lock file first is what picks up newer releases within the declared version ranges. Running the upgrade task on the stored lock file only reconciles it with the declared dependencies.
 
             The JS target's `kotlin-js-store/yarn.lock` is left alone on purpose.
           labels: dependencies
-          # Close the pull request and drop the branch once the lock file no
-          # longer differs from main, instead of leaving a stale one open.
-          delete-branch: true
