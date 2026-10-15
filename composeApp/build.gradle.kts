@@ -158,16 +158,9 @@ ktlint {
 
 val composeVersion = libs.versions.composeMultiplatform.get()
 val material3Version = libs.versions.material3.get()
-
-fun versionSeries(version: String): String =
-    Regex("""^(\d+\.\d+)\.""").find(version)?.groupValues?.get(1)
-        ?: throw GradleException("Cannot read the series of version $version")
-
-if (versionSeries(material3Version) != versionSeries(composeVersion)) {
-    throw GradleException(
-        "material3 $material3Version does not belong to the Compose Multiplatform $composeVersion series",
-    )
-}
+val material3AdaptiveVersion =
+    libs.versions.compose.multiplatform.adaptive
+        .get()
 
 val composeLockstepGroups =
     setOf(
@@ -178,19 +171,16 @@ val composeLockstepGroups =
         "org.jetbrains.compose.runtime",
         "org.jetbrains.compose.ui",
     )
-val newerThanCompose = "($composeVersion,)"
-val laterThanComposeSeries =
-    versionSeries(composeVersion)
-        .split(".")
-        .let { (major, minor) -> "[$major.${minor.toInt() + 1},)" }
 
 dependencies.components.all {
     allVariants {
         withDependencies {
             forEach { dependency ->
                 when (dependency.group) {
-                    in composeLockstepGroups -> dependency.version { reject(newerThanCompose) }
-                    "org.jetbrains.compose.material3" -> dependency.version { reject(laterThanComposeSeries) }
+                    in composeLockstepGroups -> dependency.version { reject("($composeVersion,)") }
+                    "org.jetbrains.compose.material3" -> dependency.version { reject("($material3Version,)") }
+                    "org.jetbrains.compose.material3.adaptive" ->
+                        dependency.version { reject("($material3AdaptiveVersion,)") }
                 }
             }
         }
