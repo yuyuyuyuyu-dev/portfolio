@@ -88,7 +88,7 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v3.2.0
         with:
-          app-id: ${{ secrets.PR_BOT_APP_ID }}
+          client-id: ${{ vars.PR_BOT_CLIENT_ID }}
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: Close outdated pull request
