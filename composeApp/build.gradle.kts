@@ -155,3 +155,34 @@ ktlint {
         exclude { it.file.path.contains("build/generated/") }
     }
 }
+
+val composeVersion = libs.versions.composeMultiplatform.get()
+val material3Version = libs.versions.material3.get()
+val material3AdaptiveVersion =
+    libs.versions.compose.multiplatform.adaptive
+        .get()
+
+val composeLockstepGroups =
+    setOf(
+        "org.jetbrains.compose.animation",
+        "org.jetbrains.compose.components",
+        "org.jetbrains.compose.foundation",
+        "org.jetbrains.compose.material",
+        "org.jetbrains.compose.runtime",
+        "org.jetbrains.compose.ui",
+    )
+
+dependencies.components.all {
+    allVariants {
+        withDependencies {
+            forEach { dependency ->
+                when (dependency.group) {
+                    in composeLockstepGroups -> dependency.version { reject("($composeVersion,)") }
+                    "org.jetbrains.compose.material3" -> dependency.version { reject("($material3Version,)") }
+                    "org.jetbrains.compose.material3.adaptive" ->
+                        dependency.version { reject("($material3AdaptiveVersion,)") }
+                }
+            }
+        }
+    }
+}
