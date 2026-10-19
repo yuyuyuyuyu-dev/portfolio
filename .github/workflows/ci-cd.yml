@@ -29,6 +29,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6.4.0
+        with:
+          cache-disabled: true
 
       - name: Check code formatting (ktlint)
         run: ./gradlew ktlintCheck
@@ -44,7 +46,7 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: "22"
-          cache: "npm"
+          package-manager-cache: false
 
       - name: Install dependencies
         run: npm ci
@@ -71,6 +73,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6.4.0
+        with:
+          cache-disabled: true
 
       - name: Static code analysis (detekt)
         run: ./gradlew detekt
@@ -94,6 +98,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6.4.0
+        with:
+          cache-disabled: true
 
       # Reformat the catalog in place and fail if anything changed, so the
       # committed gradle/libs.versions.toml stays sorted and canonically
@@ -122,6 +128,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6.4.0
+        with:
+          cache-disabled: true
 
       - name: Run tests
         run: ./gradlew wasmJsTest
@@ -145,6 +153,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6.4.0
+        with:
+          cache-disabled: true
 
       # Run the exact same build as the deployment, so that a broken production
       # build is caught on pull requests instead of only after merging to main.

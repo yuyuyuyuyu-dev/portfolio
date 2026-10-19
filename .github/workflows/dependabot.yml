@@ -28,3 +28,5 @@ jobs:
 
       - name: Send dependencies to Dependabot
         uses: gradle/actions/dependency-submission@v6.4.0
+        with:
+          cache-disabled: true
