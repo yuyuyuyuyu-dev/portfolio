@@ -1,3 +1,0 @@
-# Generated Gradle/Compose build output is not source we hand-edit, so keep the
-# formatter from rewriting compiled artifacts.
-**/build/
