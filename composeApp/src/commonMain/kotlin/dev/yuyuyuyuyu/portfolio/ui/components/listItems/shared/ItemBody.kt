@@ -43,8 +43,11 @@ fun ItemBody(
             modifier =
                 Modifier
                     .padding(horizontal = 10.dp)
-                    .clickable(interactionSource = interactionSource, indication = null, onClick = onSourceCodeLinkClick)
-                    .semantics {
+                    .clickable(
+                        interactionSource = interactionSource,
+                        indication = null,
+                        onClick = onSourceCodeLinkClick,
+                    ).semantics {
                         onClick(label = "ソースコードのページを新しいタブで開く") {
                             onSourceCodeLinkClick()
                             true
@@ -80,7 +83,7 @@ fun ItemBody(
 
 @Preview
 @Composable
-private fun ItemBodyPreview() {
+fun ItemBodyPreview() {
     ItemBody(
         repositoryUrl = "https://github.com/example/repo",
         onSourceCodeLinkClick = {},

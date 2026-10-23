@@ -1,6 +1,6 @@
 # portfolio
 
-[![CI/CD](https://github.com/yuyuyuyuyu-dev/portfolio/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/yuyuyuyuyu-dev/portfolio/actions/workflows/ci-cd.yml)
+[![CI](https://github.com/yuyuyuyuyu-dev/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/yuyuyuyuyu-dev/portfolio/actions/workflows/ci.yml)
 
 ポートフォリオサイト
 

@@ -1,25 +1,3 @@
-# Deviations from the default config (buildUponDefaultConfig = true).
-# Keep this file limited to:
-#   - the official adjustments for Compose: https://detekt.dev/docs/introduction/compose/
-#   - disabling rules that overlap with ktlint, which owns formatting
-
-complexity:
-  LongParameterList:
-    ignoreDefaultParameters: true
-  TooManyFunctions:
-    ignoreAnnotatedFunctions: ["Preview"]
-
 naming:
   FunctionNaming:
     ignoreAnnotated: ["Composable"]
-  TopLevelPropertyNaming:
-    constantPattern: "[A-Z][A-Za-z0-9]*"
-
-style:
-  MagicNumber:
-    ignorePropertyDeclaration: true
-  MaxLineLength:
-    # Line length is enforced by ktlint (140 in the ktlint_official code style).
-    active: false
-  UnusedPrivateMember:
-    ignoreAnnotated: ["Preview"]
