@@ -37,7 +37,7 @@ private class ExpandMoreIconPreviewParameterProvider : PreviewParameterProvider<
 
 @Preview
 @Composable
-private fun ExpandMoreIconPreview(
+fun ExpandMoreIconPreview(
     @PreviewParameter(ExpandMoreIconPreviewParameterProvider::class) expanded: Boolean,
 ) {
     ExpandMoreIcon(expanded = expanded)

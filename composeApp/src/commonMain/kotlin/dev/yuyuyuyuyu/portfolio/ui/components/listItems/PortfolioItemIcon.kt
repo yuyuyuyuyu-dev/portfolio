@@ -26,20 +26,20 @@ import dev.yuyuyuyuyu.portfolio.utils.displayName
 import org.jetbrains.compose.resources.painterResource
 
 // Gruvbox Light palette for the terminal-window style box
-private val TerminalBackgroundColor = Color(0xFFFBF1C7)
-private val TerminalPromptColor = Color(0xFF3C3836)
-private val WindowCloseButtonColor = Color(0xFFCC241D)
-private val WindowMinimizeButtonColor = Color(0xFFD79921)
-private val WindowZoomButtonColor = Color(0xFF98971A)
+private val TerminalBackgroundColor = Color(color = 0xFFFBF1C7)
+private val TerminalPromptColor = Color(color = 0xFF3C3836)
+private val WindowCloseButtonColor = Color(color = 0xFFCC241D)
+private val WindowMinimizeButtonColor = Color(color = 0xFFD79921)
+private val WindowZoomButtonColor = Color(color = 0xFF98971A)
 
 // Dimensions expressed as fractions of the icon size
-private const val AppCornerRatio = 6f
-private const val TerminalCornerRatio = 8f
-private const val TerminalPaddingRatio = 10f
-private const val WindowButtonSpacingRatio = 20f
-private const val WindowButtonSizeRatio = 12f
-private const val PromptFontRatio = 8f
-private const val PromptLineHeightRatio = 6f
+private const val APP_CORNER_RATIO = 6f
+private const val TERMINAL_CORNER_RATIO = 8f
+private const val TERMINAL_PADDING_RATIO = 10f
+private const val WINDOW_BUTTON_SPACING_RATIO = 20f
+private const val WINDOW_BUTTON_SIZE_RATIO = 12f
+private const val PROMPT_FONT_RATIO = 8f
+private const val PROMPT_LINE_HEIGHT_RATIO = 6f
 
 @Composable
 fun PortfolioItemIcon(
@@ -54,7 +54,7 @@ fun PortfolioItemIcon(
             modifier =
                 modifier
                     .size(size)
-                    .clip(RoundedCornerShape(size / AppCornerRatio)),
+                    .clip(RoundedCornerShape(size / APP_CORNER_RATIO)),
             contentScale = ContentScale.Crop,
         )
     } else {
@@ -63,28 +63,46 @@ fun PortfolioItemIcon(
             modifier =
                 modifier
                     .size(size)
-                    .clip(RoundedCornerShape(size / TerminalCornerRatio))
+                    .clip(RoundedCornerShape(size / TERMINAL_CORNER_RATIO))
                     .background(TerminalBackgroundColor)
-                    .padding(size / TerminalPaddingRatio),
+                    .padding(size / TERMINAL_PADDING_RATIO),
         ) {
             // macOS Window Buttons
             Row(
-                horizontalArrangement = Arrangement.spacedBy(size / WindowButtonSpacingRatio),
-                modifier = Modifier.padding(bottom = size / TerminalPaddingRatio),
+                horizontalArrangement = Arrangement.spacedBy(size / WINDOW_BUTTON_SPACING_RATIO),
+                modifier = Modifier.padding(bottom = size / TERMINAL_PADDING_RATIO),
             ) {
-                Box(modifier = Modifier.size(size / WindowButtonSizeRatio).clip(CircleShape).background(WindowCloseButtonColor))
-                Box(modifier = Modifier.size(size / WindowButtonSizeRatio).clip(CircleShape).background(WindowMinimizeButtonColor))
-                Box(modifier = Modifier.size(size / WindowButtonSizeRatio).clip(CircleShape).background(WindowZoomButtonColor))
+                Box(
+                    modifier =
+                        Modifier
+                            .size(size / WINDOW_BUTTON_SIZE_RATIO)
+                            .clip(CircleShape)
+                            .background(WindowCloseButtonColor),
+                )
+                Box(
+                    modifier =
+                        Modifier
+                            .size(size / WINDOW_BUTTON_SIZE_RATIO)
+                            .clip(CircleShape)
+                            .background(WindowMinimizeButtonColor),
+                )
+                Box(
+                    modifier =
+                        Modifier
+                            .size(size / WINDOW_BUTTON_SIZE_RATIO)
+                            .clip(CircleShape)
+                            .background(WindowZoomButtonColor),
+                )
             }
 
             // Terminal Prompt
             Text(
                 text = "> ${item.displayName}",
                 color = TerminalPromptColor,
-                fontSize = (size.value / PromptFontRatio).sp,
+                fontSize = (size.value / PROMPT_FONT_RATIO).sp,
                 maxLines = 4,
                 overflow = TextOverflow.Ellipsis,
-                lineHeight = (size.value / PromptLineHeightRatio).sp,
+                lineHeight = (size.value / PROMPT_LINE_HEIGHT_RATIO).sp,
             )
         }
     }

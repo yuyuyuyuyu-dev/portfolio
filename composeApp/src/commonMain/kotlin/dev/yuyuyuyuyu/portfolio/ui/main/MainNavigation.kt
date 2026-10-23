@@ -43,7 +43,7 @@ fun MainNavigation(
 
 @Preview
 @Composable
-private fun MainNavigationPreview() {
+fun MainNavigationPreview() {
     MainNavigation(
         backStack = mutableListOf(MainNavigationRoute.Portfolio),
         appComponent = AppComponent::class.create(),

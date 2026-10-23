@@ -92,6 +92,6 @@ private fun DetailEntry(
 
 @Preview
 @Composable
-private fun PortfolioNavigationPreview() {
+fun PortfolioNavigationPreview() {
     TODO()
 }

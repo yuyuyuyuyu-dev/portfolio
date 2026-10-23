@@ -12,6 +12,7 @@ class GitHubActionsViewModelImpl(
     gitHubActionsRepository: GitHubActionsRepository,
 ) : ViewModel(),
     GitHubActionsViewModel {
-    private val _uiState = MutableStateFlow(GitHubActionsUiState(gitHubActions = gitHubActionsRepository.getGitHubActions()))
+    private val _uiState =
+        MutableStateFlow(GitHubActionsUiState(gitHubActions = gitHubActionsRepository.getGitHubActions()))
     override val uiState: StateFlow<GitHubActionsUiState> = _uiState.asStateFlow()
 }
