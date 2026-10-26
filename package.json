@@ -2,10 +2,9 @@
   "name": "portfolio",
   "private": true,
   "scripts": {
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "oxfmt": "oxfmt"
   },
   "devDependencies": {
-    "prettier": "3.9.10"
+    "oxfmt": "0.74.0"
   }
 }

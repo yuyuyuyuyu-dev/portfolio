@@ -23,6 +23,6 @@ fun MainScreen(appComponent: AppComponent) {
 
 @Preview
 @Composable
-private fun MainScreenPreview() {
+fun MainScreenPreview() {
     MainScreen(appComponent = AppComponent::class.create())
 }

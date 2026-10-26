@@ -1,123 +1,19 @@
-name: Update Wasm yarn.lock
+name: Update the Wasm yarn.lock
 
 on:
   schedule:
     - cron: "17 3 * * *"
   workflow_dispatch:
 
-permissions:
-  contents: read
-
-concurrency:
-  group: update-wasm-yarn-lock
-  cancel-in-progress: false
+permissions: {}
 
 jobs:
-  resolve:
-    name: Resolve Wasm yarn.lock
-    runs-on: ubuntu-latest
-    outputs:
-      changed: ${{ steps.lock.outputs.changed }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-
-      - name: Setup JDK
-        uses: actions/setup-java@v6
-        with:
-          java-version: "21"
-          distribution: "jetbrains"
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6.4.0
-        with:
-          cache-disabled: true
-
-      - name: Resolve Wasm yarn.lock from scratch
-        run: |
-          rm -f kotlin-js-store/wasm/yarn.lock build/wasm/yarn.lock
-          ./gradlew kotlinWasmUpgradeYarnLock
-
-      - name: Check for changes
-        id: lock
-        run: |
-          if git diff --quiet -- kotlin-js-store/wasm/yarn.lock; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Save changes
-        run: |
-          mkdir -p "$RUNNER_TEMP/lock-update"
-          git diff -- kotlin-js-store/wasm/yarn.lock > "$RUNNER_TEMP/lock-update/changes.patch"
-
-      - name: Upload changes
-        uses: actions/upload-artifact@v7
-        with:
-          name: lock-update
-          path: ${{ runner.temp }}/lock-update
-
-  pull-request:
-    name: Open pull request
-    needs: resolve
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Download changes
-        uses: actions/download-artifact@v8
-        with:
-          name: lock-update
-          path: ${{ runner.temp }}/lock-update
-
-      - name: Apply changes
-        if: needs.resolve.outputs.changed == 'true'
-        run: git apply "$RUNNER_TEMP/lock-update/changes.patch"
-
-      - name: Create GitHub App token
-        id: app-token
-        uses: actions/create-github-app-token@v3.3.0
-        with:
-          client-id: ${{ vars.PR_BOT_CLIENT_ID }}
-          private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
-
-      - name: Close outdated pull request
-        if: needs.resolve.outputs.changed != 'true'
-        run: |
-          number="$(gh pr list --head chore/update-wasm-yarn-lock --base main --state open --json number --jq '.[0].number // empty')"
-          if [ -n "$number" ]; then
-            gh pr close "$number" --delete-branch --comment "Closing because main already has the Wasm yarn.lock that a fresh resolve produces today."
-          fi
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-          GH_REPO: ${{ github.repository }}
-
-      - name: Create pull request
-        id: pull-request
-        if: needs.resolve.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v8.1.1
-        with:
-          token: ${{ steps.app-token.outputs.token }}
-          add-paths: kotlin-js-store/wasm/yarn.lock
-          branch: chore/update-wasm-yarn-lock
-          commit-message: "build(deps): update Wasm yarn.lock"
-          sign-commits: true
-          title: "build(deps): update Wasm yarn.lock"
-          body: |
-            The Wasm target resolves its npm dependencies through `kotlin-js-store/wasm/yarn.lock`. This pull request deletes that lock file, resolves it again with `./gradlew kotlinWasmUpgradeYarnLock`, and was opened automatically because the result differs from main.
-
-            Deleting the lock file first is what picks up newer releases within the declared version ranges. Running the upgrade task on the stored lock file only reconciles it with the declared dependencies.
-          labels: dependencies
-
-      - name: Enable auto-merge
-        if: steps.pull-request.outputs.pull-request-operation == 'created'
-        run: gh pr merge --auto --squash "$PR_URL"
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-          PR_URL: ${{ steps.pull-request.outputs.pull-request-url }}
+  update-wasm-yarn-lock:
+    name: Update the Wasm yarn.lock
+    permissions:
+      contents: read
+    uses: yuyuyuyuyu-dev/repo-config/.github/workflows/update-wasm-yarn-lock.yml@main
+    with:
+      app-client-id: ${{ vars.PR_BOT_CLIENT_ID }}
+    secrets:
+      app-private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}

@@ -44,7 +44,8 @@ class CatalogScreenContentTest {
             }
 
             // Ensure it renders without crashing.
-            // We avoid hardcoded string checks because localization/resources might behave differently in headless WASM tests.
+            // We avoid hardcoded string checks because localization/resources
+            // might behave differently in headless WASM tests.
             // For now, if setContent completes without throwing, the smoke test passes.
         }
 }

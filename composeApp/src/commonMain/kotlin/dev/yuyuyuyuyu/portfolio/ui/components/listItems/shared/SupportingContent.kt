@@ -49,7 +49,7 @@ fun SupportingContent(
 
 @Preview
 @Composable
-private fun SupportingContentPreview() {
+fun SupportingContentPreview() {
     SupportingContent(
         description = "This is a sample description.",
         techStackSet = setOf(TechStack.Kotlin, TechStack.JetpackCompose),

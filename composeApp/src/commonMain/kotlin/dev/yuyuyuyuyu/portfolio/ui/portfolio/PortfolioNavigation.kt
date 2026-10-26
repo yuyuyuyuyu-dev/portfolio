@@ -25,37 +25,41 @@ fun PortfolioNavigation(
         onBack = { backStack.removeLastOrNull() },
         entryProvider = { key ->
             when (key) {
-                PortfolioRoute.Today ->
+                PortfolioRoute.Today -> {
                     NavEntry(key) {
                         TodayScreen(
                             viewModels = viewModels,
                             onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) },
                         )
                     }
+                }
 
-                PortfolioRoute.Catalog ->
+                PortfolioRoute.Catalog -> {
                     NavEntry(key) {
                         CatalogScreen(
                             viewModels = viewModels,
                             onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) },
                         )
                     }
+                }
 
-                PortfolioRoute.Search ->
+                PortfolioRoute.Search -> {
                     NavEntry(key) {
                         SearchScreen(
                             viewModels = viewModels,
                             onProductClick = { url -> backStack.add(PortfolioRoute.Detail(url)) },
                         )
                     }
+                }
 
-                is PortfolioRoute.Detail ->
+                is PortfolioRoute.Detail -> {
                     NavEntry(key) {
                         DetailEntry(
                             viewModels = viewModels,
                             repositoryUrl = key.repositoryUrl,
                         )
                     }
+                }
             }
         },
     )
@@ -88,6 +92,6 @@ private fun DetailEntry(
 
 @Preview
 @Composable
-private fun PortfolioNavigationPreview() {
+fun PortfolioNavigationPreview() {
     TODO()
 }

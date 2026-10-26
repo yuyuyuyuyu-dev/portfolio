@@ -36,7 +36,8 @@ class TodayScreenContentTest {
             // Header Check
             onNodeWithText("Today").assertIsDisplayed()
 
-            // Ensure the list renders without crash. Items lower down might not be in the hierarchy yet due to LazyColumn lazy-loading.
+            // Ensure the list renders without crash.
+            // Items lower down might not be in the hierarchy yet due to LazyColumn lazy-loading.
             // It's sufficient to check the top visible items for a smoke test.
         }
 }

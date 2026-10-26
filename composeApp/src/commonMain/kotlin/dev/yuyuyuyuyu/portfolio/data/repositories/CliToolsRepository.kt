@@ -41,7 +41,11 @@ class CliToolsRepository {
                 techStack = setOf(TechStack.Docker),
                 repositoryUrl = "https://github.com/yuyuyuyuyu-dev/myDE",
                 category = dev.yuyuyuyuyu.portfolio.data.models.ProductCategory.CliTool,
-                platforms = setOf(dev.yuyuyuyuyu.portfolio.data.models.Platform.Linux, dev.yuyuyuyuyu.portfolio.data.models.Platform.Cli),
+                platforms =
+                    setOf(
+                        dev.yuyuyuyuyu.portfolio.data.models.Platform.Linux,
+                        dev.yuyuyuyuyu.portfolio.data.models.Platform.Cli,
+                    ),
                 motivationRes = Res.string.tool_mot_myde,
             ),
             Product(

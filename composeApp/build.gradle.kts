@@ -151,9 +151,32 @@ tasks.matching { it.name.contains("Ktlint", ignoreCase = true) }.configureEach {
 }
 
 ktlint {
+    version =
+        libs.versions.ktlint.cli
+            .get()
     filter {
-        exclude { it.file.path.contains("build/generated/") }
+        val buildPath =
+            layout.buildDirectory
+                .get()
+                .asFile.path + File.separator
+        exclude { it.file.path.startsWith(buildPath) }
     }
+}
+
+aboutLibraries {
+    export {
+        outputFile = file("src/commonMain/composeResources/files/aboutlibraries.json")
+    }
+}
+
+compose.resources {
+    customDirectory(
+        sourceSetName = "commonMain",
+        directoryProvider =
+            tasks
+                .named("exportLibraryDefinitions")
+                .map { layout.projectDirectory.dir("src/commonMain/composeResources") },
+    )
 }
 
 val composeVersion = libs.versions.composeMultiplatform.get()
@@ -177,10 +200,17 @@ dependencies.components.all {
         withDependencies {
             forEach { dependency ->
                 when (dependency.group) {
-                    in composeLockstepGroups -> dependency.version { reject("($composeVersion,)") }
-                    "org.jetbrains.compose.material3" -> dependency.version { reject("($material3Version,)") }
-                    "org.jetbrains.compose.material3.adaptive" ->
+                    in composeLockstepGroups -> {
+                        dependency.version { reject("($composeVersion,)") }
+                    }
+
+                    "org.jetbrains.compose.material3" -> {
+                        dependency.version { reject("($material3Version,)") }
+                    }
+
+                    "org.jetbrains.compose.material3.adaptive" -> {
                         dependency.version { reject("($material3AdaptiveVersion,)") }
+                    }
                 }
             }
         }

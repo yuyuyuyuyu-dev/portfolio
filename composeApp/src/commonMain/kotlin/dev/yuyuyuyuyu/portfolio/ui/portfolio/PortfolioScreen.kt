@@ -40,7 +40,10 @@ fun PortfolioScreen(
         }
 
     val currentRoute = backStack.lastOrNull()
-    val isTopLevel = currentRoute == PortfolioRoute.Today || currentRoute == PortfolioRoute.Catalog || currentRoute == PortfolioRoute.Search
+    val isTopLevel =
+        currentRoute == PortfolioRoute.Today ||
+            currentRoute == PortfolioRoute.Catalog ||
+            currentRoute == PortfolioRoute.Search
     val currentTab = if (isTopLevel) currentRoute else backStack.getOrNull(1) ?: PortfolioRoute.Today
 
     fun navigateToTab(route: PortfolioRoute) {
@@ -106,7 +109,7 @@ fun PortfolioScreen(
 
 @Preview
 @Composable
-private fun PortfolioScreenPreview() {
+fun PortfolioScreenPreview() {
     // プレビュー用にモックやTODOを使用
     Text("Portfolio Screen Preview")
 }
