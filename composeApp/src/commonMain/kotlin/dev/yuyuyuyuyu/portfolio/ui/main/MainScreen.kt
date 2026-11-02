@@ -6,7 +6,7 @@ import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import dev.yuyuyuyuyu.portfolio.di.AppComponent
-import dev.yuyuyuyuyu.portfolio.di.create
+import dev.yuyuyuyuyu.portfolio.di.createAppComponent
 
 @Composable
 fun MainScreen(appComponent: AppComponent) {
@@ -24,5 +24,5 @@ fun MainScreen(appComponent: AppComponent) {
 @Preview
 @Composable
 fun MainScreenPreview() {
-    MainScreen(appComponent = AppComponent::class.create())
+    MainScreen(appComponent = createAppComponent())
 }

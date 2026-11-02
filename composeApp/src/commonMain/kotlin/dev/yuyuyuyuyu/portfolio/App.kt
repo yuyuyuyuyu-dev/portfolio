@@ -5,8 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.retain.retain
 import androidx.compose.ui.tooling.preview.Preview
 import dev.yuyuyuyuyu.mymaterialtheme.MyMaterialTheme
-import dev.yuyuyuyuyu.portfolio.di.AppComponent
-import dev.yuyuyuyuyu.portfolio.di.create
+import dev.yuyuyuyuyu.portfolio.di.createAppComponent
 import dev.yuyuyuyuyu.portfolio.ui.main.MainScreen
 import org.jetbrains.compose.resources.stringResource
 import portfolio.composeapp.generated.resources.Res
@@ -15,7 +14,7 @@ import portfolio.composeapp.generated.resources.app_name
 @Composable
 @Preview
 fun App() {
-    val appComponent = retain { AppComponent::class.create() }
+    val appComponent = retain { createAppComponent() }
     val appName = stringResource(Res.string.app_name)
 
     LaunchedEffect(appName) {

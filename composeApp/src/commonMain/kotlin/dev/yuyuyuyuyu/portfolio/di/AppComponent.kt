@@ -7,3 +7,5 @@ import me.tatarka.inject.annotations.Component
 abstract class AppComponent {
     abstract val portfolioScreen: PortfolioScreen
 }
+
+expect fun createAppComponent(): AppComponent
