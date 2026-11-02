@@ -6,7 +6,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import dev.yuyuyuyuyu.portfolio.di.AppComponent
-import dev.yuyuyuyuyu.portfolio.di.create
+import dev.yuyuyuyuyu.portfolio.di.createAppComponent
 import dev.yuyuyuyuyu.portfolio.ui.licenses.LicensesScreen
 
 @Composable
@@ -46,6 +46,6 @@ fun MainNavigation(
 fun MainNavigationPreview() {
     MainNavigation(
         backStack = mutableListOf(MainNavigationRoute.Portfolio),
-        appComponent = AppComponent::class.create(),
+        appComponent = createAppComponent(),
     )
 }
