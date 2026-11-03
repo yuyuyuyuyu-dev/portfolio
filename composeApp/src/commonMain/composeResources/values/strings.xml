@@ -87,6 +87,8 @@
     <string name="tool_desc_jarc">Shell script that bundles the necessary steps to generate a jar file.</string>
     <string name="tool_mot_jarc">In my Java class at vocational school, typing the same boilerplate commands repeatedly to generate an executable jar file was a hassle, so I scripted and automated it on the spot.</string>
 
+    <string name="tool_desc_kotlinstall">A tool that installs programs written in Kotlin directly from GitHub repositories, like `go install` for Go and `cargo install --git` for Rust.</string>
+
     <string name="tool_desc_rubberduck">A rubber duck written in Go.</string>
 
     <string name="tool_desc_gen_licenses">CLI tool to collect licenses of third-party libraries in a Node.js project and export them in JSON format.</string>
@@ -102,11 +104,12 @@
     <string name="plugin_desc_semicolon">Neovim plugin to insert a \";\" at the end of the line.</string>
     <string name="plugin_mot_semicolon">In languages like Rust that require trailing semicolons, manually moving the cursor to the end of the line just to type a semicolon was a pain. I created a plugin that inserts a semicolon at the end of the line while maintaining the current cursor position.</string>
 
-    <string name="plugin_desc_ghadmissionhook">A Claude Code hook that keeps GitHub access through the `gh` command read-only, and asks before creating or editing a pull request.</string>
-    <string name="plugin_mot_ghadmissionhook">Claude Code now starts in auto mode by default, so I gave up on preventing every unintended change to my local files. I chose to accept that risk locally and defend the remote side properly instead, and the only remote my command line could reach was GitHub through the `gh` command.</string>
+    <string name="plugin_desc_ghadmissionhook">A hook that restricts how Claude Code reaches GitHub.</string>
 
     <string name="action_desc_assertnochanges">A GitHub Action that asserts your desktop app, CLI tool or anything else makes no unexpected changes to files.</string>
     <string name="action_mot_assertnochanges">I was about to post on social media about a desktop app I had built, when I realized that if I said an AI built it, some people would worry it might delete or rewrite files behind their back. Nothing seemed to exist that catches that, so I built it.</string>
+
+    <string name="action_desc_updatecomposemultiplatform">A reusable workflow that updates Compose Multiplatform and its related libraries in the right combination.</string>
 
     <!-- Libraries -->
     <string name="lib_desc_licenses">Component library for Angular Material that provides a list of third-party licenses.</string>
@@ -172,4 +175,5 @@
     <string name="ui_installation">Installation</string>
     <string name="ui_copy_command">Copy command</string>
     <string name="ui_clear">Clear</string>
+    <string name="ui_readme_load_failed">Could not load the README.</string>
 </resources>
