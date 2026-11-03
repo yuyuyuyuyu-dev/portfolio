@@ -1,6 +1,7 @@
 package dev.yuyuyuyuyu.portfolio.ui.portfolio.detail
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,11 +32,18 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
@@ -61,11 +69,14 @@ import portfolio.composeapp.generated.resources.ui_why_built
 @Composable
 fun DetailScreen(item: PortfolioItem) {
     val scrollState = rememberScrollState()
+    val coroutineScope = rememberCoroutineScope()
+    var viewport by remember { mutableStateOf<LayoutCoordinates?>(null) }
 
     Column(
         modifier =
             Modifier
                 .fillMaxSize()
+                .onGloballyPositioned { viewport = it }
                 .verticalScroll(scrollState)
                 .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(32.dp),
@@ -88,6 +99,20 @@ fun DetailScreen(item: PortfolioItem) {
         val installCommand = item.installCommand
         if (!installCommand.isNullOrBlank()) {
             InstallCommandSection(installCommand = installCommand)
+        }
+
+        val readme = item.readme
+        if (readme != null) {
+            ReadmeSection(
+                readme = readme,
+                onHeadingLinkClick = { heading ->
+                    viewport?.let { coordinates ->
+                        coroutineScope.launch {
+                            scrollState.animateScrollBy(coordinates.localPositionOf(heading, Offset.Zero).y)
+                        }
+                    }
+                },
+            )
         }
     }
 }

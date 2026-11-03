@@ -50,6 +50,14 @@ kotlin {
             implementation(libs.yuyuyuyuyu.simpleTopAppBar)
             implementation(compose.materialIconsExtended)
             implementation(libs.yuyuyuyuyu.myMaterialTheme)
+            implementation(libs.ktor.client.core)
+            implementation(libs.markdownRenderer.m3)
+            implementation(libs.markdownRenderer.coil3)
+            implementation(libs.coil.networkKtor3)
+            implementation(libs.coil.svg)
+        }
+        webMain.dependencies {
+            implementation(libs.ktor.client.js)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

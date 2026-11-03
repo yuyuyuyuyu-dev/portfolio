@@ -87,6 +87,8 @@
     <string name="tool_desc_jarc">jarファイルの生成に必要な作業をひとまとめにしたシェルスクリプト</string>
     <string name="tool_mot_jarc">専門学校のJavaの授業で、実行可能なjarファイルを生成するまでに定型的なコマンドを何度も打たされるのが面倒だったため、その場でスクリプト化して自動化した。</string>
 
+    <string name="tool_desc_kotlinstall">Goの`go install`やRustの`cargo install --git`のように、Kotlinで書かれたプログラムをGitHubのリポジトリから直接インストールするツール</string>
+
     <string name="tool_desc_rubberduck">Go言語製のラバーダック</string>
 
     <string name="tool_desc_gen_licenses">Node.jsプロジェクトのサードパーティライブラリのライセンスを収集し、JSON形式でエクスポートするCLIツール</string>
@@ -102,11 +104,12 @@
     <string name="plugin_desc_semicolon">行末に";"を挿入するNeovimプラグイン</string>
     <string name="plugin_mot_semicolon">Rustなど行末にセミコロンが必要な言語で、わざわざ行末にカーソルを移動させてからセミコロンを入力するのが面倒だったため。現在位置を維持したまま行末にセミコロンを挿入する関数を提供するプラグインを作成した。</string>
 
-    <string name="plugin_desc_ghadmissionhook">`gh`コマンドによるGitHubへのアクセスを読み取り専用に制限し、プルリクエストの作成と編集の前には確認を求めるClaude Codeのフック</string>
-    <string name="plugin_mot_ghadmissionhook">Claude Codeがデフォルトでオートモードで起動するようになり、ローカルファイルへの意図しない変更をすべて防ぐのは諦めたため。ローカルのリスクは受け入れる代わりにリモート側をしっかり守ることにしたが、コマンドラインから届くリモートは`gh`コマンド経由のGitHubだけだったので、そこを制限するフックを作った。</string>
+    <string name="plugin_desc_ghadmissionhook">Claude CodeがGitHubにアクセスする方法を制限するフック</string>
 
     <string name="action_desc_assertnochanges">デスクトップアプリやCLIツールなどがファイルに予期しない変更を加えないことを検証するGitHub Actionsのアクション</string>
     <string name="action_mot_assertnochanges">自作のデスクトップアプリをSNSで紹介しようとした時、AIが作ったと言えば、ファイルを勝手に削除したり書き換えたりするのではないかと心配する人がいるだろうと気づいたため。それを検出する仕組みが見当たらなかったので自作した。</string>
+
+    <string name="action_desc_updatecomposemultiplatform">Compose Multiplatformとその関連ライブラリを、正しい組み合わせで更新する再利用可能なワークフロー</string>
 
     <!-- Libraries -->
     <string name="lib_desc_licenses">サードパーティライセンスのリストを提供するAngular Material用のコンポーネントライブラリ</string>
@@ -170,4 +173,5 @@
     <string name="ui_installation">インストール</string>
     <string name="ui_copy_command">Copy command</string>
     <string name="ui_clear">Clear</string>
+    <string name="ui_readme_load_failed">READMEを読み込めませんでした。</string>
 </resources>
