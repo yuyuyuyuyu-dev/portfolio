@@ -12,4 +12,5 @@ interface PortfolioItem {
     val category: ProductCategory
     val motivationRes: StringResource?
     val installCommand: String?
+    val readme: Readme?
 }

@@ -15,6 +15,7 @@ data class App(
     override val category: ProductCategory = ProductCategory.App,
     override val motivationRes: StringResource? = null,
     override val installCommand: String? = null,
+    override val readme: Readme? = null,
     val screenshots: List<DrawableResource> = listOf(),
     val url: String? = null,
     val icon: DrawableResource = Res.drawable.default_icon,

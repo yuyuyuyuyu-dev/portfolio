@@ -12,6 +12,7 @@ data class Product(
     override val category: ProductCategory,
     override val motivationRes: StringResource? = null,
     override val installCommand: String? = null,
+    override val readme: Readme? = null,
 ) : PortfolioItem {
     init {
         require(nameRes != null || nameFallback != null) { "Either nameRes or nameFallback must be provided" }
