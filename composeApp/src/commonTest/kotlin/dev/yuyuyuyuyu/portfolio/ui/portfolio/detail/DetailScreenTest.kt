@@ -1,5 +1,7 @@
 package dev.yuyuyuyuyu.portfolio.ui.portfolio.detail
 
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalProvidableLocaleList
 import androidx.compose.ui.test.ComposeUiTest
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
@@ -7,13 +9,22 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.v2.runComposeUiTest
+import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.intl.LocaleList
 import dev.yuyuyuyuyu.portfolio.data.models.App
 import dev.yuyuyuyuyu.portfolio.data.repositories.CliToolsRepository
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.respond
+import io.ktor.client.engine.mock.respondError
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import org.jetbrains.compose.resources.getString
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.app_name
+import portfolio.composeapp.generated.resources.ui_readme_load_failed
 import kotlin.test.Test
 
 class DetailScreenTest {
@@ -41,17 +52,66 @@ class DetailScreenTest {
 
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun detailScreen_showsTheReadme() =
+    fun detailScreen_showsTheReadmeFromGitHubInEnglish() =
         runComposeUiTest {
-            val kotlinstall = CliToolsRepository().getCliTools().first { it.nameFallback == "kotlinstall" }
+            val kotlinstall = kotlinstall()
+            val gitHub =
+                MockEngine { request ->
+                    if (request.url.toString() == kotlinstall.readme?.rawUrl) {
+                        respond("# kotlinstall\n\nThe README on GitHub.")
+                    } else {
+                        respondError(HttpStatusCode.NotFound)
+                    }
+                }
 
             setContent {
-                DetailScreen(item = kotlinstall)
+                CompositionLocalProvider(
+                    LocalProvidableLocaleList provides LocaleList(Locale("en")),
+                    LocalHttpClient provides HttpClient(gitHub),
+                ) {
+                    DetailScreen(item = kotlinstall)
+                }
             }
 
-            awaitNode(hasText("kotlinstall install https://github.com/user/repository.git", substring = true))
+            awaitNode(hasText("The README on GitHub."))
+        }
+
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun detailScreen_showsTheJapaneseReadmeInJapanese() =
+        runComposeUiTest {
+            val kotlinstall = kotlinstall()
+
+            setContent {
+                CompositionLocalProvider(LocalProvidableLocaleList provides LocaleList(Locale("ja"))) {
+                    DetailScreen(item = kotlinstall)
+                }
+            }
+
+            awaitNode(hasText("それでもKotlinが好きで諦めきれなかったので、kotlinstallを作りました。"))
+        }
+
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun detailScreen_showsAnErrorWhenTheReadmeCannotBeLoaded() =
+        runComposeUiTest {
+            val kotlinstall = kotlinstall()
+            val gitHub = MockEngine { respondError(HttpStatusCode.InternalServerError) }
+
+            setContent {
+                CompositionLocalProvider(
+                    LocalProvidableLocaleList provides LocaleList(Locale("en")),
+                    LocalHttpClient provides HttpClient(gitHub),
+                ) {
+                    DetailScreen(item = kotlinstall)
+                }
+            }
+
+            awaitNode(hasText(getString(Res.string.ui_readme_load_failed)))
         }
 }
+
+private fun kotlinstall() = CliToolsRepository().getCliTools().first { it.nameFallback == "kotlinstall" }
 
 @OptIn(ExperimentalTestApi::class)
 private suspend fun ComposeUiTest.awaitNode(matcher: SemanticsMatcher) {
