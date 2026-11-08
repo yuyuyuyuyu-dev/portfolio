@@ -11,17 +11,19 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import coil3.compose.AsyncImagePainter
 import com.mikepenz.markdown.coil3.Coil3ImageTransformerImpl
 import com.mikepenz.markdown.compose.components.MarkdownComponentModel
@@ -31,31 +33,40 @@ import com.mikepenz.markdown.compose.elements.MarkdownTable
 import com.mikepenz.markdown.compose.elements.MarkdownTableHeader
 import com.mikepenz.markdown.compose.elements.MarkdownTableRow
 import com.mikepenz.markdown.m3.Markdown
+import com.mikepenz.markdown.m3.markdownColor
+import com.mikepenz.markdown.m3.markdownTypography
 import com.mikepenz.markdown.model.ImageTransformer
+import com.mikepenz.markdown.model.markdownAnnotator
 import dev.yuyuyuyuyu.portfolio.data.models.Readme
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.expectSuccess
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
+import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.MarkdownTokenTypes
+import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.findChildOfType
 import org.intellij.markdown.ast.getTextInNode
 import org.jetbrains.compose.resources.stringResource
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.ui_readme_load_failed
 
+val LocalHttpClient = staticCompositionLocalOf { HttpClient() }
+
 @Composable
 fun ReadmeSection(
     readme: Readme,
     onHeadingLinkClick: (LayoutCoordinates) -> Unit,
 ) {
-    val japanese = Locale.current.language == "ja"
-    val markdown by produceState<Result<String>?>(null, readme, japanese) {
+    val japanese = LocalLocale.current.language == "ja"
+    val httpClient = LocalHttpClient.current
+    val markdown by produceState<Result<String>?>(null, readme, japanese, httpClient) {
         value =
             runCatching {
                 if (japanese) {
                     Res.readBytes(readme.japaneseFile).decodeToString()
                 } else {
-                    HttpClient { expectSuccess = true }.use { it.get(readme.rawUrl).bodyAsText() }
+                    httpClient.get(readme.rawUrl) { expectSuccess = true }.bodyAsText()
                 }
             }
     }
@@ -103,11 +114,29 @@ private fun ReadmeMarkdown(
             }
         }
 
+    val colors = markdownColor()
+    val typography = markdownTypography()
+    val codeSpanStyle = typography.inlineCode.copy(background = colors.inlineCodeBackground).toSpanStyle()
+    val annotator =
+        remember(codeSpanStyle) {
+            markdownAnnotator { content, child ->
+                if (child.type == MarkdownElementTypes.CODE_SPAN) {
+                    withStyle(codeSpanStyle) { append(" ${child.codeSpanText(content)} ") }
+                    true
+                } else {
+                    false
+                }
+            }
+        }
+
     CompositionLocalProvider(LocalUriHandler provides readmeUriHandler) {
         Markdown(
             content = markdown,
+            colors = colors,
+            typography = typography,
             modifier = Modifier.fillMaxWidth(),
             imageTransformer = ReadmeImageTransformer,
+            annotator = annotator,
             components =
                 markdownComponents(
                     heading1 = { ReadmeHeading(it, it.typography.h1, headings) },
@@ -181,6 +210,18 @@ private object ReadmeImageTransformer : ImageTransformer {
         } else {
             Coil3ImageTransformerImpl.intrinsicSize(painter)
         }
+    }
+}
+
+private fun ASTNode.codeSpanText(content: String): String {
+    val text =
+        content
+            .substring(children.first().endOffset, children.last().startOffset)
+            .replace('\n', ' ')
+    return if (text.startsWith(' ') && text.endsWith(' ') && text.isNotBlank()) {
+        text.substring(1, text.length - 1)
+    } else {
+        text
     }
 }
 
