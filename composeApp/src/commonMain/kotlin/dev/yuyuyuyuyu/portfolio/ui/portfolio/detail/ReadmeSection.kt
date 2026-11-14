@@ -2,6 +2,7 @@ package dev.yuyuyuyuyu.portfolio.ui.portfolio.detail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,6 +25,8 @@ import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImagePainter
 import com.mikepenz.markdown.coil3.Coil3ImageTransformerImpl
 import com.mikepenz.markdown.compose.components.MarkdownComponentModel
@@ -115,7 +118,12 @@ private fun ReadmeMarkdown(
         }
 
     val colors = markdownColor()
-    val typography = markdownTypography()
+    val textFontFamily = MaterialTheme.typography.bodyLarge.fontFamily
+    val typography =
+        markdownTypography(
+            code = MaterialTheme.typography.bodyMedium.copy(fontFamily = textFontFamily),
+            inlineCode = MaterialTheme.typography.bodyLarge.copy(fontSize = TextUnit.Unspecified),
+        )
     val codeSpanStyle = typography.inlineCode.copy(background = colors.inlineCodeBackground).toSpanStyle()
     val annotator =
         remember(codeSpanStyle) {
@@ -164,7 +172,12 @@ private fun ReadmeHeading(
             ?.toString()
             ?.toAnchor()
 
-    Box(modifier = Modifier.onGloballyPositioned { coordinates -> anchor?.let { headings[it] = coordinates } }) {
+    Box(
+        modifier =
+            Modifier
+                .padding(top = 24.dp, bottom = 12.dp)
+                .onGloballyPositioned { coordinates -> anchor?.let { headings[it] = coordinates } },
+    ) {
         MarkdownHeader(content = model.content, node = model.node, style = style)
     }
 }
