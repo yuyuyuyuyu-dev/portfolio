@@ -35,11 +35,14 @@ import com.mikepenz.markdown.compose.elements.MarkdownHeader
 import com.mikepenz.markdown.compose.elements.MarkdownTable
 import com.mikepenz.markdown.compose.elements.MarkdownTableHeader
 import com.mikepenz.markdown.compose.elements.MarkdownTableRow
+import com.mikepenz.markdown.compose.extendedspans.ExtendedSpans
+import com.mikepenz.markdown.compose.extendedspans.RoundedCornerSpanPainter
 import com.mikepenz.markdown.m3.Markdown
 import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
 import com.mikepenz.markdown.model.ImageTransformer
 import com.mikepenz.markdown.model.markdownAnnotator
+import com.mikepenz.markdown.model.markdownExtendedSpans
 import dev.yuyuyuyuyu.portfolio.data.models.Readme
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.expectSuccess
@@ -129,7 +132,7 @@ private fun ReadmeMarkdown(
         remember(codeSpanStyle) {
             markdownAnnotator { content, child ->
                 if (child.type == MarkdownElementTypes.CODE_SPAN) {
-                    withStyle(codeSpanStyle) { append(" ${child.codeSpanText(content)} ") }
+                    withStyle(codeSpanStyle) { append(" ${child.codeSpanText(content)} ") }
                     true
                 } else {
                     false
@@ -145,6 +148,7 @@ private fun ReadmeMarkdown(
             modifier = Modifier.fillMaxWidth(),
             imageTransformer = ReadmeImageTransformer,
             annotator = annotator,
+            extendedSpans = markdownExtendedSpans { remember { ExtendedSpans(RoundedCornerSpanPainter()) } },
             components =
                 markdownComponents(
                     heading1 = { ReadmeHeading(it, it.typography.h1, headings) },
