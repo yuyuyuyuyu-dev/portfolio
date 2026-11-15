@@ -87,7 +87,7 @@
     <string name="tool_desc_jarc">jarファイルの生成に必要な作業をひとまとめにしたシェルスクリプト</string>
     <string name="tool_mot_jarc">専門学校のJavaの授業で、実行可能なjarファイルを生成するまでに定型的なコマンドを何度も打たされるのが面倒だったため、その場でスクリプト化して自動化した。</string>
 
-    <string name="tool_desc_kotlinstall">Goの`go install`やRustの`cargo install --git`のように、Kotlinで書かれたプログラムをGitHubのリポジトリから直接インストールするツール</string>
+    <string name="tool_desc_kotlinstall">Goの `go install` やRustの `cargo install --git` のように、Kotlinで書かれたプログラムをGitHubのリポジトリから直接インストールするツール</string>
 
     <string name="tool_desc_rubberduck">Go言語製のラバーダック</string>
 
