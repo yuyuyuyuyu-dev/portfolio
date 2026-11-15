@@ -29,7 +29,7 @@ GitHub上のCompose Multiplatformリポジトリにある[CHANGELOG](https://git
 
 ### インストール
 
-次のファイルを`.github/workflows/update-compose-multiplatform.yml`としてリポジトリに追加してください:
+次のファイルを `.github/workflows/update-compose-multiplatform.yml` としてリポジトリに追加してください:
 
 ```yaml
 name: Update Compose Multiplatform
@@ -51,14 +51,14 @@ jobs:
 
 ファイル内の次の部分を置き換えてください:
 
-- `<version>`を、使用するこのワークフローのバージョン（`v1`など）に置き換えます。
-- `<PULL_REQUEST_APP_CLIENT_ID>`と`<PULL_REQUEST_APP_PRIVATE_KEY>`を、自分の変数とシークレットの名前に置き換えます。
+- `<version>` を、使用するこのワークフローのバージョン（`v1` など）に置き換えます。
+- `<PULL_REQUEST_APP_CLIENT_ID>` と `<PULL_REQUEST_APP_PRIVATE_KEY>` を、自分の変数とシークレットの名前に置き換えます。
 
 このファイルは毎日UTC 7:31にワークフローを実行します。別の時刻に実行するには、[GitHub Actionsのドキュメント](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)でスケジュールの書き方を参照してください。各実行では、更新があればプルリクエストを作成します。
 
 ### オプション
 
-yarn.lockの更新や自動マージの有効化も行うには、ファイルの`with`の下に入力を追加します。すべてのオプションを有効にすると、その部分は次のようになります:
+yarn.lockの更新や自動マージの有効化も行うには、ファイルの `with` の下に入力を追加します。すべてのオプションを有効にすると、その部分は次のようになります:
 
 ```yaml
 with:
@@ -75,19 +75,19 @@ with:
 
 | 名前                                   | デフォルト | 説明                                                                                                                                                              |
 | -------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `update-js-yarn-lock`                  | `false`    | `true`にすると、`./gradlew kotlinUpgradeYarnLock`で`kotlin-js-store/yarn.lock`を更新します。                                                                      |
-| `update-wasm-yarn-lock`                | `false`    | `true`にすると、`./gradlew kotlinWasmUpgradeYarnLock`で`kotlin-js-store/wasm/yarn.lock`を更新します。                                                             |
+| `update-js-yarn-lock`                  | `false`    | `true` にすると、`./gradlew kotlinUpgradeYarnLock` で `kotlin-js-store/yarn.lock` を更新します。                                                                  |
+| `update-wasm-yarn-lock`                | `false`    | `true` にすると、`./gradlew kotlinWasmUpgradeYarnLock` で `kotlin-js-store/wasm/yarn.lock` を更新します。                                                         |
 | `jdk-distribution-to-update-yarn-lock` |            | Gradleを実行するJDKのディストリビューション。[actions/setup-java](https://github.com/actions/setup-java)での名前で指定します。yarn.lockを更新する場合は必須です。 |
 | `jdk-version-to-update-yarn-lock`      |            | Gradleを実行するJDKのバージョン。yarn.lockを更新する場合は必須です。                                                                                              |
-| `app-client-id`                        |            | プルリクエストを作成するGitHub AppのクライアントID。`app-private-key`シークレットと一緒に渡します。                                                               |
-| `auto-merge`                           | `disable`  | 自動マージを有効にする際のマージ方法。`squash`、`merge`、`rebase`のいずれかです。`disable`の場合は自動マージを有効にしません。                                    |
-| `auto-merge-update-types`              |            | 自動マージを有効にするCompose Multiplatformの更新の種類。`major`、`minor`、`patch`をカンマ区切りで指定します。`auto-merge`が`disable`でない場合は必須です。       |
+| `app-client-id`                        |            | プルリクエストを作成するGitHub AppのクライアントID。`app-private-key` シークレットと一緒に渡します。                                                              |
+| `auto-merge`                           | `disable`  | 自動マージを有効にする際のマージ方法。`squash`、`merge`、`rebase` のいずれかです。`disable` の場合は自動マージを有効にしません。                                  |
+| `auto-merge-update-types`              |            | 自動マージを有効にするCompose Multiplatformの更新の種類。`major`、`minor`、`patch` をカンマ区切りで指定します。`auto-merge` が `disable` でない場合は必須です。   |
 
 ### シークレット
 
-| 名前              | 説明                                                                              |
-| ----------------- | --------------------------------------------------------------------------------- |
-| `app-private-key` | プルリクエストを作成するGitHub Appの秘密鍵。`app-client-id`入力と一緒に渡します。 |
+| 名前              | 説明                                                                               |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| `app-private-key` | プルリクエストを作成するGitHub Appの秘密鍵。`app-client-id` 入力と一緒に渡します。 |
 
 ## ライセンス
 
