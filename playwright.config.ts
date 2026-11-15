@@ -5,6 +5,7 @@ export default defineConfig({
 	forbidOnly: !!process.env.CI,
 	use: {
 		baseURL: "http://127.0.0.1:8081",
+		channel: "chrome",
 	},
 	webServer: {
 		command:

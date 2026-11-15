@@ -74,5 +74,5 @@ jobs:
       - name: Install Playwright
         run: npm ci
 
-      - name: Run the specifications
+      - name: Run the browser tests
         run: npm run playwright -- test

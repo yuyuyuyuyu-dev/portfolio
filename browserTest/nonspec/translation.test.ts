@@ -8,7 +8,7 @@ import {
 	test,
 } from "@playwright/test";
 
-test("should not offer to translate the page in a browser of any language", async ({
+test("should not offer to translate the page in Chrome of any language", async ({
 	baseURL,
 }, testInfo) => {
 	test.setTimeout(15 * 60_000);
