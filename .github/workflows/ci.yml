@@ -28,7 +28,7 @@ jobs:
       compose-multiplatform: true
 
   kotlin-test:
-    name: Kotlin test
+    name: kotlin-test
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -43,7 +43,7 @@ jobs:
         with:
           compose-multiplatform: true
 
-      - name: Run the Kotlin tests
+      - name: Run the kotlin-test tests
         run: ./gradlew wasmJsTest
 
   playwright:
