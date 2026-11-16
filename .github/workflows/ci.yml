@@ -27,8 +27,8 @@ jobs:
     with:
       compose-multiplatform: true
 
-  test:
-    name: Run tests
+  kotlin-test:
+    name: Kotlin test
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -43,11 +43,11 @@ jobs:
         with:
           compose-multiplatform: true
 
-      - name: Run tests
+      - name: Run the Kotlin tests
         run: ./gradlew wasmJsTest
 
-  build:
-    name: Build
+  playwright:
+    name: Playwright
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -74,5 +74,24 @@ jobs:
       - name: Install Playwright
         run: npm ci
 
-      - name: Run the browser tests
+      - name: Run the Playwright tests
         run: npm run playwright -- test
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up the JDK and Gradle
+        uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
+        with:
+          compose-multiplatform: true
+
+      - name: Build
+        run: ./gradlew :composeApp:wasmJsBrowserDistribution
