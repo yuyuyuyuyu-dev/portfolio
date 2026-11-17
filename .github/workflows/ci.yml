@@ -13,11 +13,11 @@ concurrency:
 permissions: {}
 
 jobs:
-  oxfmt:
-    name: Oxfmt
+  biome:
+    name: Biome
     permissions:
       contents: read
-    uses: yuyuyuyuyu-dev/repo-config/.github/workflows/oxfmt.yml@main
+    uses: yuyuyuyuyu-dev/repo-config/.github/workflows/biome.yml@main
 
   kotlin-lint:
     name: Kotlin lint
@@ -27,8 +27,8 @@ jobs:
     with:
       compose-multiplatform: true
 
-  test:
-    name: Run tests
+  kotlin-test:
+    name: kotlin-test
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -43,8 +43,39 @@ jobs:
         with:
           compose-multiplatform: true
 
-      - name: Run tests
+      - name: Run the kotlin-test tests
         run: ./gradlew wasmJsTest
+
+  playwright:
+    name: Playwright
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up the JDK and Gradle
+        uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
+        with:
+          compose-multiplatform: true
+
+      - name: Build
+        run: ./gradlew :composeApp:wasmJsBrowserDistribution
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Install Playwright
+        run: npm ci
+
+      - name: Run the Playwright tests
+        run: npm run playwright -- test
 
   build:
     name: Build

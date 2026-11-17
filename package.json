@@ -1,10 +1,13 @@
 {
-  "name": "portfolio",
-  "private": true,
-  "scripts": {
-    "oxfmt": "oxfmt"
-  },
-  "devDependencies": {
-    "oxfmt": "0.77.0"
-  }
+	"name": "portfolio",
+	"private": true,
+	"scripts": {
+		"biome": "biome",
+		"playwright": "playwright"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.6.7",
+		"@playwright/test": "1.65.1",
+		"http-server": "14.1.1"
+	}
 }
