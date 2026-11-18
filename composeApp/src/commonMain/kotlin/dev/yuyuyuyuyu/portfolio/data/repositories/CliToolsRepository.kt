@@ -1,6 +1,7 @@
 package dev.yuyuyuyuyu.portfolio.data.repositories
 
 import dev.yuyuyuyuyu.portfolio.data.models.Product
+import dev.yuyuyuyuyu.portfolio.data.models.Readme
 import dev.yuyuyuyuyu.portfolio.data.models.TechStack
 import me.tatarka.inject.annotations.Inject
 import portfolio.composeapp.generated.resources.Res
@@ -8,6 +9,7 @@ import portfolio.composeapp.generated.resources.tool_desc_gen_licenses
 import portfolio.composeapp.generated.resources.tool_desc_household
 import portfolio.composeapp.generated.resources.tool_desc_html2pdf
 import portfolio.composeapp.generated.resources.tool_desc_jarc
+import portfolio.composeapp.generated.resources.tool_desc_kotlinstall
 import portfolio.composeapp.generated.resources.tool_desc_myde
 import portfolio.composeapp.generated.resources.tool_desc_myde_command
 import portfolio.composeapp.generated.resources.tool_desc_myinstaller
@@ -114,6 +116,25 @@ class CliToolsRepository {
                         "--chromium-path \"\$(type -p chromium-browser)\" " +
                         "--src {Source HTML file path} " +
                         "--dest {Destination PDF path}",
+            ),
+            Product(
+                nameFallback = "kotlinstall",
+                descriptionRes = Res.string.tool_desc_kotlinstall,
+                techStack = setOf(TechStack.Kotlin),
+                repositoryUrl = "https://github.com/yuyuyuyuyu-dev/kotlinstall",
+                category = dev.yuyuyuyuyu.portfolio.data.models.ProductCategory.CliTool,
+                platforms =
+                    setOf(
+                        dev.yuyuyuyuyu.portfolio.data.models.Platform.MacOS,
+                        dev.yuyuyuyuyu.portfolio.data.models.Platform.Linux,
+                        dev.yuyuyuyuyu.portfolio.data.models.Platform.Cli,
+                    ),
+                readme =
+                    Readme(
+                        rawUrl = "https://raw.githubusercontent.com/yuyuyuyuyu-dev/kotlinstall/main/README.md",
+                        pageUrl = "https://github.com/yuyuyuyuyu-dev/kotlinstall/blob/main/README.md",
+                        japaneseFile = "files/readmes/ja/kotlinstall.md",
+                    ),
             ),
         ).sortedBy { it.nameFallback }
 
