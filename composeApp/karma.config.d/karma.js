@@ -1,17 +1,17 @@
 config.files.push({
-  pattern: "kotlin/composeResources/**",
-  included: false,
-  served: true,
-  watched: false,
+	pattern: "kotlin/composeResources/**",
+	included: false,
+	served: true,
+	watched: false,
 });
 
 config.set({
-  proxies: {
-    "/composeResources/": "/base/kotlin/composeResources/",
-  },
-  client: {
-    mocha: {
-      timeout: 30000,
-    },
-  },
+	proxies: {
+		"/composeResources/": "/base/kotlin/composeResources/",
+	},
+	client: {
+		mocha: {
+			timeout: 30000,
+		},
+	},
 });
