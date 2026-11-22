@@ -267,14 +267,14 @@ private fun ProfileLinks(
             onClick = { onLinkClick("https://youtrust.jp/users/bb7902cca964b92558d0116a5f44f362") },
         )
         ProfileLinkButton(
-            icon = Icons.Default.LocalCafe,
-            label = "Buy Me a Coffee",
-            onClick = { onLinkClick("https://buymeacoffee.com/yuyuyuyuyu_dev") },
-        )
-        ProfileLinkButton(
             icon = Icons.Default.Email,
             label = stringResource(Res.string.ui_email_link),
             onClick = { onLinkClick("mailto:yu.kobayashi@yuyuyuyuyu.dev") },
+        )
+        ProfileLinkButton(
+            icon = Icons.Default.LocalCafe,
+            label = "Buy Me a Coffee",
+            onClick = { onLinkClick("https://buymeacoffee.com/yuyuyuyuyu_dev") },
         )
     }
 }
