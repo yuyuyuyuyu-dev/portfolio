@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.LocalCafe
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -269,6 +270,11 @@ private fun ProfileLinks(
             icon = Icons.Default.Email,
             label = stringResource(Res.string.ui_email_link),
             onClick = { onLinkClick("mailto:yu.kobayashi@yuyuyuyuyu.dev") },
+        )
+        ProfileLinkButton(
+            icon = Icons.Default.LocalCafe,
+            label = "Buy Me a Coffee",
+            onClick = { onLinkClick("https://buymeacoffee.com/yuyuyuyuyu_dev") },
         )
     }
 }
